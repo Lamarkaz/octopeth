@@ -5,6 +5,9 @@
 #### Build Setup
 
 ``` bash
+# install yarn with homebrew
+brew install yarn --without-node
+
 # install dependencies
 yarn install
 
