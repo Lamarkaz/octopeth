@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import axios from 'axios'
-import db from './datastore'
+import db from './db'
 import Vuetify from 'vuetify'
 
 import App from './App'

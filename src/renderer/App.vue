@@ -1,12 +1,29 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <v-app>
+      <!-- main router view -->
+      <router-view v-if="authed"></router-view>
+      <!-- authentication view -->
+      <Auth v-else></Auth>
+    </v-app>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'octopeth'
+    name: 'octopeth',
+    data () {
+      return {
+        authed: false
+      }
+    },
+    created () {
+      //
+      this.$db.count({ address: { $regex: /^0x[a-fA-F0-9]{40}$/ } }, function (err, count) {
+        if (err) throw err
+        if (count > 0) this.authed = true
+      })
+    }
   }
 </script>
 
