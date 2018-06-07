@@ -14,7 +14,7 @@
     name: 'octopeth',
     data () {
       return {
-        authed: false
+        authed: true
       }
     },
     created () {
@@ -28,5 +28,9 @@
 </script>
 
 <style>
-  /* CSS */
+  @import url('https://fonts.googleapis.com/css?family=Dosis');
+
+  body {
+    font-family: 'Dosis', sans-serif !important;
+  }
 </style>
