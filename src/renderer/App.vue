@@ -2,7 +2,7 @@
   <div id="app">
     <v-app>
       <!-- main router view -->
-      <router-view v-if="authed"></router-view>
+      <router-view v-if="$store.state.auth.authed"></router-view>
       <!-- authentication view -->
       <Auth v-else></Auth>
     </v-app>
@@ -12,16 +12,14 @@
 <script>
   export default {
     name: 'octopeth',
-    data () {
-      return {
-        authed: false
-      }
-    },
     created () {
-      //
-      this.$db.count({ address: { $regex: /^0x[a-fA-F0-9]{40}$/ } }, function (err, count) {
-        if (err) throw err
-        if (count > 0) this.authed = true
+      // DELETE. ONLY FOR TESTING
+      // this.$db.remove({}, { multi: true })
+      // END
+      var self = this
+      this.$db.count({type: 'wallet'}, function (err, count) {
+        if (err) alert(err)
+        if (count > 0) self.$store.commit('AUTH')
       })
     }
   }

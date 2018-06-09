@@ -122,11 +122,11 @@ export default {
   },
   created () {
     var self = this
-    this.$db.find({installed: true}, function (err, docs) {
+    this.$db.find({type: 'app', installed: true}, function (err, docs) {
       if (err) throw err
       self.myDapps = docs
     })
-    this.$db.find({installed: { $ne: true }}, function (err, docs) {
+    this.$db.find({type: 'app', installed: { $ne: true }}, function (err, docs) {
       if (err) throw err
       self.explore = docs
     })
@@ -134,11 +134,12 @@ export default {
   methods: {
     install: function (url, title, logo, cb) {
       var self = this
-      this.$db.count({installed: true}, function (err, count) {
+      this.$db.count({type: 'app', installed: true}, function (err, count) {
         if (err) self.$electron.remote.dialog.showErrorBox('Error', 'There seems to be a problem connecting to the local database')
         scrape({urls: [url], directory: path.join(remote.app.getPath('userData'), '/apps/' + count + 1 + '/'), httpResponseHandler: phantomHtml}).then(function () {
           download.image({url: url, dest: path.join(remote.app.getPath('userData'), '/logos/' + count + 1 + '/')}).then(({filename, image}) => {
             self.$db.insert({
+              type: 'app',
               location: path.join(remote.app.getPath('userData'), '/apps/' + count + 1 + '/'),
               title: title,
               logo: path.join(remote.app.getPath('userData'), '/logos/' + count + 1 + '/' + filename),

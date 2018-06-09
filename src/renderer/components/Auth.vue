@@ -45,18 +45,50 @@
                         </v-btn>
                         <div class="dividerStyle"></div>
                         <span style="color: grey; font-size: 15px; font-weight: 300; margin-top: 10px; margin-left: 22.5%">or create a new Identity</span>
-                        <v-btn class="authBtn pulse" style="background-color: #F7931E; margin-top: 15px" v-on:click="authenticate">
+                        <v-btn class="authBtn pulse" style="background-color: #F7931E; margin-top: 15px" v-on:click="dialog = true">
                             <v-icon style="font-size: 20px; padding-right: 10px">person_add</v-icon>Generate Identity
                         </v-btn>
                     </form>
                 </v-card>
             </v-flex>
         </v-container>
+        <!-- Password dialog -->
+        <v-layout row justify-center>
+          <v-dialog v-model="dialog" persistent max-width="500px">
+            <v-card>
+              <v-card-title>
+                <span class="headline">SELECT NEW PASSWORD</span>
+              </v-card-title>
+              <v-card-text>
+                <small v-if="pw != confirmpw">Your passwords do not match</small>
+                <br>
+                <small v-if="pw.length < 8">Your passwords must be at least 8 characters long</small>
+                <v-container grid-list-md>
+                  <v-layout wrap>
+                    <v-flex xs12>
+                      <v-text-field v-model="pw" type="password" label="Select Password" required></v-text-field>
+                    </v-flex>
+                    <v-flex xs12>
+                      <v-text-field v-model="confirmpw" type="password" label="Confirm Password" required></v-text-field>
+                    </v-flex>
+                  </v-layout>
+                </v-container>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" flat @click.native="dialog = false">Cancel</v-btn>
+                <v-btn color="blue darken-1" flat @click.native="generate()" :disabled="(pw != confirmpw || pw.length < 8)">Encrypt</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </v-layout>
     </v-layout>
 </template>
 
 
 <script>
+import ethers from 'ethers'
+
 export default{
   props: {
     value: {
@@ -90,7 +122,10 @@ export default{
       password: '',
       json: '',
       ready: true,
-      error: false
+      error: false,
+      dialog: false,
+      pw: 'hi',
+      confirmpw: ''
     }
   },
   watch: {
@@ -140,6 +175,22 @@ export default{
         this.error = true
       }
       this.ready = true
+    },
+    generate: function () {
+      var self = this
+      this.ready = false
+      this.dialog = false
+      var wallet = ethers.Wallet.createRandom()
+      var encrypted = wallet.encrypt(this.pw, function (pc) {
+        if (pc === 1) {
+          encrypted.then(function (json) {
+            self.$db.update({type: 'wallet'}, {type: 'wallet', data: json}, {upsert: true}, function (err) {
+              if (err) alert(err)
+              self.$store.commit('AUTH')
+            })
+          })
+        }
+      })
     }
   },
   computed: {
