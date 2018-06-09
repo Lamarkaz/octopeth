@@ -26,7 +26,7 @@ function createWindow () {
     minWidth: 1300,
     useContentSize: true,
     titleBarStyle: 'hidden-inset',
-    show: false
+    backgroundColor: '#222222'
   })
 
   mainWindow.maximize()

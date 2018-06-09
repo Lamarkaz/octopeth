@@ -92,44 +92,44 @@ export default {
   data () {
     return {
       myDapps: [
-        // {
-        //   logo: 'https://decentube.com/dist/logo.svg',
-        //   title: 'Decentube'
-        // },
-        // {
-        //   logo: '',
-        //   title: 'Dcourt'
-        // },
-        // {
-        //   logo: 'http://www.economicsgazette.com/wp-content/uploads/REP.png',
-        //   title: 'Augur'
-        // },
-        // {
-        //   logo: 'https://cdn.coinranking.com/r16I7Lud-/gno.svg',
-        //   title: 'Gnosis'
-        // },
-        // {
-        //   logo: 'https://i2.wp.com/www.crypto-news.in/wp-content/uploads/2017/12/cryptokitties-cryptonews-hedwig.png',
-        //   title: 'CryptoKitties'
-        // },
-        // {
-        //   logo: '',
-        //   title: 'Digix'
-        // }
+        {
+          logo: 'https://decentube.com/dist/logo.svg',
+          title: 'Decentube'
+        },
+        {
+          logo: '',
+          title: 'Dcourt'
+        },
+        {
+          logo: 'http://www.economicsgazette.com/wp-content/uploads/REP.png',
+          title: 'Augur'
+        },
+        {
+          logo: 'https://cdn.coinranking.com/r16I7Lud-/gno.svg',
+          title: 'Gnosis'
+        },
+        {
+          logo: 'https://i2.wp.com/www.crypto-news.in/wp-content/uploads/2017/12/cryptokitties-cryptonews-hedwig.png',
+          title: 'CryptoKitties'
+        },
+        {
+          logo: '',
+          title: 'Digix'
+        }
       ],
       explore: []
     }
   },
   created () {
-    var self = this
-    this.$db.find({type: 'app', installed: true}, function (err, docs) {
-      if (err) throw err
-      self.myDapps = docs
-    })
-    this.$db.find({type: 'app', installed: { $ne: true }}, function (err, docs) {
-      if (err) throw err
-      self.explore = docs
-    })
+    // var self = this
+    // this.$db.find({type: 'app', installed: true}, function (err, docs) {
+    //   if (err) throw err
+    //   self.myDapps = docs
+    // })
+    // this.$db.find({type: 'app', installed: { $ne: true }}, function (err, docs) {
+    //   if (err) throw err
+    //   self.explore = docs
+    // })
   },
   methods: {
     install: function (url, title, logo, cb) {

@@ -58,29 +58,48 @@
         <!-- Password dialog -->
         <v-layout row justify-center>
           <v-dialog v-model="dialog" persistent max-width="500px">
-            <v-card>
+            <v-card class="genId">
               <v-card-title>
-                <span class="headline">SELECT NEW PASSWORD</span>
+                <span class="headline" style="font-family: 'Dosis', sans-serif; font-size: 21px"><v-icon style="font-size: 26px; padding-right: 6px; margin-top: -6px; color: #222">person_add</v-icon>Generate a new Identity</span>
               </v-card-title>
               <v-card-text>
                 <small v-if="pw != confirmpw">Your passwords do not match</small>
                 <br>
-                <small v-if="pw.length < 8">Your passwords must be at least 8 characters long</small>
                 <v-container grid-list-md>
                   <v-layout wrap>
                     <v-flex xs12>
-                      <v-text-field v-model="pw" type="password" label="Select Password" required></v-text-field>
+                      <v-text-field 
+                      v-model="pw"
+                      prepend-icon="lock" single-line
+                      hint="At least 8 characters"
+                      :append-icon="newPassBol ? 'visibility' : 'visibility_off'"
+                      :append-icon-cb="() => (newPassBol = !newPassBol)"
+                      :type="newPassBol ? 'newPassword' : 'text'"
+                      counter
+                      label="Select Password" 
+                      required
+                      ></v-text-field>
                     </v-flex>
                     <v-flex xs12>
-                      <v-text-field v-model="confirmpw" type="password" label="Confirm Password" required></v-text-field>
+                      <v-text-field 
+                      v-model="confirmpw" 
+                      prepend-icon="done_all" single-line
+                      :append-icon="confPassBol ? 'visibility' : 'visibility_off'"
+                      :append-icon-cb="() => (confPassBol = !confPassBol)"
+                      :type="confPassBol ? 'confPassword' : 'text'" 
+                      counter
+                      label="Confirm Password" 
+                      required
+                      ></v-text-field>
                     </v-flex>
                   </v-layout>
                 </v-container>
+                <small v-if="pw.length < 8">Your passwords must be at least 8 characters long</small>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" flat @click.native="dialog = false">Cancel</v-btn>
-                <v-btn color="blue darken-1" flat @click.native="generate()" :disabled="(pw != confirmpw || pw.length < 8)">Encrypt</v-btn>
+                <v-btn class="cancelBtn" @click.native="dialog = false">Cancel</v-btn>
+                <v-btn class="genBtn" @click.native="generate()" :disabled="(pw != confirmpw || pw.length < 8)">Generate</v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>
@@ -122,12 +141,16 @@ export default{
     return {
       filename: '',
       passBol: true,
+      newPassBol: true,
+      confPassBol: true,
       password: '',
+      newPassword: '',
+      confPassword: '',
       json: '',
       ready: true,
       error: false,
       dialog: false,
-      pw: 'hi',
+      pw: '',
       confirmpw: ''
     }
   },
@@ -207,8 +230,8 @@ export default{
 
 <style scoped>
 .authLayout {
-    background-image: linear-gradient(to right, #F37335 0%, #FDC830 100%);
-    background-size: 62% 100%;
+    background-image: linear-gradient(to right, #F37335 0%, #efbb1f 100%); /* #efbb1f */
+    background-size: 63% 100%;
 }
 .authOverlay {
     background: #222;
@@ -277,6 +300,22 @@ input[type=file] {
 }
 .logoShow {
   width: auto;
+}
+.genId {
+  background: #F7931E;
+  padding: 15px;
+}
+.genBtn {
+  font-family: 'Dosis', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 900px;
+}
+.genBtn {
+  font-family: 'Dosis', sans-serif;
+  font-weight: 700;
 }
 /* Animation */
 @-webkit-keyframes pulse {
