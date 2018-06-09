@@ -6,6 +6,8 @@
           <center>
             <h3 style="font-family: 'Dosis', sans-serif !important; font-weight: 700; font-size: 48px; color: #222">OCTOPETH</h3>
           </center>
+          <div class="logoShow">
+          <img src="../assets/logo-dark.svg" width="1000px"/>
           </div>
         </div>
         <v-container class="authOverlay">
@@ -254,5 +256,3 @@ input[type=file] {
   }
 }
 </style>
-
-

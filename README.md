@@ -1,6 +1,8 @@
 # Octopeth
 
-![octopeth](https://github.com/Lamarkaz/octopeth/tree/master/src/renderer/assets/octopeth.jpg "Octopeth")
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Lamarkaz/octopeth/master/src/renderer/assets/octopeth.jpg" width="350px">
+</p>
 
 > Decentralized Ethereum dApp Store
 

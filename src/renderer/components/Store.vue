@@ -1,8 +1,8 @@
 <template>
   <div class="background">
-    <v-toolbar 
+    <v-toolbar
       fixed
-      dark 
+      dark
       flat
       height="75"
       class="background">
@@ -29,13 +29,13 @@
       </h3>
       <v-container fluid grid-list-md>
         <v-layout row wrap>
-          <v-flex 
-            v-for="i 
-            in myDapps" 
-            :key="`2${i.title}`" 
+          <v-flex
+            v-for="i
+            in myDapps"
+            :key="`2${i.title}`"
             xs12
             md6
-            lg3 
+            lg3
             class="appView"
           >
             <v-card class="dappCard" style="height: 250px; width: 250px">
@@ -80,37 +80,81 @@
 </template>
 
 
+
 <script>
+import scrape from 'website-scraper'
+import phantomHtml from 'website-scraper-phantom'
+import path from 'path'
+import { remote } from 'electron'
+import download from 'image-downloader'
+
 export default {
   data () {
     return {
       myDapps: [
-        {
-          logo: 'https://decentube.com/dist/logo.svg',
-          title: 'Decentube'
-        },
-        {
-          logo: '',
-          title: 'Dcourt',
-          id: 'DCO'
-        },
-        {
-          logo: 'http://www.economicsgazette.com/wp-content/uploads/REP.png',
-          title: 'Augur'
-        },
-        {
-          logo: 'https://cdn.coinranking.com/r16I7Lud-/gno.svg',
-          title: 'Gnosis'
-        },
-        {
-          logo: 'https://i2.wp.com/www.crypto-news.in/wp-content/uploads/2017/12/cryptokitties-cryptonews-hedwig.png',
-          title: 'CryptoKitties'
-        },
-        {
-          logo: '',
-          title: 'Digix'
-        }
-      ]
+        // {
+        //   logo: 'https://decentube.com/dist/logo.svg',
+        //   title: 'Decentube'
+        // },
+        // {
+        //   logo: '',
+        //   title: 'Dcourt'
+        // },
+        // {
+        //   logo: 'http://www.economicsgazette.com/wp-content/uploads/REP.png',
+        //   title: 'Augur'
+        // },
+        // {
+        //   logo: 'https://cdn.coinranking.com/r16I7Lud-/gno.svg',
+        //   title: 'Gnosis'
+        // },
+        // {
+        //   logo: 'https://i2.wp.com/www.crypto-news.in/wp-content/uploads/2017/12/cryptokitties-cryptonews-hedwig.png',
+        //   title: 'CryptoKitties'
+        // },
+        // {
+        //   logo: '',
+        //   title: 'Digix'
+        // }
+      ],
+      explore: []
+    }
+  },
+  created () {
+    var self = this
+    this.$db.find({installed: true}, function (err, docs) {
+      if (err) throw err
+      self.myDapps = docs
+    })
+    this.$db.find({installed: { $ne: true }}, function (err, docs) {
+      if (err) throw err
+      self.explore = docs
+    })
+  },
+  methods: {
+    install: function (url, title, logo, cb) {
+      var self = this
+      this.$db.count({installed: true}, function (err, count) {
+        if (err) self.$electron.remote.dialog.showErrorBox('Error', 'There seems to be a problem connecting to the local database')
+        scrape({urls: [url], directory: path.join(remote.app.getPath('userData'), '/apps/' + count + 1 + '/'), httpResponseHandler: phantomHtml}).then(function () {
+          download.image({url: url, dest: path.join(remote.app.getPath('userData'), '/logos/' + count + 1 + '/')}).then(({filename, image}) => {
+            self.$db.insert({
+              location: path.join(remote.app.getPath('userData'), '/apps/' + count + 1 + '/'),
+              title: title,
+              logo: path.join(remote.app.getPath('userData'), '/logos/' + count + 1 + '/' + filename),
+              installed: true,
+              id: count + 1
+            }, function (err) {
+              if (err) throw err
+              if (cb) cb()
+            })
+          }).catch(function () {
+            self.$electron.remote.dialog.showErrorBox('Error', 'The dApp logo could not be downloaded')
+          })
+        }).catch(function () {
+          self.$electron.remote.dialog.showErrorBox('Error', 'The dApp contents could not be downloaded')
+        })
+      })
     }
   }
 }
@@ -159,7 +203,7 @@ export default {
     padding-left: 20px;
     padding-bottom: 20px;
     width: 100%;
-    
+
   }
   .appTitle {
     font-weight: 700;
