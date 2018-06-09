@@ -1,6 +1,250 @@
 <template>
-    <v-layout>
-        <v-container>
+    <v-layout class="authLayout">
+        <div class="leftWrapper">
+          <div class="logoShow">
+          <img src="../assets/logo-dark.svg" width="1000px"/>
+          </div>
+        </div>
+        <v-container class="authOverlay">
+            <v-flex style="margin-left: auto; margin-right: auto; margin-top: 70px; max-width: 530px">
+                <v-card class="authCard">
+                    <v-alert v-if="error" color="error" icon="warning" value="true" style="margin-top: -45px">
+                    Error: please make sure you upload a valid identity file and enter the correct decryption password
+                    </v-alert>
+                    <v-icon style="font-size: 55px; padding-right: 10px; color: #F7931E; left: 42%; margin-bottom: 20px; position: relative; border-radius: 50%">fingerprint</v-icon>
+                    <br/>
+                    <div style="text-align: center; margin-bottom: 30px; font-size: 16px; font-weight: 600">Already a user?<br/><span style="color: grey; font-size: 15px; font-weight: 300">Import your Identity file and credentials to start</span></div>
+                    <form class="authForm">
+                        <v-text-field class="inputStyle"
+                        prepend-icon="attach_file" single-line
+                        v-model="filename" :label="label"
+                        @click.native="onFocus"
+                        :disabled="disabled"
+                        :rules="[v => !!v || 'Identity file is required!']"
+                        ref="fileTextField"
+                        dark
+                        required
+                        ></v-text-field>
+                        <input type="file" :accept="accept" :multiple="false" :disabled="disabled" ref="fileInput" @change="onFileChange"></input>
+                        <v-text-field class="inputStyle"
+                            v-model="password"
+                            prepend-icon="lock" single-line
+                            name="input-10-1"
+                            label="Enter your password"
+                            hint="At least 8 characters"
+                            min="8"
+                            :append-icon="passBol ? 'visibility' : 'visibility_off'"
+                            :append-icon-cb="() => (passBol = !passBol)"
+                            :type="passBol ? 'password' : 'text'"
+                            counter
+                            dark
+                            required
+                        ></v-text-field>
+                        <v-btn :disabled="!valid" class="authBtn" style="background-color: #cecece" v-on:click="authenticate">
+                            <v-icon style="font-size: 20px; padding-right: 10px;">vpn_key</v-icon>Authenticate
+                        </v-btn>
+                        <div class="dividerStyle"></div>
+                        <span style="color: grey; font-size: 15px; font-weight: 300; margin-top: 10px; margin-left: 22.5%">or create a new Identity</span>
+                        <v-btn class="authBtn pulse" style="background-color: #F7931E; margin-top: 15px" v-on:click="authenticate">
+                            <v-icon style="font-size: 20px; padding-right: 10px">person_add</v-icon>Generate Identity
+                        </v-btn>
+                    </form>
+                </v-card>
+            </v-flex>
         </v-container>
     </v-layout>
 </template>
+
+
+<script>
+export default{
+  props: {
+    value: {
+      type: [Array, String]
+    },
+    label: {
+      type: String,
+      default: 'Select an identity file..'
+    },
+    accept: {
+      type: String,
+      default: '.json'
+    },
+    required: {
+      type: Boolean,
+      default: false
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    multiple: {
+      type: Boolean,
+      default: false
+    }
+  },
+  data () {
+    return {
+      filename: '',
+      passBol: true,
+      password: '',
+      json: '',
+      ready: true,
+      error: false
+    }
+  },
+  watch: {
+    value (v) {
+      this.filename = v
+    }
+  },
+  mounted () {
+    this.filename = this.value
+  },
+
+  methods: {
+    onFocus () {
+      if (!this.disabled) {
+        debugger
+        this.$refs.fileInput.click()
+      }
+    },
+    onFileChange ($event) {
+      const files = $event.target.files || $event.dataTransfer.files
+      if (files) {
+        if (files.length > 0) {
+          this.filename = [...files].map(file => file.name).join(', ')
+        } else {
+          this.filename = null
+        }
+      } else {
+        this.filename = $event.target.value.split('\\').pop()
+      }
+      var reader = new FileReader()
+      reader.readAsText(files[0], 'UTF-8')
+      var self = this
+      reader.onload = (function (file) {
+        return function (e) {
+          self.json = e.target.result
+          alert('Welcome back ' + e.target.result)
+        }
+      })(files[0])
+    },
+    authenticate () {
+      this.ready = false
+      var wallet = ''
+      // var wallet = Blockchain.decrypt(JSON.parse(this.json), this.password) --> Requires blockchain.js and web3.js
+      if (wallet !== false) {
+        alert(JSON.stringify(wallet))
+      } else {
+        this.error = true
+      }
+      this.ready = true
+    }
+  },
+  computed: {
+    valid: function () {
+      return (this.json !== '' && this.password.length > 7)
+    }
+  }
+}
+</script>
+
+
+<style scoped>
+.authLayout {
+    background-image: linear-gradient(to right, #F37335 0%, #FDC830 100%);
+    background-size: 62% 100%;
+}
+.authOverlay {
+    background: #222;
+    position: absolute;
+    width: 38%;
+    height: 100%;
+    right: 0;
+}
+.mainAuth {
+    width: 70%;
+    margin-right: auto;
+    margin-left: auto;
+}
+input[type=file] {
+    position: absolute;
+    left: -99999px;
+}
+.authCard {
+  width: 85%;
+  margin-right: auto;
+  margin-left: auto;
+  box-shadow: none;
+  padding-bottom: 5px;
+  color: #F7931E;
+  background: transparent;
+}
+.authForm {
+  padding-left: 10%;
+  padding-right: 15%;
+}
+.inputStyle {
+  color: #F7931E;
+}
+.dividerStyle {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  border-bottom: 1px grey solid;
+  opacity: 0.2;
+}
+.authBtn {
+  margin-top: 20px;
+  height: 45px;
+  color: black;
+  box-shadow: none;
+  width: 100%;
+  border-radius: 999px
+}
+.pulse {
+  display: inline-block;
+  cursor: pointer;
+  box-shadow: 0 0 0 rgba(204,169,44, 0.4);
+  animation: pulse 2s infinite;
+}
+.pulse:hover {
+  animation: none;
+}
+.leftWrapper {
+  position: absolute;
+  left: 7.5%;
+  top: 13%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.logoShow {
+  width: auto;
+}
+/* Animation */
+@-webkit-keyframes pulse {
+  0% {
+    -webkit-box-shadow: 0 0 0 0 rgba(204,169,44, 0.4);
+  }
+  70% {
+      -webkit-box-shadow: 0 0 0 12px rgba(204,169,44, 0);
+  }
+  100% {
+      -webkit-box-shadow: 0 0 0 0 rgba(204,169,44, 0);
+  }
+}
+@keyframes pulse {
+  0% {
+    -moz-box-shadow: 0 0 0 0 rgba(204,169,44, 0.4);
+    box-shadow: 0 0 0 0 rgba(204,169,44, 0.4);
+  }
+  70% {
+      -moz-box-shadow: 0 0 0 12px rgba(204,169,44, 0);
+      box-shadow: 0 0 0 12px rgba(204,169,44, 0);
+  }
+  100% {
+      -moz-box-shadow: 0 0 0 0 rgba(204,169,44, 0);
+      box-shadow: 0 0 0 0 rgba(204,169,44, 0);
+  }
+}
+</style>
