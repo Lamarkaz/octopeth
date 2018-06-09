@@ -7,7 +7,7 @@
       height="75"
       class="background">
       <v-toolbar-title v-on:click="$router.push('/')">
-        <img src="../assets/Logo.svg" width="70px" style="margin-left: 40px; cursor: pointer; margin-top: 10px"/>
+        <img src="../assets/logo.svg" width="70px" style="margin-left: 40px; cursor: pointer; margin-top: 10px"/>
         <span class="logoText orange--text">OCTOPETH</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
@@ -188,7 +188,7 @@ export default {
     opacity: 0.8;
   }
   .mainWrapperIcon {
-    font-size: 35px !important; 
+    font-size: 35px !important;
     margin-right: 5px;
     color: #F7931E;
     margin-top: -4px;
