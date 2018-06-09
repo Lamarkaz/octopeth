@@ -1,5 +1,7 @@
 # Octopeth
 
+![octopeth](https://github.com/Lamarkaz/octopeth/tree/master/src/renderer/assets/octopeth.jpg "Octopeth")
+
 > Decentralized Ethereum dApp Store
 
 #### Build Setup

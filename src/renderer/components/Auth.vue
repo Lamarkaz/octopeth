@@ -1,12 +1,17 @@
 <template>
     <v-layout class="authLayout">
+        <div class="leftWrapper">
+          <div class="logoShow">
+          <img src="../assets/Logo-dark.svg" width="1000px"/>
+          </div>
+        </div>
         <v-container class="authOverlay">
             <v-flex style="margin-left: auto; margin-right: auto; margin-top: 70px; max-width: 530px">
                 <v-card class="authCard">
                     <v-alert v-if="error" color="error" icon="warning" value="true" style="margin-top: -45px">
                     Error: please make sure you upload a valid identity file and enter the correct decryption password
                     </v-alert>
-                    <v-icon style="font-size: 55px; padding-right: 10px; color: #F7931E; left: 42%; margin-bottom: 20px; position: relative">fingerprint</v-icon>
+                    <v-icon style="font-size: 55px; padding-right: 10px; color: #F7931E; left: 42%; margin-bottom: 20px; position: relative; border-radius: 50%">fingerprint</v-icon>
                     <br/>
                     <div style="text-align: center; margin-bottom: 30px; font-size: 16px; font-weight: 600">Already a user?<br/><span style="color: grey; font-size: 15px; font-weight: 300">Import your Identity file and credentials to start</span></div>
                     <form class="authForm">
@@ -39,8 +44,8 @@
                             <v-icon style="font-size: 20px; padding-right: 10px;">vpn_key</v-icon>Authenticate
                         </v-btn>
                         <div class="dividerStyle"></div>
-                        <span style="color: grey; font-size: 15px; font-weight: 300; margin-top: 10px">or create a new Identity</span>
-                        <v-btn class="authBtn" style="background-color: #F7931E; margin-top: 10px" v-on:click="authenticate">
+                        <span style="color: grey; font-size: 15px; font-weight: 300; margin-top: 10px; margin-left: 22.5%">or create a new Identity</span>
+                        <v-btn class="authBtn pulse" style="background-color: #F7931E; margin-top: 15px" v-on:click="authenticate">
                             <v-icon style="font-size: 20px; padding-right: 10px">person_add</v-icon>Generate Identity
                         </v-btn>
                     </form>
@@ -169,7 +174,6 @@ input[type=file] {
 }
 .authCard {
   width: 85%;
-  padding-top: 15px;
   margin-right: auto;
   margin-left: auto;
   box-shadow: none;
@@ -197,6 +201,51 @@ input[type=file] {
   box-shadow: none; 
   width: 100%; 
   border-radius: 999px
+}
+.pulse {
+  display: inline-block;
+  cursor: pointer;
+  box-shadow: 0 0 0 rgba(204,169,44, 0.4);
+  animation: pulse 2s infinite;
+}
+.pulse:hover {
+  animation: none;
+}
+.leftWrapper {
+  position: absolute;
+  left: 7.5%;
+  top: 13%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.logoShow {
+  width: auto;
+}
+/* Animation */
+@-webkit-keyframes pulse {
+  0% {
+    -webkit-box-shadow: 0 0 0 0 rgba(204,169,44, 0.4);
+  }
+  70% {
+      -webkit-box-shadow: 0 0 0 12px rgba(204,169,44, 0);
+  }
+  100% {
+      -webkit-box-shadow: 0 0 0 0 rgba(204,169,44, 0);
+  }
+}
+@keyframes pulse {
+  0% {
+    -moz-box-shadow: 0 0 0 0 rgba(204,169,44, 0.4);
+    box-shadow: 0 0 0 0 rgba(204,169,44, 0.4);
+  }
+  70% {
+      -moz-box-shadow: 0 0 0 12px rgba(204,169,44, 0);
+      box-shadow: 0 0 0 12px rgba(204,169,44, 0);
+  }
+  100% {
+      -moz-box-shadow: 0 0 0 0 rgba(204,169,44, 0);
+      box-shadow: 0 0 0 0 rgba(204,169,44, 0);
+  }
 }
 </style>
 
