@@ -28,7 +28,7 @@
                         dark
                         required
                         ></v-text-field>
-                        <input type="file" :accept="accept" :multiple="false" :disabled="disabled" ref="fileInput" @change="onFileChange"></input>
+                        <input type="file" :multiple="false" :disabled="disabled" ref="fileInput" @change="onFileChange"></input>
                         <v-text-field class="inputStyle"
                             v-model="password"
                             prepend-icon="lock" single-line
@@ -101,10 +101,6 @@ export default{
       type: String,
       default: 'Select an identity file..'
     },
-    accept: {
-      type: String,
-      default: '.json'
-    },
     required: {
       type: Boolean,
       default: false
@@ -123,11 +119,11 @@ export default{
       filename: '',
       passBol: true,
       password: '',
-      json: '',
+      json: {},
       ready: true,
       error: false,
       dialog: false,
-      pw: 'hi',
+      pw: '',
       confirmpw: ''
     }
   },
@@ -149,34 +145,48 @@ export default{
     },
     onFileChange ($event) {
       const files = $event.target.files || $event.dataTransfer.files
-      if (files) {
-        if (files.length > 0) {
-          this.filename = [...files].map(file => file.name).join(', ')
-        } else {
-          this.filename = null
-        }
-      } else {
-        this.filename = $event.target.value.split('\\').pop()
-      }
       var reader = new FileReader()
       reader.readAsText(files[0], 'UTF-8')
       var self = this
       reader.onload = (function (file) {
         return function (e) {
-          self.json = e.target.result
-          alert('Welcome back ' + e.target.result)
+          function tryParseJSON (jsonString) {
+            try {
+              var o = JSON.parse(jsonString)
+              if (o && typeof o === 'object') {
+                return o
+              }
+            } catch (e) { }
+            return false
+          }
+          if (tryParseJSON(e.target.result) !== false) {
+            self.json = e.target.result
+            if (files) {
+              if (files.length > 0) {
+                self.filename = [...files].map(file => file.name).join(', ')
+              } else {
+                self.filename = null
+              }
+            } else {
+              self.filename = $event.target.value.split('\\').pop()
+            }
+          } else {
+            alert('Error: Invalid wallet file')
+          }
         }
       })(files[0])
     },
     authenticate () {
+      var self = this
       this.ready = false
-      var wallet = ''
-      // var wallet = Blockchain.decrypt(JSON.parse(this.json), this.password) --> Requires blockchain.js and web3.js
-      if (wallet !== false) {
-        alert(JSON.stringify(wallet))
-      } else {
-        this.error = true
-      }
+      ethers.Wallet.fromEncryptedWallet(this.json, this.password).then(function (wallet) {
+        self.$db.update({type: 'wallet'}, {type: 'wallet', data: self.json}, {upsert: true}, function (err) {
+          if (err) alert(err)
+          else self.$store.commit('AUTH')
+        })
+      }).catch(function (e) {
+        alert(e)
+      })
       this.ready = true
     },
     generate: function () {
@@ -189,7 +199,7 @@ export default{
           encrypted.then(function (json) {
             self.$db.update({type: 'wallet'}, {type: 'wallet', data: json}, {upsert: true}, function (err) {
               if (err) alert(err)
-              self.$store.commit('AUTH')
+              else self.$store.commit('AUTH')
             })
           })
         }
