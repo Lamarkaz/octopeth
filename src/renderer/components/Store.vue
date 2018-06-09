@@ -4,7 +4,7 @@
       fixed
       dark 
       flat
-      height="90"
+      height="75"
       class="background">
       <v-toolbar-title v-on:click="$router.push('/')">
         <img src="../assets/Logo.svg" width="70px" style="margin-left: 15px; cursor: pointer; margin-top: 10px"/>

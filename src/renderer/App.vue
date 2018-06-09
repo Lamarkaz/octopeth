@@ -14,7 +14,7 @@
     name: 'octopeth',
     data () {
       return {
-        authed: true
+        authed: false
       }
     },
     created () {
@@ -32,5 +32,15 @@
 
   body {
     font-family: 'Dosis', sans-serif !important;
+    -ms-overflow-style: scrollbar;
+    -webkit-app-region:drag !important;
+  }
+  input[type="submit"],
+  input[type="reset"],
+  input[type="button"],
+  input[type="text"],
+  button,
+  textarea {
+    -webkit-app-region: no-drag;
   }
 </style>
