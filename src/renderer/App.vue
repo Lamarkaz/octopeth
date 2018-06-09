@@ -14,7 +14,7 @@
     name: 'octopeth',
     data () {
       return {
-        authed: true
+        authed: false
       }
     },
     created () {
