@@ -21,11 +21,12 @@ function createWindow () {
    */
   mainWindow = new BrowserWindow({
     height: 700,
-    width: 1200,
+    width: 1300,
     minHeight: 700,
     minWidth: 1300,
     useContentSize: true,
-    backgroundColor: '#222222'
+    titleBarStyle: 'hidden-inset',
+    show: false
   })
 
   mainWindow.maximize()
@@ -34,6 +35,10 @@ function createWindow () {
 
   mainWindow.on('closed', () => {
     mainWindow = null
+  })
+
+  mainWindow.once('ready-to-show', () => {
+    mainWindow.show()
   })
 }
 

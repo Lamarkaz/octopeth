@@ -1,6 +1,11 @@
 <template>
     <v-layout class="authLayout">
         <div class="leftWrapper">
+          <div class="logoShow" style="margin-left: -90px; position: absolute">
+          <img src="../assets/Logo-dark.svg" width="800px"/>
+          <center>
+            <h3 style="font-family: 'Dosis', sans-serif !important; font-weight: 700; font-size: 48px; color: #222">OCTOPETH</h3>
+          </center>
           <div class="logoShow">
           <img src="../assets/logo-dark.svg" width="1000px"/>
           </div>
@@ -247,11 +252,14 @@ input[type=file] {
 }
 .authBtn {
   margin-top: 20px;
-  height: 45px;
-  color: black;
-  box-shadow: none;
-  width: 100%;
-  border-radius: 999px
+  height: 45px;  
+  color: black; 
+  box-shadow: none; 
+  width: 100%; 
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: 'Dosis', sans-serif !important;
 }
 .pulse {
   display: inline-block;

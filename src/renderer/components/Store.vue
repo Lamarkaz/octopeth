@@ -7,7 +7,7 @@
       height="75"
       class="background">
       <v-toolbar-title v-on:click="$router.push('/')">
-        <img src="../assets/logo.svg" width="70px" style="margin-left: 15px; cursor: pointer; margin-top: 10px"/>
+        <img src="../assets/Logo.svg" width="70px" style="margin-left: 40px; cursor: pointer; margin-top: 10px"/>
         <span class="logoText orange--text">OCTOPETH</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
@@ -16,7 +16,7 @@
         <v-icon style="font-size: 18px; margin-left: 0px">attach_money</v-icon>
         </v-chip>
       <v-tooltip bottom color="black">
-        <v-gravatar hash="5d41402abc4b2a76b9719d911017c592" :size="32" class="grav" slot="activator"/>
+        <v-gravatar hash="5d41402abc4b2a76b9719d911017c592" :size="30" class="grav" slot="activator" style="margin-right: 30px"/>
         <span>Copy this Address</span>
       </v-tooltip>
     </v-toolbar>
@@ -188,7 +188,7 @@ export default {
     opacity: 0.8;
   }
   .mainWrapperIcon {
-    font-size: 39px !important;
+    font-size: 35px !important; 
     margin-right: 5px;
     color: #F7931E;
     margin-top: -4px;
@@ -196,6 +196,7 @@ export default {
   .MainWrapperTypo {
     margin-bottom: 25px;
     color: #F7931E;
+    font-size: 25px;
   }
   .appView {
     margin-top: 15px;
