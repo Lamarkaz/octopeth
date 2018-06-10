@@ -29,8 +29,6 @@ function createWindow () {
     backgroundColor: '#222222'
   })
 
-  mainWindow.maximize()
-
   mainWindow.loadURL(winURL)
 
   mainWindow.on('closed', () => {

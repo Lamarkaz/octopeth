@@ -14,7 +14,7 @@
     name: 'octopeth',
     created () {
       // DELETE. ONLY FOR TESTING
-      // this.$db.remove({}, { multi: true })
+      this.$db.remove({}, { multi: true })
       // END
       var self = this
       this.$db.count({type: 'wallet'}, function (err, count) {

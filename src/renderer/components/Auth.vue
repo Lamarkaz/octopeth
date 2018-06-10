@@ -63,13 +63,12 @@
                 <span class="headline" style="font-family: 'Dosis', sans-serif; font-size: 21px"><v-icon style="font-size: 26px; padding-right: 6px; margin-top: -6px; color: #222">person_add</v-icon>Generate a new Identity</span>
               </v-card-title>
               <v-card-text>
-                <small v-if="pw != confirmpw">Your passwords do not match</small>
-                <br>
                 <v-container grid-list-md>
                   <v-layout wrap>
                     <v-flex xs12>
                       <v-text-field 
                       v-model="pw"
+                      color="secondary" 
                       prepend-icon="lock" single-line
                       hint="At least 8 characters"
                       :append-icon="newPassBol ? 'visibility' : 'visibility_off'"
@@ -82,7 +81,8 @@
                     </v-flex>
                     <v-flex xs12>
                       <v-text-field 
-                      v-model="confirmpw" 
+                      v-model="confirmpw"
+                      color="secondary" 
                       prepend-icon="done_all" single-line
                       :append-icon="confPassBol ? 'visibility' : 'visibility_off'"
                       :append-icon-cb="() => (confPassBol = !confPassBol)"
@@ -94,11 +94,13 @@
                     </v-flex>
                   </v-layout>
                 </v-container>
-                <small v-if="pw.length < 8">Your passwords must be at least 8 characters long</small>
               </v-card-text>
+              <v-alert value="true" v-if="pw != confirmpw" type="error">
+                Your passwords do not match
+              </v-alert>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn class="cancelBtn" @click.native="dialog = false">Cancel</v-btn>
+                <v-btn class="genBtn" @click.native="dialog = false">Cancel</v-btn>
                 <v-btn class="genBtn" @click.native="generate()" :disabled="(pw != confirmpw || pw.length < 8)">Generate</v-btn>
               </v-card-actions>
             </v-card>

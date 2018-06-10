@@ -15,16 +15,36 @@
           Balance: 154 ETH
         <v-icon style="font-size: 18px; margin-left: 0px">attach_money</v-icon>
         </v-chip>
-      <v-tooltip bottom color="black">
-        <v-gravatar hash="5d41402abc4b2a76b9719d911017c592" :size="30" class="grav" slot="activator" style="margin-right: 30px"/>
-        <span>Copy this Address</span>
+          <div class="text-xs-center">
+            <v-menu
+              origin="center center"
+              transition="scale-transition"
+              bottom
+              dark
+              color="primary"
+            >
+              <v-gravatar hash="5d41402abc4b2a76b9719d911017c592" :size="30" class="grav" slot="activator" style="margin-right: 30px"/>
+
+              <v-list>
+                <v-list-tile key="1" @click="">
+                  <v-list-tile-title class="menuItemStyle">Publish ÐApp</v-list-tile-title>
+                </v-list-tile>
+                <v-list-tile key="2" @click="">
+                  <v-list-tile-title class="menuItemStyle">Copy this Address</v-list-tile-title>
+                </v-list-tile>
+                <v-list-tile key="3" @click="">
+                  <v-list-tile-title class="menuItemStyle">Change Identity</v-list-tile-title>
+                </v-list-tile>
+              </v-list>
+            </v-menu>
+          </div>
       </v-tooltip>
     </v-toolbar>
 
     <!-- installed view -->
     <div class="mainWrapper" style="margin-top: 120px">
       <h3 class="text-xs-center MainWrapperTypo">
-        <v-icon class="mainWrapperIcon">cloud_download</v-icon>
+        <v-icon class="mainWrapperIcon">archive</v-icon>
         My ÐApps
       </h3>
       <v-container fluid grid-list-md>
@@ -44,6 +64,11 @@
               <v-card-title primary-title >
                 <v-card-text>
                   <h3 class="appTitle text-xs-center">{{ i.title }}</h3>
+                  <div class="categType">
+                    <v-card-text class="text-xs-center categText">
+                      <v-icon style="color: white; margin-right: 2px; margin-top: -5px">videogame_asset</v-icon> GAMING
+                    </v-card-text>
+                  </div>
                   <div class="appBody text-xs-center">Located two hours south of Sydney in the <br>Southern Highlands of New South Wales, ...</div>
                 </v-card-text>
               </v-card-title>
@@ -117,7 +142,17 @@ export default {
           title: 'Digix'
         }
       ],
-      explore: []
+      explore: [],
+      categories: [
+        {
+          other: {
+            icon: 'background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%)'
+          },
+          gaming: {
+            icon: 'videogame_asset'
+          }
+        }
+      ]
     }
   },
   created () {
@@ -232,6 +267,25 @@ export default {
     cursor: pointer;
     transition: margin-top 600ms ease-in-out;
   }
+  .categType {
+    width: auto;
+    width: 250px;
+    height: 35px;
+    left: 0px;
+    bottom: 0px;
+    background: rgba(0,0,0,.3);
+    position: absolute;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    display: none;
+    transition: none 600ms ease-in-out;
+  }
+  .categText {
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+    margin-top: -10px;
+  }
   .dappCard:hover {
     margin-top: -10px;
     background-image: linear-gradient(to right, #F37335 0%, #FDC830 100%);
@@ -239,15 +293,25 @@ export default {
   }
   .dappCard:hover  .appTitle {
     color: #222;
+    margin-top: -35px;
   }
   .dappCard:hover  .appBody {
     display: block;
-    margin-top: -180px;
+    margin-top: -170px;
   }
   .dappCard:hover  .dappLogo {
     opacity: 0;
   }
+  .dappCard:hover  .categType {
+    display: block;
+  }
   .background {
     background-color: #222;
+  }
+  .menuItemStyle {
+    color: #F7931E;
+    font-family: 'Dosis', sans-serif;
+    font-size: 18px;
+    font-weight: 500; 
   }
 </style>

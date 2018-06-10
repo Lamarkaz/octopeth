@@ -22,7 +22,12 @@ Vue.http = Vue.prototype.$http = axios
 Vue.config.productionTip = false
 Vue.component('v-gravatar', Gravatar)
 
-Vue.use(Vuetify)
+Vue.use(Vuetify, {
+  theme: {
+    primary: '#F7931E',
+    secondary: '#222222'
+  }
+})
 
 // NeDB
 Vue.prototype.$db = db
