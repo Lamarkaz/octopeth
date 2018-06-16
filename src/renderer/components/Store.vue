@@ -66,7 +66,7 @@
                   <h3 class="appTitle text-xs-center">{{ i.title }}</h3>
                   <div class="categType">
                     <v-card-text class="text-xs-center categText">
-                      <v-icon style="color: white; margin-right: 2px; margin-top: -5px">videogame_asset</v-icon> GAMING
+                      <v-icon style="color: white; margin-right: 2px; margin-top: -5px"></v-icon> GAMING
                     </v-card-text>
                   </div>
                   <div class="appBody text-xs-center">Located two hours south of Sydney in the <br>Southern Highlands of New South Wales, ...</div>
@@ -119,40 +119,36 @@ export default {
       myDapps: [
         {
           logo: 'https://decentube.com/dist/logo.svg',
-          title: 'Decentube'
+          title: 'Decentube',
+          category: 'other'
         },
         {
           logo: '',
-          title: 'Dcourt'
+          title: 'Dcourt',
+          category: 'social'
         },
         {
           logo: 'http://www.economicsgazette.com/wp-content/uploads/REP.png',
-          title: 'Augur'
+          title: 'Augur',
+          category: 'other'
         },
         {
           logo: 'https://cdn.coinranking.com/r16I7Lud-/gno.svg',
-          title: 'Gnosis'
+          title: 'Gnosis',
+          category: 'other'
         },
         {
           logo: 'https://i2.wp.com/www.crypto-news.in/wp-content/uploads/2017/12/cryptokitties-cryptonews-hedwig.png',
-          title: 'CryptoKitties'
+          title: 'CryptoKitties',
+          category: 'gaming'
         },
         {
           logo: '',
-          title: 'Digix'
+          title: 'Digix',
+          category: 'tokens'
         }
       ],
-      explore: [],
-      categories: [
-        {
-          other: {
-            icon: 'background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%)'
-          },
-          gaming: {
-            icon: 'videogame_asset'
-          }
-        }
-      ]
+      explore: []
     }
   },
   created () {
@@ -191,6 +187,19 @@ export default {
           self.$electron.remote.dialog.showErrorBox('Error', 'The dApp contents could not be downloaded')
         })
       })
+    }
+  },
+  computed: {
+    dapp_processed () {
+      var arr = []
+      for (var i = 0; i < this.myDapps.length; i++) {
+        if (this.myDapps[i].category === 'gaming') {
+          var obj = this.myDapps[i]
+          obj.icon = 'videogame_asset'
+          arr.push(obj)
+        }
+      }
+      return arr
     }
   }
 }

@@ -68,12 +68,13 @@
                     <v-flex xs12>
                       <v-text-field 
                       v-model="pw"
+                      name="input-10-1"
                       color="secondary" 
                       prepend-icon="lock" single-line
                       hint="At least 8 characters"
                       :append-icon="newPassBol ? 'visibility' : 'visibility_off'"
                       :append-icon-cb="() => (newPassBol = !newPassBol)"
-                      :type="newPassBol ? 'newPassword' : 'text'"
+                      :type="newPassBol ? 'password' : 'text'"
                       counter
                       label="Select Password" 
                       required
@@ -82,11 +83,12 @@
                     <v-flex xs12>
                       <v-text-field 
                       v-model="confirmpw"
+                      name="input-10-1"
                       color="secondary" 
                       prepend-icon="done_all" single-line
                       :append-icon="confPassBol ? 'visibility' : 'visibility_off'"
                       :append-icon-cb="() => (confPassBol = !confPassBol)"
-                      :type="confPassBol ? 'confPassword' : 'text'" 
+                      :type="confPassBol ? 'password' : 'text'" 
                       counter
                       label="Confirm Password" 
                       required
@@ -95,9 +97,9 @@
                   </v-layout>
                 </v-container>
               </v-card-text>
-              <v-alert value="true" v-if="pw != confirmpw" type="error">
-                Your passwords do not match
-              </v-alert>
+              <div class="warningAlert" v-if="pw != confirmpw" type="error">
+                <v-icon style="margin-right: 5px; font-size: 21px">warning</v-icon> passwords do not match
+              </div>
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn class="genBtn" @click.native="dialog = false">Cancel</v-btn>
@@ -327,6 +329,15 @@ input[type=file] {
 .genBtn {
   font-family: 'Dosis', sans-serif;
   font-weight: 700;
+}
+.warningAlert {
+  margin-left: 25px;
+  margin-bottom: 15px;
+  padding-left: 10px;
+  font-family: 'Dosis';
+  color: rgba(0,0,0,.5);
+  font-weight: 500;
+  font-size: 15px;
 }
 /* Animation */
 @-webkit-keyframes pulse {
