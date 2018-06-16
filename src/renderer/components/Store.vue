@@ -4,16 +4,16 @@
       fixed
       dark
       flat
-      height="75"
+      tabs
+      height="70"
       class="background">
       <v-toolbar-title v-on:click="$router.push('/')">
         <img src="../assets/logo.svg" width="70px" style="margin-left: 40px; cursor: pointer; margin-top: 10px"/>
         <span class="logoText orange--text">OCTOPETH</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-        <v-chip color="orange darken-3" text-color="white" style="margin-right: 15px; padding-left: 10px" disabled="">
+        <v-chip color="orange darken-3" text-color="white" style="margin-right: 15px; padding: 0px 10px; font-weight: 600; font-family: 'Dosis'; font-size: 15px; color: #222 !important" disabled="">
           Balance: 154 ETH
-        <v-icon style="font-size: 18px; margin-left: 0px">attach_money</v-icon>
         </v-chip>
           <div class="text-xs-center">
             <v-menu
@@ -24,7 +24,6 @@
               color="primary"
             >
               <v-gravatar hash="5d41402abc4b2a76b9719d911017c592" :size="30" class="grav" slot="activator" style="margin-right: 30px"/>
-
               <v-list>
                 <v-list-tile key="1" @click="">
                   <v-list-tile-title class="menuItemStyle">Publish ÐApp</v-list-tile-title>
@@ -32,13 +31,30 @@
                 <v-list-tile key="2" @click="">
                   <v-list-tile-title class="menuItemStyle">Copy this Address</v-list-tile-title>
                 </v-list-tile>
+                <v-list-tile key="2" @click="">
+                  <v-list-tile-title class="menuItemStyle">Export Identity File</v-list-tile-title>
+                </v-list-tile>
                 <v-list-tile key="3" @click="">
-                  <v-list-tile-title class="menuItemStyle">Change Identity</v-list-tile-title>
+                  <v-list-tile-title class="menuItemStyle">Logout</v-list-tile-title>
                 </v-list-tile>
               </v-list>
             </v-menu>
           </div>
-      </v-tooltip>
+          <v-tabs
+            slot="extension"
+            v-model="model"
+            dark
+            centered
+            slider-color="orange darken-2"
+          >
+            <v-tab
+              v-for="i in 3"
+              :key="i"
+              :href="`#tab-${i}`"
+            >
+              Item {{ i }}
+            </v-tab>
+          </v-tabs>
     </v-toolbar>
 
     <!-- installed view -->
@@ -86,24 +102,40 @@
         <v-icon class="mainWrapperIcon">explore</v-icon>
         Explore
       </h3>
-       <v-layout row wrap>
-          <v-flex v-for="i in myDapps" :key="`2${i.title}`" xs2 class="appView">
-            <v-card class="dappCard">
-              <v-card-media :src="i.logo" height="135px" class="dappLogo">
+      <v-container fluid grid-list-md>
+        <v-layout row wrap>
+          <v-flex
+            v-for="i
+            in myDapps"
+            :key="`2${i.title}`"
+            xs12
+            md6
+            lg3
+            class="appView"
+          >
+            <v-card class="dappCard" style="height: 250px; width: 250px">
+              <v-card-media :src="i.logo" height="150px" class="dappLogo">
               </v-card-media>
               <v-card-title primary-title >
                 <v-card-text>
                   <h3 class="appTitle text-xs-center">{{ i.title }}</h3>
+                  <div class="categType">
+                    <v-card-text class="text-xs-center categText">
+                      <v-icon style="color: white; margin-right: 2px; margin-top: -5px"></v-icon> GAMING
+                    </v-card-text>
+                  </div>
+                  <div class="appBody text-xs-center">Located two hours south of Sydney in the <br>Southern Highlands of New South Wales, ...</div>
                 </v-card-text>
               </v-card-title>
             </v-card>
           </v-flex>
         </v-layout>
+      </v-container>
     </div>
 
+    <CircularNav></CircularNav>
   </div>
 </template>
-
 
 
 <script>

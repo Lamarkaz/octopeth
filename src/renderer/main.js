@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import axios from 'axios'
-import db from './db'
+import db from './js/db'
 import Vuetify from 'vuetify'
 import Gravatar from 'vue-gravatar'
 import Web3 from 'web3'
@@ -11,11 +11,13 @@ import App from './App'
 import router from './router'
 import store from './store'
 import Auth from '@/components/Auth'
+import CircularNav from '@/components/CircularNav'
 import 'vuetify/dist/vuetify.min.css'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 // Global Components
 Vue.component('Auth', Auth)
+Vue.component('CircularNav', CircularNav)
 
 Vue.use(require('vue-electron'))
 Vue.http = Vue.prototype.$http = axios

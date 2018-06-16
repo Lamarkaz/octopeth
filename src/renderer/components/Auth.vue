@@ -26,6 +26,7 @@
                         :rules="[v => !!v || 'Identity file is required!']"
                         ref="fileTextField"
                         dark
+                        loading
                         required
                         ></v-text-field>
                         <input type="file" :multiple="false" :disabled="disabled" ref="fileInput" @change="onFileChange"></input>
