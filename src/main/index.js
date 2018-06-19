@@ -25,8 +25,8 @@ function createWindow () {
     minHeight: 700,
     minWidth: 1300,
     useContentSize: true,
-    titleBarStyle: 'hidden-inset',
-    backgroundColor: '#222222'
+    backgroundColor: '#222222',
+    titleBarStyle: 'hidden'
   })
 
   mainWindow.loadURL(winURL)

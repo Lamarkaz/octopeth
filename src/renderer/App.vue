@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <v-app>
+    <v-app id="electron-titlebar" class="drag">
+      <!-- Customized title-bar -->
       <!-- main router view -->
       <router-view v-if="$store.state.auth.authed"></router-view>
       <!-- authentication view -->
