@@ -1,7 +1,7 @@
 # Octopeth
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Lamarkaz/octopeth/master/src/renderer/assets/octopeth.jpg" width="350px">
+  <img src="https://raw.githubusercontent.com/Lamarkaz/octopeth/master/src/renderer/assets/logo-dark.png" width="350px">
 </p>
 
 > Decentralized Ethereum dApp Store
