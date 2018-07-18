@@ -1,6 +1,6 @@
 <template>
   <div class="navWrapper">
-    <circle-menu type="middle-around" :number="4" mask='black' btn colors="[ 'rgb(255, 255, 102)', '#A7425C', '#FFE26F', 'F3825F', '#F19584' ]" circle>
+    <circle-menu type="middle-around" :number="4" mask='black' btn colors="[ '#6b20ac', '#A7425C', '#FFE26F', 'F3825F', '#F19584' ]" circle>
       <a slot="item_1" class="navSlot">
         <v-icon slot="item_1" class="navIcon">home</v-icon>
       </a>
@@ -30,7 +30,7 @@ export default {
 <style scoped>
 .navWrapper {
     position: fixed;
-    bottom: -50px;  /* position the top  edge of the element at the middle of the parent */
+    bottom: 0px;  /* position the top  edge of the element at the middle of the parent */
     left: 50%; /* position the left edge of the element at the middle of the parent */
 }
 .navSlot {
@@ -38,6 +38,7 @@ export default {
 }
 .navIcon {
   font-size: 27px;
-  color: rgba(0,0,0,0.7)
+  color: rgba(0,0,0,0.7);
+  margin-top: -5px;
 }
 </style>

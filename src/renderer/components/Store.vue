@@ -9,11 +9,11 @@
       height="70"
       class="background">
       <v-toolbar-title v-on:click="$router.push('/')">
-        <img src="../assets/logo.svg" width="70px" style="margin-left: 40px; cursor: pointer; margin-top: 10px"/>
-        <span class="logoText orange--text">OCTOPETH</span>
+        <img src="../assets/logo.svg" width="40px" style="margin-left: 40px; cursor: pointer; margin-top: 10px; margin-right: 7.5px"/>
+        <span class="logoText">OCTOPETH</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-        <v-chip color="orange darken-3" text-color="white" style="margin-right: 15px; padding: 0px 10px; font-weight: 600; font-family: 'Dosis'; font-size: 15px; color: #222 !important" disabled="">
+        <v-chip color="purple darken-3" text-color="white" style="margin-right: 15px; padding: 0px 10px; font-weight: 600; font-family: 'Dosis'; font-size: 15px; color: #222 !important" disabled="">
           Balance: 154 ETH
         </v-chip>
           <div class="text-xs-center">
@@ -24,7 +24,7 @@
               dark
               color="primary"
             >
-              <v-gravatar hash="5d41402abc4b2a76b9719d911017c592" :size="30" class="grav" slot="activator" style="margin-right: 30px"/>
+              <v-gravatar hash="5d41402abc4b2a76b9719d911017c592" :size="26" class="grav" slot="activator" style="margin-right: 30px"/>
               <v-list>
                 <v-list-tile key="1" @click="">
                   <v-list-tile-title class="menuItemStyle">Publish ÐApp</v-list-tile-title>
@@ -46,7 +46,7 @@
             v-model="currentItem"
             fixed-tabs
             color="transparent"
-            slider-color="orange darken-2"
+            slider-color="purple darken-2"
             show-arrows
           >
             <v-tab
@@ -172,7 +172,7 @@ export default {
     font-family: 'Dosis', sans-serif !important;
     font-weight: 700;
     font-size: 23px;
-    color: #F7931E !important;
+    color: #8223d3 !important;
     position: absolute;
     margin-top: 9px;
     margin-left: -5px;
@@ -180,7 +180,7 @@ export default {
   .grav {
     margin-top: 5px;
     border-radius: 99px;
-    border: 2px solid #F7931E;
+    border: 3px solid #8223d3;
     cursor: pointer;
   }
   .bottom-nav {

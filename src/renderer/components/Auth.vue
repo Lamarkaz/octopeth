@@ -10,7 +10,7 @@
                     <v-alert v-if="error" color="error" icon="warning" value="true" style="margin-top: -45px">
                     Error: please make sure you upload a valid identity file and enter the correct decryption password
                     </v-alert>
-                    <v-icon style="font-size: 55px; padding-right: 10px; color: #8E2CE1; left: 42%; margin-bottom: 20px; position: relative; border-radius: 50%">fingerprint</v-icon>
+                    <v-icon style="font-size: 55px; padding-right: 10px; color: #6b20ac; left: 42%; margin-bottom: 20px; position: relative; border-radius: 50%">fingerprint</v-icon>
                     <br/>
                     <div style="text-align: center; margin-bottom: 30px; font-size: 16px; font-weight: 600">ALREADY A USER?<br/><span style="color: grey; font-size: 15px; font-weight: 300">Import your Identity file and credentials to start</span></div>
                     <form class="authForm">
@@ -47,7 +47,7 @@
                         </v-btn>
                         <div class="dividerStyle"></div>
                         <span style="color: grey; font-size: 15px; font-weight: 300; margin-top: 10px; margin-left: 22.5%">or create a new Identity</span>
-                        <v-btn class="authBtn pulse" style="background-color: #8E2CE1; margin-top: 15px" v-on:click="dialog = true">
+                        <v-btn class="authBtn pulse" style="background-color: #6b20ac; margin-top: 15px" v-on:click="dialog = true">
                             <v-icon style="font-size: 20px; padding-right: 10px">person_add</v-icon>Generate Identity
                         </v-btn>
                     </form>
@@ -56,10 +56,10 @@
         </v-container>
         <!-- Password dialog -->
         <v-layout row justify-center>
-          <v-dialog v-model="dialog" persistent max-width="500px">
+          <v-dialog v-model="dialog" persistent max-width="500px" dark> 
             <v-card class="genId">
               <v-card-title>
-                <span class="headline" style="font-family: 'Dosis', sans-serif; font-size: 21px"><v-icon style="font-size: 26px; padding-right: 6px; margin-top: -6px; color: #222">person_add</v-icon>Generate a new Identity</span>
+                <span class="headline" style="font-family: 'Dosis', sans-serif; font-size: 23px !important; font-weight: 600; color: white"><v-icon style="font-size: 26px; padding-right: 10px; margin-top: -6px; color: white">person_add</v-icon>Generate a new Identity</span>
               </v-card-title>
               <v-card-text>
                 <v-container grid-list-md>
@@ -68,36 +68,52 @@
                       <v-text-field 
                       v-model="pw"
                       name="input-10-1"
-                      color="secondary" 
-                      prepend-icon="lock" single-line
+                      color="black" 
                       hint="At least 8 characters"
                       :append-icon="newPassBol ? 'visibility' : 'visibility_off'"
                       :append-icon-cb="() => (newPassBol = !newPassBol)"
                       :type="newPassBol ? 'password' : 'text'"
                       counter
+                      box
+                      loading
                       label="Select Password" 
                       required
-                      ></v-text-field>
+                      >
+                        <v-progress-linear
+                          slot="progress"
+                          :value="pw_progress"
+                          :color="pw_color"
+                          height="5"
+                        ></v-progress-linear>
+                      </v-text-field>
                     </v-flex>
                     <v-flex xs12>
                       <v-text-field 
                       v-model="confirmpw"
                       name="input-10-1"
-                      color="secondary" 
-                      prepend-icon="done_all" single-line
+                      color="black"
                       :append-icon="confPassBol ? 'visibility' : 'visibility_off'"
                       :append-icon-cb="() => (confPassBol = !confPassBol)"
                       :type="confPassBol ? 'password' : 'text'" 
                       counter
+                      box
+                      loading
                       label="Confirm Password" 
                       required
-                      ></v-text-field>
+                      >
+                        <v-progress-linear
+                          slot="progress"
+                          :value="confirmpw_progress"
+                          :color="confirmpw_color"
+                          height="5"
+                        ></v-progress-linear>
+                      </v-text-field>
                     </v-flex>
                   </v-layout>
                 </v-container>
               </v-card-text>
               <div class="warningAlert" v-if="pw != confirmpw" type="error">
-                <v-icon style="margin-right: 5px; font-size: 21px">warning</v-icon> passwords do not match
+                <v-icon style="margin-right: 5px; font-size: 21px; color: #FF4151">warning</v-icon> passwords do not match
               </div>
               <v-card-actions>
                 <v-spacer></v-spacer>
@@ -234,6 +250,18 @@ export default{
   computed: {
     valid: function () {
       return (this.json !== '' && this.password.length > 7)
+    },
+    pw_progress () {
+      return Math.min(100, this.pw.length * 10)
+    },
+    confirmpw_progress () {
+      return Math.min(100, this.confirmpw.length * 10)
+    },
+    pw_color () {
+      return ['error', 'warning', 'success'][Math.floor(this.pw_progress / 40)]
+    },
+    confirmpw_color () {
+      return ['error', 'warning', 'success'][Math.floor(this.confirmpw_progress / 40)]
     }
   }
 }
@@ -315,7 +343,8 @@ input[type=file] {
   width: auto;
 }
 .genId {
-  background: rgb(107, 32, 172);
+  border-top: solid 4px rgb(107, 32, 172);
+  background: #222;
   padding: 15px;
 }
 .genBtn {
@@ -332,37 +361,48 @@ input[type=file] {
 }
 .warningAlert {
   margin-left: 25px;
+  margin-top: 10px;
   margin-bottom: 15px;
   padding-left: 10px;
   font-family: 'Dosis';
-  color: rgba(0,0,0,.5);
+  color: #FF4151;
   font-weight: 500;
   font-size: 15px;
+}
+.application .theme--light.input-group input, .application .theme--light.input-group textarea, .theme--light .input-group input, .theme--light .input-group textarea {
+  color: white;
+  margin-bottom: 11px;
+}
+.input-group__details {
+  max-width: calc(100%) !important;
+}
+.input-group__counter {
+    color: white !important;
 }
 /* Animation */
 @-webkit-keyframes pulse {
   0% {
-    -webkit-box-shadow: 0 0 0 0 rgba(204,169,44, 0.4);
+    -webkit-box-shadow: 0 0 0 0 rgba(116, 44, 204, 0.4);
   }
   70% {
-    -webkit-box-shadow: 0 0 0 12px rgba(204,169,44, 0);
+    -webkit-box-shadow: 0 0 0 12px rgba(116, 44, 204, 0.4);
   }
   100% {
-    -webkit-box-shadow: 0 0 0 0 rgba(204,169,44, 0);
+    -webkit-box-shadow: 0 0 0 0 rgba(116, 44, 204, 0.4);
   }
 }
 @keyframes pulse {
   0% {
-    -moz-box-shadow: 0 0 0 0 rgba(204,169,44, 0.4);
-    box-shadow: 0 0 0 0 rgba(204,169,44, 0.4);
+    -moz-box-shadow: 0 0 0 0 rgba(111, 44, 204, 0.4);
+    box-shadow: 0 0 0 0 rgba(111, 44, 204, 0.4);
   }
   70% {
-    -moz-box-shadow: 0 0 0 12px rgba(204,169,44, 0);
-    box-shadow: 0 0 0 12px rgba(204,169,44, 0);
+    -moz-box-shadow: 0 0 0 12px rgba(129, 44, 204, 0);
+    box-shadow: 0 0 0 12px rgba(129, 44, 204, 0);
   }
   100% {
-    -moz-box-shadow: 0 0 0 0 rgba(204,169,44, 0);
-    box-shadow: 0 0 0 0 rgba(204,169,44, 0);
+    -moz-box-shadow: 0 0 0 0 rgba(111, 44, 204, 0);
+    box-shadow: 0 0 0 0 rgba(111, 44, 204, 0);
   }
 }
 </style>
