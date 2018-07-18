@@ -1,8 +1,15 @@
 <template>
     <v-layout class="authLayout">
         <div class="leftWrapper">
-          <div class="logoShow" style="margin-left: -90px; position: absolute">
-        </div>
+            <v-carousel>
+              <v-carousel-item
+                v-for="(item,i) in items"
+                :key="i"
+                :src="item.src"
+                reverse-transition="fade"
+                transition="fade"
+              ></v-carousel-item>
+            </v-carousel>
         </div>
         <v-container class="authOverlay">
             <v-flex style="margin-left: auto; margin-right: auto; margin-top: 70px; max-width: 530px">
@@ -150,7 +157,21 @@ export default{
     multiple: {
       type: Boolean,
       default: false
-    }
+    },
+    items: [
+      {
+        src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg'
+      },
+      {
+        src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg'
+      },
+      {
+        src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg'
+      },
+      {
+        src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg'
+      }
+    ]
   },
   data () {
     return {

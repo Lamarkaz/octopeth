@@ -22,6 +22,7 @@
         if (err) alert(err)
         if (count > 0) self.$store.commit('AUTH')
       })
+      window.electron = this.$electron // DELETE IN PRODUCTION
     }
   }
 </script>

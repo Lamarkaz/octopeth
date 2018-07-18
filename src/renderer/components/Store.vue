@@ -59,7 +59,7 @@
           </v-tabs>
     </v-toolbar>
 
-    <!-- Top store navigation -->
+    <!-- Top store navigation
       <v-card style="margin-top: 174px">
         <v-bottom-nav
           :value="true"
@@ -77,11 +77,12 @@
             <v-icon>explore</v-icon>
           </v-btn>
         </v-bottom-nav>
-      </v-card>
+      </v-card> -->
 
     <!-- installed view -->
     <MyDapps></MyDapps>
     <!-- explore view-->
+    <Explore></Explore>
     <!-- <Explore></Explore> -->
 
     <CircularNav></CircularNav>
@@ -146,23 +147,23 @@ export default {
     }
   },
   computed: {
-    dapp_processed () {
-      var arr = []
-      for (var i = 0; i < this.myDapps.length; i++) {
-        if (this.myDapps[i].category === 'gaming') {
-          var obj = this.myDapps[i]
-          obj.icon = 'videogame_asset'
-          arr.push(obj)
-        }
-      }
-      return arr
-    },
-    color () {
-      switch (this.e2) {
-        case 0: return 'grey darken-4'
-        case 1: return 'orange darken-2'
-      }
-    }
+    // dapp_processed () {
+    //   var arr = []
+    //   for (var i = 0; i < this.myDapps.length; i++) {
+    //     if (this.myDapps[i].category === 'gaming') {
+    //       var obj = this.myDapps[i]
+    //       obj.icon = 'videogame_asset'
+    //       arr.push(obj)
+    //     }
+    //   }
+    //   return arr
+    // },
+    // color () {
+    //   switch (this.e2) {
+    //     case 0: return 'grey darken-4'
+    //     case 1: return 'purple darken-3'
+    //   }
+    // }
   }
 }
 </script>

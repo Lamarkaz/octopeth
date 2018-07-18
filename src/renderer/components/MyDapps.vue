@@ -109,12 +109,13 @@ export default {
   .mainWrapperIcon {
     font-size: 35px !important;
     margin-right: 5px;
-    color: #F7931E;
+    color: rgb(107, 32, 172);
     margin-top: -4px;
   }
   .MainWrapperTypo {
+    margin-top: 100px;
     margin-bottom: 25px;
-    color: #F7931E;
+    color: rgb(107, 32, 172);
     font-size: 25px;
   }
   .appView {
@@ -128,7 +129,7 @@ export default {
   .appTitle {
     font-weight: 700;
     font-size: 22px;
-    color: #F7931E;
+    color: rgb(107, 32, 172);
     transition: color 800ms ease-in-out;
   }
   .dappLogo {
@@ -177,7 +178,7 @@ export default {
     margin-top: -7px;
   }
   .dappCard:hover  .appTitle {
-    color: #F7931E;
+    color: rgb(107, 32, 172);
     margin-top: -175px;
   }
   .dappCard:hover  .appBody {
@@ -193,7 +194,7 @@ export default {
     background-color: #222;
   }
   .menuItemStyle {
-    color: #F7931E;
+    color: rgb(107, 32, 172);
     font-family: 'Dosis', sans-serif;
     font-size: 18px;
     font-weight: 500; 
