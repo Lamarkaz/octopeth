@@ -2,10 +2,6 @@
     <v-layout class="authLayout">
         <div class="leftWrapper">
           <div class="logoShow" style="margin-left: -90px; position: absolute">
-          <img src="../assets/logo-dark.svg" width="800px"/>
-          <center>
-            <h3 style="font-family: 'Dosis', sans-serif !important; font-weight: 700; font-size: 48px; color: #222">OCTOPETH</h3>
-          </center>
         </div>
         </div>
         <v-container class="authOverlay">
@@ -14,9 +10,9 @@
                     <v-alert v-if="error" color="error" icon="warning" value="true" style="margin-top: -45px">
                     Error: please make sure you upload a valid identity file and enter the correct decryption password
                     </v-alert>
-                    <v-icon style="font-size: 55px; padding-right: 10px; color: #F7931E; left: 42%; margin-bottom: 20px; position: relative; border-radius: 50%">fingerprint</v-icon>
+                    <v-icon style="font-size: 55px; padding-right: 10px; color: #8E2CE1; left: 42%; margin-bottom: 20px; position: relative; border-radius: 50%">fingerprint</v-icon>
                     <br/>
-                    <div style="text-align: center; margin-bottom: 30px; font-size: 16px; font-weight: 600">Already a user?<br/><span style="color: grey; font-size: 15px; font-weight: 300">Import your Identity file and credentials to start</span></div>
+                    <div style="text-align: center; margin-bottom: 30px; font-size: 16px; font-weight: 600">ALREADY A USER?<br/><span style="color: grey; font-size: 15px; font-weight: 300">Import your Identity file and credentials to start</span></div>
                     <form class="authForm">
                         <v-text-field class="inputStyle"
                         prepend-icon="attach_file" single-line
@@ -25,6 +21,7 @@
                         :disabled="disabled"
                         :rules="[v => !!v || 'Identity file is required!']"
                         ref="fileTextField"
+                        color="purple darken-3"
                         dark
                         loading
                         required
@@ -40,6 +37,7 @@
                             :append-icon="passBol ? 'visibility' : 'visibility_off'"
                             :append-icon-cb="() => (passBol = !passBol)"
                             :type="passBol ? 'password' : 'text'"
+                            color="puprle darken-3"
                             counter
                             dark
                             required
@@ -49,7 +47,7 @@
                         </v-btn>
                         <div class="dividerStyle"></div>
                         <span style="color: grey; font-size: 15px; font-weight: 300; margin-top: 10px; margin-left: 22.5%">or create a new Identity</span>
-                        <v-btn class="authBtn pulse" style="background-color: #F7931E; margin-top: 15px" v-on:click="dialog = true">
+                        <v-btn class="authBtn pulse" style="background-color: #8E2CE1; margin-top: 15px" v-on:click="dialog = true">
                             <v-icon style="font-size: 20px; padding-right: 10px">person_add</v-icon>Generate Identity
                         </v-btn>
                     </form>
@@ -243,9 +241,10 @@ export default{
 
 
 <style scoped>
-.authLayout {
-    background-image: linear-gradient(to right, #F37335 0%, #efbb1f 100%); /* #efbb1f */
-    background-size: 63% 100%;
+.authLayout { 
+  background-image: linear-gradient(-160deg, #6175c7 0%, rgb(107, 32, 172) 100%);
+  background-size: 63% 100%;
+  -webkit-app-region: drag;
 }
 .authOverlay {
     background: #222;
@@ -269,7 +268,7 @@ input[type=file] {
   margin-left: auto;
   box-shadow: none;
   padding-bottom: 5px;
-  color: #F7931E;
+  color: rgb(107, 32, 172);
   background: transparent;
 }
 .authForm {
@@ -277,7 +276,7 @@ input[type=file] {
   padding-right: 15%;
 }
 .inputStyle {
-  color: #F7931E;
+  color: rgb(107, 32, 172);
 }
 .dividerStyle {
   margin-top: 30px;
@@ -299,7 +298,7 @@ input[type=file] {
 .pulse {
   display: inline-block;
   cursor: pointer;
-  box-shadow: 0 0 0 rgba(204,169,44, 0.4);
+  box-shadow: 0 0 0 rgba(107, 32, 172, 0.4);
   animation: pulse 2s infinite;
 }
 .pulse:hover {
@@ -316,7 +315,7 @@ input[type=file] {
   width: auto;
 }
 .genId {
-  background: #F7931E;
+  background: rgb(107, 32, 172);
   padding: 15px;
 }
 .genBtn {
@@ -346,10 +345,10 @@ input[type=file] {
     -webkit-box-shadow: 0 0 0 0 rgba(204,169,44, 0.4);
   }
   70% {
-      -webkit-box-shadow: 0 0 0 12px rgba(204,169,44, 0);
+    -webkit-box-shadow: 0 0 0 12px rgba(204,169,44, 0);
   }
   100% {
-      -webkit-box-shadow: 0 0 0 0 rgba(204,169,44, 0);
+    -webkit-box-shadow: 0 0 0 0 rgba(204,169,44, 0);
   }
 }
 @keyframes pulse {
@@ -358,12 +357,12 @@ input[type=file] {
     box-shadow: 0 0 0 0 rgba(204,169,44, 0.4);
   }
   70% {
-      -moz-box-shadow: 0 0 0 12px rgba(204,169,44, 0);
-      box-shadow: 0 0 0 12px rgba(204,169,44, 0);
+    -moz-box-shadow: 0 0 0 12px rgba(204,169,44, 0);
+    box-shadow: 0 0 0 12px rgba(204,169,44, 0);
   }
   100% {
-      -moz-box-shadow: 0 0 0 0 rgba(204,169,44, 0);
-      box-shadow: 0 0 0 0 rgba(204,169,44, 0);
+    -moz-box-shadow: 0 0 0 0 rgba(204,169,44, 0);
+    box-shadow: 0 0 0 0 rgba(204,169,44, 0);
   }
 }
 </style>

@@ -2,6 +2,23 @@
 
 import { app, BrowserWindow } from 'electron'
 
+// import the module
+import * as Splashscreen from "@trodi/electron-splashscreen";
+const mainOpts: Electron.BrowserWindowConstructorOptions = ...
+// configure the splashscreen
+const config: Splashscreen.Config = {
+    windowOpts: mainOpts;
+    templateUrl: `${__dirname}/splash-screen.html`;
+    splashScreenOpts: {
+        width: 425,
+        height: 325,
+    },
+};
+// initialize the splashscreen handling
+const main: BrowserWindow = Splashscreen.initSplashScreen(config);
+// load your browser window per usual
+main.loadURL(`file://index.html`);
+
 /**
  * Set `__static` path to static files in production
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
@@ -20,13 +37,20 @@ function createWindow () {
    * Initial window options
    */
   mainWindow = new BrowserWindow({
-    height: 700,
-    width: 1300,
-    minHeight: 700,
-    minWidth: 1300,
+    height: 600,
+    width: 1100,
+    minHeight: 600,
+    minWidth: 1100,
     useContentSize: true,
-    backgroundColor: '#222222',
-    titleBarStyle: 'hidden'
+    backgroundColor: toElectronBackgroundColor(cfg.backgroundColor || '#000'),
+    titleBarStyle: 'hidden',
+    title: 'Hyper.app',
+    // we want to go frameless on Windows and Linux
+    frame: process.platform === 'darwin',
+    transparent: process.platform === 'darwin',
+    icon,
+    show: process.env.HYPER_DEBUG || process.env.HYPERTERM_DEBUG || isDev,
+    acceptFirstMouse: true
   })
 
   mainWindow.loadURL(winURL)

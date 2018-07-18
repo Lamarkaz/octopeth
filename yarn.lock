@@ -2952,6 +2952,10 @@ electron-publish@19.56.0:
     fs-extra-p "^4.5.0"
     mime "^2.2.0"
 
+electron-titlebar@0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/electron-titlebar/-/electron-titlebar-0.0.3.tgz#ee6bc83e3a80eb7030da6cd51c3563f4851766be"
+
 electron-to-chromium@^1.2.7, electron-to-chromium@^1.3.47:
   version "1.3.48"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.48.tgz#d3b0d8593814044e092ece2108fc3ac9aea4b900"
@@ -8689,6 +8693,10 @@ vm-browserify@0.0.4:
 void-elements@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/void-elements/-/void-elements-2.0.1.tgz#c066afb582bb1cb4128d60ea92392e94d5e9dbec"
+
+vue-circle-menu@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/vue-circle-menu/-/vue-circle-menu-1.1.1.tgz#3347ea746b0457e0a1dec688c58eaf4326d32b57"
 
 vue-electron@^1.0.6:
   version "1.0.6"
