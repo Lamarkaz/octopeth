@@ -4,6 +4,9 @@ import "./Ownable.sol";
 
 contract Octopeth is Ownable {
 
+  bool preCensorship;
+  bytes config;
+
   struct dApp {
     address owner;
     string title;
@@ -19,26 +22,38 @@ contract Octopeth is Ownable {
   enum categories {OTHER, GAMING, ENTERTAINMENT, FINANCE, SOCIAL, EXCHANGE, GAMBLING, TOKENS, SHARING, GOVERNANCE}
 
   event Publish(address owner, string title, string url, string contact, string logo, string desc, bytes32 hash, categories cat);
-  event Approve(address owner, string title, string url, string contact, string logo, string desc, bytes32 hash, categories cat);
+  event Review(address owner, string title, string url, string contact, string logo, string desc, bytes32 hash, categories cat);
   event Remove(string indexed title);
+  event PreCensor(bool value);
+  event Config(bytes value);
 
   mapping (string => dApp) dApps;
 
   function publish(string title, string url, string contact, string logo, string desc, bytes32 hash, categories cat) public {
     require(dApps[title].owner == address(0) || dApps[title].owner == msg.sender);
-    dApp memory newdApp = dApp(msg.sender, title, url, logo, desc, contact, hash, cat, false);
+    dApp memory newdApp = dApp(msg.sender, title, url, logo, desc, contact, hash, cat, !(preCensorship));
     dApps[title] = newdApp;
     emit Publish(msg.sender, title, url, contact, logo, desc, hash, cat);
   }
 
-  function approve(string title) public onlyOwner {
+  function review(string title, bool value) public onlyOwner {
     dApp storage thisdApp = dApps[title];
-    dApps[title].approved = true;
-    emit Approve(thisdApp.owner, thisdApp.title, thisdApp.url, thisdApp.contact, thisdApp.logo, thisdApp.desc, thisdApp.hash, thisdApp.cat);
+    dApps[title].approved = value;
+    emit Review(thisdApp.owner, thisdApp.title, thisdApp.url, thisdApp.contact, thisdApp.logo, thisdApp.desc, thisdApp.hash, thisdApp.cat);
   }
 
   function remove(string title) public onlyOwner {
     dApps[title].approved = false;
     emit Remove(title);
+  }
+
+  function preCensor(bool value) public onlyOwner {
+    preCensorship = value;
+    emit PreCensor(value);
+  }
+
+  function updateConfig(bytes value) public onlyOwner {
+    config = value;
+    emit Config(value);
   }
 }
