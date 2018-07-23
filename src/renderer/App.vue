@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <v-app>
+    <v-app id="electron-titlebar" class="drag">
+      <!-- Customized title-bar -->
       <!-- main router view -->
       <router-view v-if="$store.state.auth.authed"></router-view>
       <!-- authentication view -->
@@ -21,6 +22,9 @@
         if (err) alert(err)
         if (count > 0) self.$store.commit('AUTH')
       })
+      window.electron = this.$electron // DELETE IN PRODUCTION
+      this.$store.dispatch('updateMyDapps')
+      this.$store.dispatch('updateExplore')
     }
   }
 </script>

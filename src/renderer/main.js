@@ -11,15 +11,21 @@ import App from './App'
 import router from './router'
 import store from './store'
 import Auth from '@/components/Auth'
+import MyDapps from '@/components/MyDapps'
 import CircularNav from '@/components/CircularNav'
+import Explore from '@/components/Explore'
+
 import 'vuetify/dist/vuetify.min.css'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 // Global Components
 Vue.component('Auth', Auth)
 Vue.component('CircularNav', CircularNav)
+Vue.component('Explore', Explore)
+Vue.component('MyDapps', MyDapps)
 
 Vue.use(require('vue-electron'))
+Vue.use(require('electron-titlebar'))
 Vue.http = Vue.prototype.$http = axios
 Vue.config.productionTip = false
 Vue.component('v-gravatar', Gravatar)
