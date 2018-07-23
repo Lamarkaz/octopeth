@@ -8,7 +8,7 @@
       </h3>
       <v-container grid-list-md text-xs-center>
       <v-layout row wrap>
-        <v-flex v-for="i in myDapps" :key="`1${i}`" lg2 >
+        <v-flex v-for="i in $store.dapps.state.myDapps" :key="`1${i}`" lg2 >
           <v-card dark color="secondary">
                 <v-card class="dappCard px-0" style="height: 250px;">
                 <v-card-media :src="i.logo" height="150px" class="dappLogo">
@@ -33,7 +33,7 @@
         <v-layout row wrap>
           <v-flex
             v-for="i
-            in myDapps"
+            in $store.dapps.state.myDapps"
             :key="`2${i.title}`"
             lg1
             offset-2
@@ -50,39 +50,38 @@
 export default {
   data () {
     return {
-      myDapps: [
-        {
-          logo: 'http://lh3.googleusercontent.com/akv2Bdp7i5Vv-sl9FuP3_dhWpUO80zULf-Pkh6RFleomEp6pZorHuCNm3FbR9oAMunVK=w170-rw',
-          title: 'Decentube',
-          category: 'other'
-        },
-        {
-          logo: '',
-          title: 'Dcourt',
-          category: 'social'
-        },
-        {
-          logo: 'http://lh3.googleusercontent.com/sRmOaGKtn9ByTyHyEjPHLOqcgSdROfqiF7-q3P0B_8AkPywuZm-CDt1pX9z8Oob4Y3Od=w170-rw',
-          title: 'Augur',
-          category: 'other'
-        },
-        {
-          logo: 'http://lh3.googleusercontent.com/dj8kVcmXUj5bBzOG3xnKqPamTRWk9wyI1_aQufFbO4zmjECo8alVkssw9oibcEtnHzc=w170-rw',
-          title: 'Gnosis',
-          category: 'other'
-        },
-        {
-          logo: 'http://lh5.ggpht.com/0VYAvZLR9YhosF-thqm8xl8EWsCfrEY_uk2og2f59K8IOx5TfPsXjFVwxaHVnUbuEjc=w170-rw',
-          title: 'CryptoKitties',
-          category: 'gaming'
-        },
-        {
-          logo: '',
-          title: 'Digix',
-          category: 'tokens'
-        }
-      ],
-      explore: [],
+      // myDapps: [
+      // {
+      //     logo: 'http://lh3.googleusercontent.com/akv2Bdp7i5Vv-sl9FuP3_dhWpUO80zULf-Pkh6RFleomEp6pZorHuCNm3FbR9oAMunVK=w170-rw',
+      //     title: 'Decentube',
+      //     category: 'other'
+      //   },
+      //   {
+      //     logo: '',
+      //     title: 'Dcourt',
+      //     category: 'social'
+      //   },
+      //   {
+      //     logo: 'http://lh3.googleusercontent.com/sRmOaGKtn9ByTyHyEjPHLOqcgSdROfqiF7-q3P0B_8AkPywuZm-CDt1pX9z8Oob4Y3Od=w170-rw',
+      //     title: 'Augur',
+      //     category: 'other'
+      //   },
+      //   {
+      //     logo: 'http://lh3.googleusercontent.com/dj8kVcmXUj5bBzOG3xnKqPamTRWk9wyI1_aQufFbO4zmjECo8alVkssw9oibcEtnHzc=w170-rw',
+      //     title: 'Gnosis',
+      //     category: 'other'
+      //   },
+      //   {
+      //     logo: 'http://lh5.ggpht.com/0VYAvZLR9YhosF-thqm8xl8EWsCfrEY_uk2og2f59K8IOx5TfPsXjFVwxaHVnUbuEjc=w170-rw',
+      //     title: 'CryptoKitties',
+      //     category: 'gaming'
+      //   },
+      //   {
+      //     logo: '',
+      //     title: 'Digix',
+      //     category: 'tokens'
+      //   }
+      // ],
       currentItem: 'tab-Home',
       items: [
         'Home', 'Shopping', 'Videos', 'App1', 'App2', 'Images', 'App3', 'App4', 'App'

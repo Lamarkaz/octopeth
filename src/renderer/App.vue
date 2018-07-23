@@ -23,6 +23,8 @@
         if (count > 0) self.$store.commit('AUTH')
       })
       window.electron = this.$electron // DELETE IN PRODUCTION
+      this.$store.dispatch('updateMyDapps')
+      this.$store.dispatch('updateExplore')
     }
   }
 </script>

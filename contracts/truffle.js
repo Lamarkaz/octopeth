@@ -1,11 +1,25 @@
+const privateKeys = require("./privkey")
+const HDWalletProvider = require("truffle-hdwallet-provider-privkey");
+
 module.exports = {
-  // See <http://truffleframework.com/docs/advanced/configuration>
   networks: {
     development: {
-      host: "127.0.0.1",
-      port: 7545,
-      network_id: "5777" // Match any network id,
+      host: "localhost",
+      port: 8545,
+      network_id: "*" // Match any network id
     },
-
+    ropsten: {
+      provider: () => {
+        return new HDWalletProvider(privateKeys[0], "https://ropsten.infura.io")
+      },
+      network_id: 3,
+      gas:4000000
+    }
+  },
+  solc: {
+    optimizer: {
+      enabled: true,
+      runs: 200
+    }
   }
 };

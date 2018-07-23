@@ -63,6 +63,7 @@
     "material-design-icons-iconfont": "^3.0.3",
     "nedb": "^1.8.0",
     "sha3": "^1.2.2",
+    "truffle-hdwallet-provider-privkey": "^0.2.0",
     "typeface-dosis": "0.0.54",
     "vue": "^2.3.3",
     "vue-circle-menu": "^1.1.1",

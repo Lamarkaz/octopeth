@@ -1,11 +1,22 @@
 <template>
     <v-layout class="authLayout">
         <div class="leftWrapper">
-            <v-carousel>
+            <v-carousel style="height:100%; margin-left: -105px; width: 890px; position: absolute; top: 0px">
               <v-carousel-item
-                v-for="(item,i) in items"
-                :key="i"
-                :src="item.src"
+                key="1"
+                src="item.src"
+                reverse-transition="fade"
+                transition="fade"
+              ></v-carousel-item>
+              <v-carousel-item
+                key="1"
+                src="item.src"
+                reverse-transition="fade"
+                transition="fade"
+              ></v-carousel-item>
+              <v-carousel-item
+                key="1"
+                src="item.src"
                 reverse-transition="fade"
                 transition="fade"
               ></v-carousel-item>
@@ -157,21 +168,7 @@ export default{
     multiple: {
       type: Boolean,
       default: false
-    },
-    items: [
-      {
-        src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg'
-      },
-      {
-        src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg'
-      },
-      {
-        src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg'
-      },
-      {
-        src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg'
-      }
-    ]
+    }
   },
   data () {
     return {

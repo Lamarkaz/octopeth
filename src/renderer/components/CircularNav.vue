@@ -1,6 +1,6 @@
 <template>
   <div class="navWrapper">
-    <circle-menu type="middle-around" :number="4" mask='black' btn colors="[ '#6b20ac', '#A7425C', '#FFE26F', 'F3825F', '#F19584' ]" circle>
+    <circle-menu type="middle-around" :number="4" mask='black' btn colors="[ '#6A1B9A', '#A7425C', '#FFE26F', 'F3825F', '#F19584' ]" circle>
       <a slot="item_1" class="navSlot">
         <v-icon slot="item_1" class="navIcon">home</v-icon>
       </a>

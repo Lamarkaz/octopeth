@@ -8,7 +8,7 @@
       </h3>
       <v-container grid-list-md text-xs-center>
       <v-layout row wrap>
-        <v-flex v-for="i in myDapps" :key="`1${i}`" lg2 >
+        <v-flex v-for="i in $store.dapps.state.explore" :key="`1${i}`" lg2 >
           <v-card dark color="secondary">
                 <v-card class="dappCard px-0" style="height: 250px;">
                 <v-card-media :src="i.logo" height="150px" class="dappLogo">
@@ -33,7 +33,7 @@
         <v-layout row wrap>
           <v-flex
             v-for="i
-            in myDapps"
+            in $store.dapps.state.explore"
             :key="`2${i.title}`"
             lg1
             offset-2
@@ -47,46 +47,80 @@
 </template>
 
 <script>
+import scrape from 'website-scraper'
+import phantomHtml from 'website-scraper-phantom'
+import path from 'path'
+import { remote } from 'electron'
+import download from 'image-downloader'
+
 export default {
   data () {
     return {
-      myDapps: [
-        {
-          logo: 'http://lh3.googleusercontent.com/akv2Bdp7i5Vv-sl9FuP3_dhWpUO80zULf-Pkh6RFleomEp6pZorHuCNm3FbR9oAMunVK=w170-rw',
-          title: 'Decentube',
-          category: 'other'
-        },
-        {
-          logo: '',
-          title: 'Dcourt',
-          category: 'social'
-        },
-        {
-          logo: 'http://lh3.googleusercontent.com/sRmOaGKtn9ByTyHyEjPHLOqcgSdROfqiF7-q3P0B_8AkPywuZm-CDt1pX9z8Oob4Y3Od=w170-rw',
-          title: 'Augur',
-          category: 'other'
-        },
-        {
-          logo: 'http://lh3.googleusercontent.com/dj8kVcmXUj5bBzOG3xnKqPamTRWk9wyI1_aQufFbO4zmjECo8alVkssw9oibcEtnHzc=w170-rw',
-          title: 'Gnosis',
-          category: 'other'
-        },
-        {
-          logo: 'http://lh5.ggpht.com/0VYAvZLR9YhosF-thqm8xl8EWsCfrEY_uk2og2f59K8IOx5TfPsXjFVwxaHVnUbuEjc=w170-rw',
-          title: 'CryptoKitties',
-          category: 'gaming'
-        },
-        {
-          logo: '',
-          title: 'Digix',
-          category: 'tokens'
-        }
-      ],
-      explore: [],
+      // explore: [
+      //   {
+      //     logo: 'http://lh3.googleusercontent.com/akv2Bdp7i5Vv-sl9FuP3_dhWpUO80zULf-Pkh6RFleomEp6pZorHuCNm3FbR9oAMunVK=w170-rw',
+      //     title: 'Decentube',
+      //     category: 'other'
+      //   },
+      //   {
+      //     logo: '',
+      //     title: 'Dcourt',
+      //     category: 'social'
+      //   },
+      //   {
+      //     logo: 'http://lh3.googleusercontent.com/sRmOaGKtn9ByTyHyEjPHLOqcgSdROfqiF7-q3P0B_8AkPywuZm-CDt1pX9z8Oob4Y3Od=w170-rw',
+      //     title: 'Augur',
+      //     category: 'other'
+      //   },
+      //   {
+      //     logo: 'http://lh3.googleusercontent.com/dj8kVcmXUj5bBzOG3xnKqPamTRWk9wyI1_aQufFbO4zmjECo8alVkssw9oibcEtnHzc=w170-rw',
+      //     title: 'Gnosis',
+      //     category: 'other'
+      //   },
+      //   {
+      //     logo: 'http://lh5.ggpht.com/0VYAvZLR9YhosF-thqm8xl8EWsCfrEY_uk2og2f59K8IOx5TfPsXjFVwxaHVnUbuEjc=w170-rw',
+      //     title: 'CryptoKitties',
+      //     category: 'gaming'
+      //   },
+      //   {
+      //     logo: '',
+      //     title: 'Digix',
+      //     category: 'tokens'
+      //   }
+      // ],
       currentItem: 'tab-Home',
       items: [
         'Home', 'Shopping', 'Videos', 'App1', 'App2', 'Images', 'App3', 'App4', 'App'
       ]
+    }
+  },
+  methods: {
+    install: function (url, title, logo, cb) {
+      var self = this
+      this.$db.count({type: 'app', installed: true}, function (err, count) {
+        if (err) self.$electron.remote.dialog.showErrorBox('Error', 'There seems to be a problem connecting to the local database')
+        scrape({urls: [url], directory: path.join(remote.app.getPath('userData'), '/apps/' + count + 1 + '/'), httpResponseHandler: phantomHtml}).then(function () {
+          download.image({url: url, dest: path.join(remote.app.getPath('userData'), '/logos/' + count + 1 + '/')}).then(({filename, image}) => {
+            self.$db.insert({
+              type: 'app',
+              location: path.join(remote.app.getPath('userData'), '/apps/' + count + 1 + '/'),
+              title: title,
+              logo: path.join(remote.app.getPath('userData'), '/logos/' + count + 1 + '/' + filename),
+              installed: true,
+              id: count + 1
+            }, function (err) {
+              if (err) throw err
+              if (cb) cb()
+              self.$store.dispatch('updateMyDapps')
+              self.$store.dispatch('updateExplore')
+            })
+          }).catch(function () {
+            self.$electron.remote.dialog.showErrorBox('Error', 'The dApp logo could not be downloaded')
+          })
+        }).catch(function () {
+          self.$electron.remote.dialog.showErrorBox('Error', 'The dApp contents could not be downloaded')
+        })
+      })
     }
   }
 }
