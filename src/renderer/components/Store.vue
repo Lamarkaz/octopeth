@@ -14,7 +14,7 @@
         <span class="logoText">OCTOPETH</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-        <v-chip color="black darken-1" text-color="white" style="margin-right: 15px; padding: 0px 10px; font-weight: 600; font-family: 'Dosis'; font-size: 15px; color: #222 !important" disabled="">
+        <v-chip color="grey darken-4" text-color="white" style="margin-right: 15px; padding: 0px 10px; font-weight: 600; font-family: 'Dosis'; font-size: 15px" disabled="">
           Balance: 154 ETH
         </v-chip>
           <div class="text-xs-center">

@@ -23,7 +23,7 @@
             </v-carousel>
         </div>
         <v-container class="authOverlay">
-            <v-flex style="margin-left: auto; margin-right: auto; margin-top: 70px; max-width: 530px">
+            <v-flex style="margin-left: auto; margin-right: auto; margin-top: 35px; max-width: 530px">
                 <v-card class="authCard">
                     <v-alert v-if="error" color="error" icon="warning" value="true" style="margin-top: -45px">
                     Error: please make sure you upload a valid identity file and enter the correct decryption password
@@ -55,7 +55,7 @@
                             :append-icon="passBol ? 'visibility' : 'visibility_off'"
                             :append-icon-cb="() => (passBol = !passBol)"
                             :type="passBol ? 'password' : 'text'"
-                            color="puprle darken-3"
+                            color="purple darken-3"
                             counter
                             dark
                             required
@@ -65,8 +65,8 @@
                         </v-btn>
                         <div class="dividerStyle"></div>
                         <span style="color: grey; font-size: 15px; font-weight: 300; margin-top: 10px; margin-left: 22.5%">or create a new Identity</span>
-                        <v-btn class="authBtn pulse" style="background-color: #6b20ac; margin-top: 15px" v-on:click="dialog = true">
-                            <v-icon style="font-size: 20px; padding-right: 10px">person_add</v-icon>Generate Identity
+                        <v-btn class="authBtn pulse" style="background-color: #6b20ac; margin-top: 15px; color: white" v-on:click="dialog = true">
+                            <v-icon style="font-size: 20px; padding-right: 10px; color: white">person_add</v-icon>Generate Identity
                         </v-btn>
                     </form>
                 </v-card>
@@ -86,13 +86,13 @@
                       <v-text-field 
                       v-model="pw"
                       name="input-10-1"
-                      color="black" 
+                      color="white" 
                       hint="At least 8 characters"
                       :append-icon="newPassBol ? 'visibility' : 'visibility_off'"
                       :append-icon-cb="() => (newPassBol = !newPassBol)"
                       :type="newPassBol ? 'password' : 'text'"
                       counter
-                      box
+                      dark
                       loading
                       label="Select Password" 
                       required
@@ -109,12 +109,12 @@
                       <v-text-field 
                       v-model="confirmpw"
                       name="input-10-1"
-                      color="black"
+                      color="white"
                       :append-icon="confPassBol ? 'visibility' : 'visibility_off'"
                       :append-icon-cb="() => (confPassBol = !confPassBol)"
                       :type="confPassBol ? 'password' : 'text'" 
                       counter
-                      box
+                      dark
                       loading
                       label="Confirm Password" 
                       required
