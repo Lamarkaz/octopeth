@@ -25,7 +25,7 @@ function createWindow () {
     minHeight: 630,
     minWidth: 1100,
     useContentSize: true,
-    titleBarStyle: 'hidden'
+    transparent: true, frame: false
   })
 
   mainWindow.loadURL(winURL)

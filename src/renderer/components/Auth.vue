@@ -1,22 +1,20 @@
 <template>
     <v-layout class="authLayout">
         <div class="leftWrapper">
-            <v-carousel style="height:100%; margin-left: -105px; width: 890px; position: absolute; top: 0px">
+            <v-carousel hide-delimiters style="margin-left: -70px; width:680px; box-shadow: none">
               <v-carousel-item
                 key="1"
-                src="item.src"
+                src=""
+              ></v-carousel-item>
+              <v-carousel-item
+                key="2"
+                src=""
                 reverse-transition="fade"
                 transition="fade"
               ></v-carousel-item>
               <v-carousel-item
-                key="1"
-                src="item.src"
-                reverse-transition="fade"
-                transition="fade"
-              ></v-carousel-item>
-              <v-carousel-item
-                key="1"
-                src="item.src"
+                key="3"
+                src=""
                 reverse-transition="fade"
                 transition="fade"
               ></v-carousel-item>
@@ -395,7 +393,10 @@ input[type=file] {
   max-width: calc(100%) !important;
 }
 .input-group__counter {
-    color: white !important;
+  color: white !important;
+}
+.intro-carousel .carousel__controls {
+  background: red !important;
 }
 /* Animation */
 @-webkit-keyframes pulse {
