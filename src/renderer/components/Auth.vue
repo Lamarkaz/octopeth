@@ -5,6 +5,18 @@
             <img src="../assets/logo-dark.svg" width="75px" style="margin-left: -75px; margin-top: -90px; opacity: 0.2"/>
             </center>
             <v-carousel hide-delimiters interval=5500 style="margin-left: -70px; width:680px; box-shadow: none">
+              <v-carousel-item
+                key="1"
+                src="imgs/create--assets.png"
+              ></v-carousel-item>
+              <v-carousel-item
+                key="2"
+                src="imgs/explore--assets.png"
+              ></v-carousel-item>
+              <v-carousel-item
+                key="3"
+                src="imgs/collect--assets.png"
+              ></v-carousel-item>
             </v-carousel>
         </div>
         <v-container class="authOverlay">
@@ -132,6 +144,10 @@
 
 <script>
 import ethers from 'ethers'
+// Auth carousel assets
+import '../assets/create.png'
+import '../assets/explore.png'
+import '../assets/collect.png'
 
 export default{
   props: {

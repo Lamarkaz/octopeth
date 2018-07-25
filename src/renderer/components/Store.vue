@@ -10,7 +10,7 @@
       class="background"
       color="purple darken-3">
       <v-toolbar-title v-on:click="$router.push('/')">
-        <img src="../assets/logo-dark.svg" width="45px" style="margin-left: 50px; cursor: pointer; margin-top: 10px; margin-right: 7.5px"/>
+        <img src="../assets/explore.png" width="45px" style="margin-left: 50px; cursor: pointer; margin-top: 10px; margin-right: 7.5px"/>
         <span class="logoText">OCTOPETH</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
