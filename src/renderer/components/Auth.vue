@@ -1,23 +1,10 @@
 <template>
     <v-layout class="authLayout">
         <div class="leftWrapper">
-            <v-carousel hide-delimiters style="margin-left: -70px; width:680px; box-shadow: none">
-              <v-carousel-item
-                key="1"
-                src=""
-              ></v-carousel-item>
-              <v-carousel-item
-                key="2"
-                src=""
-                reverse-transition="fade"
-                transition="fade"
-              ></v-carousel-item>
-              <v-carousel-item
-                key="3"
-                src=""
-                reverse-transition="fade"
-                transition="fade"
-              ></v-carousel-item>
+          <center>
+            <img src="../assets/logo-dark.svg" width="75px" style="margin-left: -75px; margin-top: -90px; opacity: 0.2"/>
+            </center>
+            <v-carousel hide-delimiters interval=5500 style="margin-left: -70px; width:680px; box-shadow: none">
             </v-carousel>
         </div>
         <v-container class="authOverlay">
@@ -286,7 +273,7 @@ export default{
 
 <style scoped>
 .authLayout { 
-  background-image: linear-gradient(-160deg, #6175c7 0%, rgb(107, 32, 172) 100%);
+  background-image: linear-gradient(-160deg, #6175c7 0%, #9245ba 70%);
   background-size: 63% 100%;
   -webkit-app-region: drag;
 }

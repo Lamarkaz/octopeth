@@ -4,8 +4,8 @@ import "./Ownable.sol";
 
 contract Octopeth is Ownable {
 
-  bool preCensorship;
-  bytes config;
+  bool public preCensorship;
+  bytes public config;
 
   struct dApp {
     address owner;

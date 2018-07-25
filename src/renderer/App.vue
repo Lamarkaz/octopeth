@@ -11,6 +11,7 @@
 </template>
 
 <script>
+  // import download from 'electron-dl'
   export default {
     name: 'octopeth',
     created () {
@@ -23,8 +24,28 @@
         if (count > 0) self.$store.commit('AUTH')
       })
       window.electron = this.$electron // DELETE IN PRODUCTION
-      this.$store.dispatch('updateMyDapps')
-      this.$store.dispatch('updateExplore')
+      window.contract = this.$contract
+      this.$contract.getPastEvents('Publish', {fromBlock: 0}, function (err, arr) {
+        if (!err) {
+          arr.forEach(function (e) {
+            // var values = e.returnValues
+            // download(self.$electron.remote.BrowserWindow.getFocusedWindow(), values.logo, {directory:''})
+            // self.$db.insert({
+            //   type:'app',
+            //   data:{
+            //     title: values.title,
+            //     logo: path.join(remote.app.getPath('userData'), '/logos/' + count + 1 + '/' + filename),
+            //     installed: true,
+            //     id: count + 1
+            //   }
+            // })
+          })
+          self.$store.dispatch('updateMyDapps')
+          self.$store.dispatch('updateExplore')
+        } else {
+          console.log(err)
+        }
+      })
     }
   }
 </script>
