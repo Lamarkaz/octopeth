@@ -6,25 +6,25 @@ const state = {
 }
 
 const mutations = {
-  newMyDapps (state, docs) {
+  NEWMYDAPPS (state, docs) {
     state.myDapps = docs
   },
-  newExplore (state, docs) {
+  NEWEXPLORE (state, docs) {
     state.explore = docs
   }
 }
 
 const actions = {
   updateMyDapps (context) {
-    db.find({type: 'app', installed: true}, function (err, docs) {
+    db.find({type: 'app', 'data.installed': true}, function (err, docs) {
       if (err) throw err
-      context.commit('newMyDapps', docs)
+      context.commit('NEWMYDAPPS', docs)
     })
   },
   updateExplore (context) {
-    db.find({type: 'app', installed: { $ne: true }}, function (err, docs) {
+    db.find({type: 'app', 'data.installed': { $ne: true }}, function (err, docs) {
       if (err) throw err
-      context.commit('newExplore', docs)
+      context.commit('NEWEXPLORE', docs)
     })
   }
 }
