@@ -1,9 +1,6 @@
 <template>
     <v-layout class="authLayout">
         <div class="leftWrapper">
-          <center>
-            <img src="../assets/logo-dark.svg" width="75px" style="margin-left: -75px; margin-top: -90px; opacity: 0.2"/>
-            </center>
             <v-carousel hide-delimiters interval=5500 style="margin-left: -70px; width:680px; box-shadow: none">
               <v-carousel-item
                 key="1"

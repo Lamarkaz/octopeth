@@ -1,17 +1,17 @@
 <template>
   <div class="navWrapper">
-    <circle-menu type="middle-around" :number="4" mask='black' btn colors="[ '#6A1B9A', '#A7425C', '#FFE26F', 'F3825F', '#F19584' ]" circle>
+    <circle-menu  @click='toggle()' type="middle-around" :number="4" mask='black' btn colors="[ '#8223d3', '#A7425C', '#FFE26F', 'F3825F', '#F19584' ]" circle>
       <a slot="item_1" class="navSlot">
-        <v-icon slot="item_1" class="navIcon">home</v-icon>
+        <v-icon slot="item_1" class="navIcon">arrow_back</v-icon>
       </a>
       <a slot="item_2" class="navSlot">
-        <v-icon slot="item_2" class="navIcon">close</v-icon>
+        <v-icon slot="item_2" class="navIcon">arrow_forward</v-icon>
       </a>
       <a slot="item_3" class="navSlot">
-        <v-icon slot="item_3" class="navIcon">refresh</v-icon>
+        <v-icon slot="item_3" class="navIcon">close</v-icon>
       </a>
       <a slot="item_4" class="navSlot">
-        <v-icon slot="item_4" class="navIcon">unfold_less</v-icon>
+        <v-icon slot="item_4" class="navIcon">refresh</v-icon>
       </a>
     </circle-menu>
   </div>

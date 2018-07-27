@@ -6,13 +6,18 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: '/store',
       name: 'Store',
       component: require('@/components/Store').default
     },
     {
+      path: '/dapp',
+      name: 'dAppViewer',
+      component: require('@/components/dAppViewer').default
+    },
+    {
       path: '*',
-      redirect: '/'
+      redirect: '/store'
     }
   ]
 })

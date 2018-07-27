@@ -10,17 +10,17 @@ import artifact from '../../contracts/build/contracts/Octopeth'
 import App from './App'
 import router from './router'
 import store from './store'
+import Navbar from '@/components/Navbar'
 import Auth from '@/components/Auth'
 import MyDapps from '@/components/MyDapps'
-import CircularNav from '@/components/CircularNav'
 import Explore from '@/components/Explore'
 
 import 'vuetify/dist/vuetify.min.css'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 // Global Components
+Vue.component('Navbar', Navbar)
 Vue.component('Auth', Auth)
-Vue.component('CircularNav', CircularNav)
 Vue.component('Explore', Explore)
 Vue.component('MyDapps', MyDapps)
 
