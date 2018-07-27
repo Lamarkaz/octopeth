@@ -18,13 +18,21 @@ const actions = {
   updateMyDapps (context) {
     db.find({type: 'app', 'data.installed': true}, function (err, docs) {
       if (err) throw err
-      context.commit('NEWMYDAPPS', docs)
+      var dataArr = []
+      for (let i of docs) {
+        dataArr.push(i.data)
+      }
+      context.commit('NEWMYDAPPS', dataArr)
     })
   },
   updateExplore (context) {
     db.find({type: 'app', 'data.installed': { $ne: true }}, function (err, docs) {
       if (err) throw err
-      context.commit('NEWEXPLORE', docs)
+      var dataArr = []
+      for (let i of docs) {
+        dataArr.push(i.data)
+      }
+      context.commit('NEWEXPLORE', dataArr)
     })
   }
 }

@@ -40,7 +40,7 @@ Vue.use(Vuetify, {
 // NeDB
 Vue.prototype.$db = db
 
-// Web3
+// Web3 and Contract
 Vue.prototype.$web3 = new Web3(config.provider)
 Vue.prototype.$contract = new Vue.prototype.$web3.eth.Contract(artifact.abi, config.address)
 

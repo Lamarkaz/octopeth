@@ -8,7 +8,7 @@
       </h3>
       <v-container grid-list-md text-xs-center>
       <v-layout row wrap>
-        <v-flex v-for="i in $store.dapps.state.myDapps" :key="`1${i}`" lg2 >
+        <v-flex v-for="i in $store.state.dapps.myDapps" :key="`1${i.title}`" lg2 >
           <v-card dark color="secondary">
                 <v-card class="dappCard px-0" style="height: 250px;">
                 <v-card-media :src="i.logo" height="150px" class="dappLogo">
@@ -33,7 +33,7 @@
         <v-layout row wrap>
           <v-flex
             v-for="i
-            in $store.dapps.state.myDapps"
+            in $store.state.dapps.myDapps"
             :key="`2${i.title}`"
             lg1
             offset-2

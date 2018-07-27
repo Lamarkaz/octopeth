@@ -8,20 +8,20 @@
       </h3>
       <v-container grid-list-md text-xs-center>
       <v-layout row wrap>
-        <v-flex v-for="i in $store.dapps.state.explore" :key="`1${i}`" lg2 >
+        <v-flex v-for="i in $store.state.dapps.explore" :key="`3${i.title}`" lg2 >
           <v-card dark color="secondary">
                 <v-card class="dappCard px-0" style="height: 250px;">
-                <v-card-media :src="i.logo" height="150px" class="dappLogo">
+                <v-card-media :src="displayImg(i.logo)" height="150px" class="dappLogo">
                 </v-card-media>
                 <v-card-title primary-title >
                   <v-card-text>
                     <h3 class="appTitle text-xs-center">{{ i.title }}</h3>
                     <div class="categType">
                       <v-card-text class="text-xs-center categText">
-                        <v-icon style="color: white; margin-right: 2px; margin-top: -5px"></v-icon> GAMING
+                        <v-icon style="color: white; margin-right: 2px; margin-top: -5px"></v-icon> {{ translateCat(i.cat) }}
                       </v-card-text>
                     </div>
-                    <div class="appBody text-xs-left">Located two hours south of Sydney in the <br>Southern Highlands of New South Wales, ...</div>
+                    <div class="appBody text-xs-left">{{ i.desc }}</div>
                   </v-card-text>
                 </v-card-title>
               </v-card>
@@ -33,8 +33,8 @@
         <v-layout row wrap>
           <v-flex
             v-for="i
-            in $store.dapps.state.explore"
-            :key="`2${i.title}`"
+            in $store.state.dapps.explore"
+            :key="`4${i.title}`"
             lg1
             offset-2
             class="appView"
@@ -57,11 +57,6 @@ export default {
   data () {
     return {
       // explore: [
-      //   {
-      //     logo: 'http://lh3.googleusercontent.com/akv2Bdp7i5Vv-sl9FuP3_dhWpUO80zULf-Pkh6RFleomEp6pZorHuCNm3FbR9oAMunVK=w170-rw',
-      //     title: 'Decentube',
-      //     category: 'other'
-      //   },
       //   {
       //     logo: '',
       //     title: 'Dcourt',
@@ -121,6 +116,33 @@ export default {
           self.$electron.remote.dialog.showErrorBox('Error', 'The dApp contents could not be downloaded')
         })
       })
+    },
+    displayImg: function (img) {
+      return 'data:image/jpeg;base64,' + btoa(img.buffer)
+    },
+    translateCat: function (i) {
+      switch (i) {
+        case '0':
+          return 'OTHER'
+        case '1':
+          return 'GAMING'
+        case '2':
+          return 'ENTERTAINMENT'
+        case '3':
+          return 'FINANCE'
+        case '4':
+          return 'SOCIAL'
+        case '5':
+          return 'EXCHANGE'
+        case '6':
+          return 'GAMBLING'
+        case '7':
+          return 'TOKENS'
+        case '8':
+          return 'SHARING'
+        case '9':
+          return 'GOVERNANCE'
+      }
     }
   }
 }

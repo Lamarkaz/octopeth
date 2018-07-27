@@ -13,7 +13,7 @@
     </v-toolbar-title>
     <v-spacer></v-spacer>
     <v-chip color="grey darken-4" text-color="white" style="margin-right: 15px; padding: 0px 10px; font-weight: 600; font-family: 'Dosis'; font-size: 15px" disabled="">
-      Balance: 154 ETH
+      Balance: {{$store.state.auth.user.balance}} ETH
     </v-chip>
     <div class="text-xs-center">
       <v-menu
@@ -23,18 +23,18 @@
         dark
         color="primary"
       >
-        <v-gravatar hash="5d41402abc4b2a76b9719d911017c592" :size="26" class="grav" slot="activator" style="margin-right: 30px"/>
+        <v-gravatar :hash="md5hash" :size="26" class="grav" slot="activator" style="margin-right: 30px"/>
         <v-list>
           <v-list-tile key="1" @click='toggle()'>
             <v-list-tile-title class="menuItemStyle">Publish ÐApp</v-list-tile-title>
           </v-list-tile>
-          <v-list-tile key="2" @click="$router.push('/dapp')">
-            <v-list-tile-title class="menuItemStyle">Copy this Address</v-list-tile-title>
+          <v-list-tile key="2" @click="addressToClipboard()">
+            <v-list-tile-title class="menuItemStyle">Copy Address To Clipboard</v-list-tile-title>
           </v-list-tile>
-          <v-list-tile key="2" @click="$router.push('/store')">
-            <v-list-tile-title class="menuItemStyle">Export Identity File</v-list-tile-title>
+          <v-list-tile key="2" @click="exportIdentity()">
+            <v-list-tile-title class="menuItemStyle">Export Encrypted Identity</v-list-tile-title>
           </v-list-tile>
-          <v-list-tile key="3" @click="">
+          <v-list-tile key="3" @click="$store.dispatch('deauthenticate')">
             <v-list-tile-title class="menuItemStyle">Logout</v-list-tile-title>
           </v-list-tile>
         </v-list>
@@ -50,7 +50,7 @@
     >
       <v-tab
         v-for="item in items"
-        :key="item"
+        :key="`5${item}`"
         :href="'#tab-' + item"
       >
         {{ item }}
@@ -60,6 +60,8 @@
 </template>
 
 <script>
+import crypto from 'crypto'
+import FileSaver from 'file-saver'
 export default {
   data () {
     return {
@@ -75,7 +77,22 @@ export default {
   methods: {
     toggle: function () {
       this.isOpen = !this.isOpen
-      console.log('Hello')
+    },
+    addressToClipboard: function () {
+      this.$electron.remote.clipboard.writeText('0x' + this.$store.state.auth.user.address)
+      alert('Address copied to clipboard')
+    },
+    exportIdentity: function () {
+      var identity = this.$store.state.auth.user
+      delete identity.interval
+      delete identity.balance
+      var blob = new Blob([JSON.stringify(identity)], {type: 'text/plain;charset=utf-8'})
+      FileSaver.saveAs(blob, 'identity.json')
+    }
+  },
+  computed: {
+    md5hash: function () {
+      return crypto.createHash('md5').update(this.$store.state.auth.user.address).digest('hex')
     }
   }
 }

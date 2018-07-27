@@ -237,10 +237,7 @@ export default{
       var self = this
       this.ready = false
       ethers.Wallet.fromEncryptedWallet(this.json, this.password).then(function (wallet) {
-        self.$db.update({type: 'wallet'}, {type: 'wallet', data: self.json}, {upsert: true}, function (err) {
-          if (err) alert(err)
-          else self.$store.commit('AUTH')
-        })
+        self.$store.dispatch('authenticate', JSON.parse(self.json))
       }).catch(function (e) {
         alert(e)
       })
@@ -254,10 +251,7 @@ export default{
       var encrypted = wallet.encrypt(this.pw, function (pc) {
         if (pc === 1) {
           encrypted.then(function (json) {
-            self.$db.update({type: 'wallet'}, {type: 'wallet', data: json}, {upsert: true}, function (err) {
-              if (err) alert(err)
-              else self.$store.commit('AUTH')
-            })
+            self.$store.dispatch('authenticate', JSON.parse(json))
           })
         }
       })

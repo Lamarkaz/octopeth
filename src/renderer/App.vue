@@ -19,12 +19,14 @@
       this.$db.remove({}, { multi: true })
       // END
       var self = this
-      this.$db.count({type: 'wallet'}, function (err, count) {
+      this.$db.findOne({type: 'wallet'}, function (err, doc) {
         if (err) alert(err)
-        if (count > 0) self.$store.commit('AUTH')
+        if (doc !== null) self.$store.dispatch('authenticate', doc.data)
       })
       window.electron = this.$electron // DELETE IN PRODUCTION
       window.contract = this.$contract
+      self.$store.dispatch('updateExplore')
+      self.$store.dispatch('updateMyDapps')
       this.$contract.getPastEvents('Publish', {fromBlock: 0}, function (err, arr) {
         if (!err) {
           arr.forEach(function (e) {
@@ -36,7 +38,7 @@
             xhr.onload = () => {
               var res = xhr.response
               var imgType = imageType(new Uint8Array(res))
-              if (imgType != null) {
+              if (imgType !== null) {
                 self.$db.findOne({'data.title': values.title}, function (err, doc) {
                   if (!err) {
                     if (doc === null) {
@@ -47,15 +49,15 @@
                       self.$db.insert({
                         type: 'app',
                         data: {
-                          title: values.title,
+                          title: decodeURIComponent(values.title),
                           url: decodeURIComponent(values.url),
-                          contact: values.contact,
+                          contact: decodeURIComponent(values.contact),
                           hash: values.hash,
                           cat: values.cat,
                           owner: values.owner,
-                          desc: values.desc,
+                          desc: decodeURIComponent(values.desc),
                           approved: values.approved,
-                          logo: {buffer: res, type: imgType},
+                          logo: {buffer: new Uint8Array(res).reduce((data, byte) => data + String.fromCharCode(byte), ''), type: imgType},
                           installed: false
                         }
                       }, function (err) {
