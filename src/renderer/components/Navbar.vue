@@ -31,10 +31,10 @@
           <v-list-tile key="2" @click="addressToClipboard()">
             <v-list-tile-title class="menuItemStyle">Copy Address To Clipboard</v-list-tile-title>
           </v-list-tile>
-          <v-list-tile key="2" @click="exportIdentity()">
+          <v-list-tile key="3" @click="exportIdentity()">
             <v-list-tile-title class="menuItemStyle">Export Encrypted Identity</v-list-tile-title>
           </v-list-tile>
-          <v-list-tile key="3" @click="$store.dispatch('deauthenticate')">
+          <v-list-tile key="4" @click="$store.dispatch('deauthenticate')">
             <v-list-tile-title class="menuItemStyle">Logout</v-list-tile-title>
           </v-list-tile>
         </v-list>
@@ -51,6 +51,7 @@
       <v-tab
         v-for="item in items"
         :key="`5${item}`"
+        @click="changeCat(item)"
         :href="'#tab-' + item"
       >
         {{ item }}
@@ -68,7 +69,7 @@ export default {
       explore: [],
       currentItem: 'tab-Home',
       items: [
-        'Home', 'Shopping', 'Videos', 'App1', 'App2', 'Images', 'App3', 'App4', 'App'
+        'HOME', 'GAMING', 'ENTERTAINMENT', 'FINANCE', 'SOCIAL', 'EXCHANGE', 'GAMBLING', 'TOKENS', 'SHARING', 'GOVERNANCE', 'OTHER'
       ],
       e2: 3,
       isOpen: false
@@ -88,6 +89,9 @@ export default {
       delete identity.balance
       var blob = new Blob([JSON.stringify(identity)], {type: 'text/plain;charset=utf-8'})
       FileSaver.saveAs(blob, 'identity.json')
+    },
+    changeCat: function (name) {
+      this.$store.commit('CHANGECAT', name)
     }
   },
   computed: {

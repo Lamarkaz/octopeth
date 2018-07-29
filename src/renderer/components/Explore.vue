@@ -9,7 +9,7 @@
       <v-container grid-list-md text-xs-center>
       <v-layout row wrap>
         <v-flex v-for="i in $store.state.dapps.explore" :key="`3${i.title}`" lg2 >
-          <v-card dark color="secondary">
+          <v-card v-if="$store.state.dapps.cat === 'HOME' || translateCat(i.cat) === $store.state.dapps.cat" dark color="secondary">
                 <v-card class="dappCard px-0" style="height: 250px;">
                 <v-card-media :src="displayImg(i.logo)" height="150px" class="dappLogo">
                 </v-card-media>
@@ -38,6 +38,7 @@
             lg1
             offset-2
             class="appView"
+            v-if="$store.state.dapps.cat === 'HOME' || translateCat(i.cat) === $store.state.dapps.cat"
           >
           </v-flex>
         </v-layout>

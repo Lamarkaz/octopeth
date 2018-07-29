@@ -2,7 +2,8 @@ import db from '../../js/db'
 
 const state = {
   myDapps: [],
-  explore: []
+  explore: [],
+  cat: 'HOME'
 }
 
 const mutations = {
@@ -11,6 +12,9 @@ const mutations = {
   },
   NEWEXPLORE (state, docs) {
     state.explore = docs
+  },
+  CHANGECAT (state, name) {
+    state.cat = name
   }
 }
 

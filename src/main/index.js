@@ -28,7 +28,8 @@ function createWindow () {
     useContentSize: true,
     titleBarStyle: 'hidden',
     fullscreen: false,
-    resizable: false
+    resizable: falseو
+    'web-preferences': {'web-security': false}
   })
 
   mainWindow.loadURL(winURL)

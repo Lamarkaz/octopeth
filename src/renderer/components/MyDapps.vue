@@ -9,19 +9,19 @@
       <v-container grid-list-md text-xs-center>
       <v-layout row wrap>
         <v-flex v-for="i in $store.state.dapps.myDapps" :key="`1${i.title}`" lg2 >
-          <v-card dark color="secondary">
+          <v-card v-if="$store.state.dapps.cat === 'HOME' || translateCat(i.cat) === $store.state.dapps.cat" dark color="secondary">
                 <v-card class="dappCard px-0" style="height: 250px;">
-                <v-card-media :src="i.logo" height="150px" class="dappLogo">
+                <v-card-media :src="displayImg(i.logo)" height="150px" class="dappLogo">
                 </v-card-media>
                 <v-card-title primary-title >
                   <v-card-text>
                     <h3 class="appTitle text-xs-center">{{ i.title }}</h3>
                     <div class="categType">
                       <v-card-text class="text-xs-center categText">
-                        <v-icon style="color: white; margin-right: 2px; margin-top: -5px"></v-icon> GAMING
+                        <v-icon style="color: white; margin-right: 2px; margin-top: -5px"></v-icon> {{ translateCat(i.cat) }}
                       </v-card-text>
                     </div>
-                    <div class="appBody text-xs-left">Located two hours south of Sydney in the <br>Southern Highlands of New South Wales, ...</div>
+                    <div class="appBody text-xs-left">{{ i.desc }}</div>
                   </v-card-text>
                 </v-card-title>
               </v-card>
@@ -38,6 +38,7 @@
             lg1
             offset-2
             class="appView"
+            v-if="$store.state.dapps.cat === 'HOME' || translateCat(i.cat) === $store.state.dapps.cat"
           >
           </v-flex>
         </v-layout>
@@ -86,6 +87,35 @@ export default {
       items: [
         'Home', 'Shopping', 'Videos', 'App1', 'App2', 'Images', 'App3', 'App4', 'App'
       ]
+    }
+  },
+  methods: {
+    displayImg: function (img) {
+      return 'data:image/jpeg;base64,' + btoa(img.buffer)
+    },
+    translateCat: function (i) {
+      switch (i) {
+        case '0':
+          return 'OTHER'
+        case '1':
+          return 'GAMING'
+        case '2':
+          return 'ENTERTAINMENT'
+        case '3':
+          return 'FINANCE'
+        case '4':
+          return 'SOCIAL'
+        case '5':
+          return 'EXCHANGE'
+        case '6':
+          return 'GAMBLING'
+        case '7':
+          return 'TOKENS'
+        case '8':
+          return 'SHARING'
+        case '9':
+          return 'GOVERNANCE'
+      }
     }
   }
 }

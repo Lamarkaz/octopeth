@@ -6,7 +6,7 @@
 
     <!-- circular navigator -->
     <div class="navWrapper" @click='toggle()'>
-      <circle-menu  type="middle-around" :number="4" mask='black' btn colors="[ '#8223d3', '#A7425C', '#FFE26F', 'F3825F', '#F19584' ]" circle>
+      <circle-menu  type="middle-around" :number="4" mask='black' btn :colors="colors" circle>
         <a slot="item_1" class="navSlot">
           <v-icon slot="item_1" class="navIcon">arrow_back</v-icon>
         </a>
@@ -33,7 +33,8 @@ export default {
   },
   data () {
     return {
-      isOpen: false
+      isOpen: false,
+      colors: [ '#8223d3', '#A7425C', '#FFE26F', '#F3825F', '#F19584' ]
     }
   },
   methods: {

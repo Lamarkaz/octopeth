@@ -30,12 +30,12 @@ const actions = {
     db.update({type: 'wallet'}, {type: 'wallet', data: wallet}, {upsert: true}, function (err) {
       if (!err) {
         web3.eth.getBalance('0x' + wallet.address).then(function (balance) {
-          wallet.balance = balance
+          wallet.balance = web3.utils.fromWei(balance, 'ether')
           context.commit('AUTH', wallet)
           wallet.interval = setInterval(function () {
             web3.eth.getBalance('0x' + wallet.address).then(function (balance) {
               if (balance !== state.user.balance) {
-                context.commit('UPDATEBALANCE', balance)
+                context.commit('UPDATEBALANCE', web3.utils.fromWei(balance, 'ether'))
               }
             })
           }, 5000)
