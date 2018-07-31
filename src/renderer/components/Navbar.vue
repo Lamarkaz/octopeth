@@ -26,7 +26,7 @@
         >
           <v-gravatar :hash="md5hash" :size="26" class="grav" slot="activator" style="margin-right: 30px"/>
           <v-list>
-            <v-list-tile key="1" @click='toggle()'>
+            <v-list-tile key="1" @click.stop="pubDialog = true">
               <v-list-tile-title class="menuItemStyle">Publish ÐApp</v-list-tile-title>
             </v-list-tile>
             <v-list-tile key="2" @click="addressToClipboard()">
@@ -59,38 +59,95 @@
         </v-tab>
       </v-tabs>
     </v-toolbar>
-      <v-dialog
-        v-model="dialog"
-        max-width="390" 
-      >
-        <v-card class="logoutAlert">
-          <v-card-title class="headline" style="font-size: 28px; font-family: 'Dosis'">Are you sure you want to logout?</v-card-title>
-          <v-card-text style="color: rgba(255,255,255,0.8)">
-            Make sure to export your identity file before logging out to be able to login again.
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn
-              color="red darken-1"
-              flat="flat"
-              @click="$store.dispatch('deauthenticate')"
-              class="genBtn"
-            >
-              Logout
-            </v-btn>
+    
+    <!-- Logout warning modal -->
+    <v-dialog
+      v-model="dialog"
+      max-width="390" 
+    >
+      <v-card class="logoutAlert">
+        <v-card-title class="headline" style="font-size: 28px; font-family: 'Dosis'">Are you sure you want to logout?</v-card-title>
+        <v-card-text style="color: rgba(255,255,255,0.8)">
+          Make sure to export your identity file before logging out to be able to login again.
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="red darken-1"
+            flat="flat"
+            @click="$store.dispatch('deauthenticate')"
+            class="genBtn"
+          >
+            Logout
+          </v-btn>
 
-            <v-btn
-              color="green darken-1"
-              flat="flat"
-              class="genBtn"
-              @click="exportIdentity()"
+          <v-btn
+            color="green darken-1"
+            flat="flat"
+            class="genBtn"
+            @click="exportIdentity()"
+          >
+            Export Identity File
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+    <!-- Publish ÐApp modal-->
+    <v-dialog
+      v-model="pubDialog"
+      max-width="600" 
+    >
+      <v-card class="logoutAlert">
+        <v-card-title class="headline" style="font-size: 28px; font-family: 'Dosis'">Publish a new ÐApp</v-card-title>
+        <v-card-text style="width: 80%; margin-right: auto; margin-left: auto">
+          <v-text-field 
+            name="input-10-1"
+            label="ÐApp Name"
+            color="white"
+            dark
+            required
             >
-              Export Identity File
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-    </div>
+          </v-text-field>
+          <v-text-field 
+            name="input-10-1"
+            label="URL"
+            color="white"
+            dark
+            required
+            >
+          </v-text-field>
+          <v-text-field 
+            name="input-10-1"
+            label="Logo"
+            color="white"
+            dark
+            required
+            >
+          </v-text-field>
+          <v-text-field 
+            name="input-10-1"
+            label="Description"
+            color="white"
+            counter=60
+            dark
+            required
+            >
+          </v-text-field>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="green darken-1"
+            flat="flat"
+            class="genBtn"
+          >
+            Publish
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </div>
 </template>
 
 <script>
@@ -100,6 +157,7 @@ export default {
   data () {
     return {
       dialog: false,
+      pubDialog: false,
       explore: [],
       currentItem: 'tab-Home',
       items: [

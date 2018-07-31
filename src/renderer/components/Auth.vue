@@ -130,7 +130,7 @@
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn class="genBtn" @click.native="dialog = false">Cancel</v-btn>
-                <v-btn class="genBtn" @click.native="generate()" :disabled="(pw != confirmpw || pw.length < 8)">Generate</v-btn>
+                <v-btn class="genBtn" :loading="loader" @click.native="generate()" :disabled="(pw != confirmpw || pw.length < 8)">Generate</v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>
@@ -182,7 +182,8 @@ export default{
       error: false,
       dialog: false,
       pw: '',
-      confirmpw: ''
+      confirmpw: '',
+      loader: false
     }
   },
   watch: {
@@ -246,7 +247,7 @@ export default{
     generate: function () {
       var self = this
       this.ready = false
-      this.dialog = false
+      this.loader = true
       var wallet = ethers.Wallet.createRandom()
       var encrypted = wallet.encrypt(this.pw, function (pc) {
         if (pc === 1) {
