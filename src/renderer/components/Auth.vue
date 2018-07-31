@@ -365,10 +365,6 @@ input[type=file] {
   padding-right: 10px;
   border-radius: 900px;
 }
-.genBtn {
-  font-family: 'Dosis', sans-serif;
-  font-weight: 700;
-}
 .warningAlert {
   margin-left: 25px;
   margin-top: 10px;

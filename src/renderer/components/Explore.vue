@@ -7,7 +7,7 @@
         Explore
       </h3>
       <v-container grid-list-md text-xs-center>
-      <v-layout row wrap>
+      <v-layout align-center justify-center row>
         <v-flex v-for="i in $store.state.dapps.explore" :key="`3${i.title}`" lg2 >
           <v-card v-if="$store.state.dapps.cat === 'HOME' || translateCat(i.cat) === $store.state.dapps.cat" dark color="secondary">
                 <v-card class="dappCard px-0" style="height: 250px;">
@@ -28,20 +28,6 @@
           </v-card>
         </v-flex>
       </v-layout>
-      </v-container>
-      <v-container fluid grid-list-md>
-        <v-layout row wrap>
-          <v-flex
-            v-for="i
-            in $store.state.dapps.explore"
-            :key="`4${i.title}`"
-            lg1
-            offset-2
-            class="appView"
-            v-if="$store.state.dapps.cat === 'HOME' || translateCat(i.cat) === $store.state.dapps.cat"
-          >
-          </v-flex>
-        </v-layout>
       </v-container>
     </div>
   </v-app>
@@ -86,7 +72,7 @@ export default {
       // ],
       currentItem: 'tab-Home',
       items: [
-        'Home', 'Shopping', 'Videos', 'App1', 'App2', 'Images', 'App3', 'App4', 'App'
+        'App1', 'App2', 'App3', 'App4', 'App5', 'App6', 'App7', 'App8', 'App9'
       ]
     }
   },
