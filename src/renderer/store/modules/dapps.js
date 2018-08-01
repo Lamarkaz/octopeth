@@ -3,7 +3,8 @@ import db from '../../js/db'
 const state = {
   myDapps: [],
   explore: [],
-  cat: 'HOME'
+  categories: ['ALL', 'GAMING', 'ENTERTAINMENT', 'FINANCE', 'SOCIAL', 'EXCHANGE', 'GAMBLING', 'TOKENS', 'SHARING', 'GOVERNANCE', 'OTHER'],
+  cat: 'ALL'
 }
 
 const mutations = {

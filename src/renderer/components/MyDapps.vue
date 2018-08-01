@@ -9,7 +9,7 @@
       <v-container grid-list-md text-xs-center>
       <v-layout row wrap>
         <v-flex v-for="i in $store.state.dapps.myDapps" :key="`1${i.title}`" lg2 style="max-width: 200px; margin-left: 5px; margin-right: 5px">
-          <v-card v-if="$store.state.dapps.cat === 'HOME' || translateCat(i.cat) === $store.state.dapps.cat" dark color="secondary">
+          <v-card v-if="$store.state.dapps.cat === 'ALL' || translateCat(i.cat) === $store.state.dapps.cat" dark color="secondary">
                 <v-card class="dappCard px-0" style="height: 250px;">
                 <v-card-media :src="displayImg(i.logo)" height="150px" class="dappLogo">
                 </v-card-media>
@@ -38,7 +38,7 @@
             lg1
             offset-2
             class="appView"
-            v-if="$store.state.dapps.cat === 'HOME' || translateCat(i.cat) === $store.state.dapps.cat"
+            v-if="$store.state.dapps.cat === 'ALL' || translateCat(i.cat) === $store.state.dapps.cat"
           >
           </v-flex>
         </v-layout>
@@ -83,10 +83,7 @@ export default {
       //     category: 'tokens'
       //   }
       // ],
-      currentItem: 'tab-Home',
-      items: [
-        'Home', 'Shopping', 'Videos', 'App1', 'App2', 'Images', 'App3', 'App4', 'App'
-      ]
+      currentItem: 'tab-Home'
     }
   },
   methods: {

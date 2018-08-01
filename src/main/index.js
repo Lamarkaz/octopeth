@@ -27,8 +27,7 @@ function createWindow () {
     backgroundColor: '#222',
     useContentSize: true,
     titleBarStyle: 'hidden',
-    fullscreen: false,
-    resizable: falseو
+    resizable: false,
     'web-preferences': {'web-security': false}
   })
 

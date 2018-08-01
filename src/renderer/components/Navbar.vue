@@ -50,7 +50,7 @@
         show-arrows
       >
         <v-tab
-          v-for="item in items"
+          v-for="item in $store.state.dapps.categories"
           :key="`5${item}`"
           @click="changeCat(item)"
           :href="'#tab-' + item"
@@ -96,44 +96,76 @@
     <!-- Publish ÐApp modal-->
     <v-dialog
       v-model="pubDialog"
-      max-width="600" 
+      max-width="700" 
     >
       <v-card class="logoutAlert">
         <v-card-title class="headline" style="font-size: 28px; font-family: 'Dosis'">Publish a new ÐApp</v-card-title>
         <v-card-text style="width: 80%; margin-right: auto; margin-left: auto">
-          <v-text-field 
-            name="input-10-1"
-            label="ÐApp Name"
-            color="white"
-            dark
-            required
-            >
-          </v-text-field>
-          <v-text-field 
-            name="input-10-1"
-            label="URL"
-            color="white"
-            dark
-            required
-            >
-          </v-text-field>
-          <v-text-field 
-            name="input-10-1"
-            label="Logo"
-            color="white"
-            dark
-            required
-            >
-          </v-text-field>
-          <v-text-field 
-            name="input-10-1"
-            label="Description"
-            color="white"
-            counter=60
-            dark
-            required
-            >
-          </v-text-field>
+          <v-layout row wrap>
+            <v-flex :key="8" xs8 style="margin-left: -25px">
+              <v-text-field 
+                name="input-10-1"
+                v-model="dappTitle"
+                label="ÐApp Title"
+                color="white"
+                dark
+                required
+                >
+              </v-text-field>
+              <v-text-field 
+                name="input-10-1"
+                label="URL"
+                color="white"
+                dark
+                required
+                >
+              </v-text-field>
+              <v-text-field 
+                name="input-10-1"
+                v-model="dappLogo"
+                label="Logo URL"
+                color="white"
+                dark
+                required
+                >
+              </v-text-field>
+              <v-text-field 
+                name="input-10-1"
+                v-model="dappDesc"
+                label="Description"
+                color="white"
+                counter=60
+                dark
+                required
+                >
+              </v-text-field>
+              <v-select
+                v-model="dappCateg"
+                dark
+                color="white"
+                :items="$store.state.dapps.categories"
+                label="Category"
+              ></v-select>
+            </v-flex>
+            <v-flex :key="4" xs4>
+                <h3 class="previewer">Your ÐApp Card Preview</h3>
+                <v-card class="dappCard px-0" style="height: 250px; width: 200px">
+                <v-card-media :src="dappLogo" height="150px" class="dappLogo">
+                </v-card-media>
+                <v-card-title primary-title >
+                  <v-card-text>
+                    <h3 class="appTitle text-xs-center">{{ dappTitle }}</h3>
+                    <div class="categType">
+                      <v-card-text class="text-xs-center categText">
+                        <v-icon style="color: white; margin-right: 2px; margin-top: -5px"></v-icon> {{ dappCateg }}
+                      </v-card-text>
+                    </div>
+                    <div class="appBody text-xs-left">{{ dappDesc }}</div>
+                  </v-card-text>
+                </v-card-title>
+              </v-card>
+            </v-flex>
+          </v-layout>
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -156,13 +188,14 @@ import FileSaver from 'file-saver'
 export default {
   data () {
     return {
+      dappLogo: '',
+      dappTitle: '',
+      dappDesc: '',
+      dappCateg: '',
       dialog: false,
       pubDialog: false,
       explore: [],
       currentItem: 'tab-Home',
-      items: [
-        'HOME', 'GAMING', 'ENTERTAINMENT', 'FINANCE', 'SOCIAL', 'EXCHANGE', 'GAMBLING', 'TOKENS', 'SHARING', 'GOVERNANCE', 'OTHER'
-      ],
       e2: 3,
       isOpen: false
     }
@@ -229,5 +262,76 @@ export default {
     padding-left: 10px;
     padding-right: 10px;
     border-radius: 900px;
+  }
+  .appTitle {
+    font-weight: 700;
+    font-size: 22px;
+    color: rgb(107, 32, 172);
+    transition: color 800ms ease-in-out;
+  }
+  .dappLogo {
+    padding: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .appBody {
+    color: white;
+    margin-left: -10px;
+    margin-top: 10px;
+    font-weight: 500;
+    font-size: 15px;
+    display: none;
+    transition: all 600ms ease-in-out;
+  }
+  .dappCard {
+    font-family: 'Dosis';
+    margin: 30px;
+    margin-top: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    background: rgba(0,0,0,0.4);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: margin-top 600ms ease-in-out;
+  }
+  .categType {
+    width: 100%;
+    height: 30px;
+    left: 0px;
+    bottom: 0px;
+    background: rgba(0,0,0,.3);
+    position: absolute;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    display: none;
+    transition: none 600ms ease-in-out;
+  }
+  .categText {
+    font-size: 13px;
+    font-weight: 700;
+    color: white;
+    margin-top: -10px;
+  }
+  .dappCard:hover  .appTitle {
+    color: rgb(107, 32, 172);
+    margin-top: -175px;
+  }
+  .dappCard:hover  .appBody {
+    display: block;
+  }
+  .dappCard:hover  .dappLogo {
+    opacity: 0;
+  }
+  .dappCard:hover  .categType {
+    display: block;
+  }
+  .previewer {
+    font-family: 'Dosis';
+    font-weight: 500;
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 40px;
+    margin-left: 35px;
   }
 </style>
