@@ -149,8 +149,8 @@
             </v-flex>
             <v-flex :key="4" xs4>
                 <h3 class="previewer">Your ÐApp Card Preview</h3>
-                <v-card class="dappCard px-0" style="height: 250px; width: 200px">
-                <v-card-media :src="dappLogo" height="150px" class="dappLogo">
+                <v-card class="dappCard px-0" style="height: 230px; width: 200px">
+                <v-card-media :src="dappLogo" height="130px" class="dappLogo">
                 </v-card-media>
                 <v-card-title primary-title >
                   <v-card-text>
@@ -271,6 +271,7 @@ export default {
   }
   .dappLogo {
     padding: 15px;
+    width: 130px;
     margin-right: auto;
     margin-left: auto;
   }
@@ -289,7 +290,7 @@ export default {
     margin-top: 15px;
     padding-left: 10px;
     padding-right: 10px;
-    padding-top: 10px;
+    padding-top: 20px;
     background: rgba(0,0,0,0.4);
     border-radius: 5px;
     cursor: pointer;

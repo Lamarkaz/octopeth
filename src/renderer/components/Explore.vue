@@ -10,8 +10,8 @@
       <v-layout align-center justify-center row>
         <v-flex v-for="i in $store.state.dapps.explore" :key="`3${i.title}`" lg2 style="max-width: 200px; margin-left: 5px; margin-right: 5px">
           <v-card v-if="$store.state.dapps.cat === 'ALL' || translateCat(i.cat) === $store.state.dapps.cat" dark color="secondary">
-                <v-card class="dappCard px-0" style="height: 250px;">
-                <v-card-media :src="displayImg(i.logo)" height="150px" class="dappLogo">
+                <v-card class="dappCard px-0" style="height: 230px">
+                <v-card-media :src="displayImg(i.logo)" height="130px" class="dappLogo">
                 </v-card-media>
                 <v-card-title primary-title >
                   <v-card-text>
@@ -174,6 +174,7 @@ export default {
   }
   .dappLogo {
     padding: 15px;
+    width: 130px;
     margin-right: auto;
     margin-left: auto;
   }
@@ -190,7 +191,7 @@ export default {
   .dappCard {
     padding-left: 10px;
     padding-right: 10px;
-    padding-top: 10px;
+    padding-top: 20px;
     background: rgba(0,0,0,0.4);
     border-radius: 5px;
     cursor: pointer;
