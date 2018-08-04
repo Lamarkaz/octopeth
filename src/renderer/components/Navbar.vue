@@ -277,6 +277,7 @@ export default {
   }
   .appBody {
     color: white;
+    word-break: break-all;
     margin-left: -10px;
     margin-top: 10px;
     font-weight: 500;
