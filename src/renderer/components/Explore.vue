@@ -8,8 +8,8 @@
       </h3>
       <v-container grid-list-md text-xs-center>
       <v-layout align-center justify-center row>
-        <v-flex v-for="i in $store.state.dapps.explore" :key="`3${i.title}`" lg2 style="max-width: 200px; margin-left: 5px; margin-right: 5px">
-          <v-card v-if="$store.state.dapps.cat === 'ALL' || translateCat(i.cat) === $store.state.dapps.cat" dark color="secondary">
+        <v-flex v-for="i in $store.state.dapps.explore" :key="`3${i.title}`" lg2 style="max-width: 200px; margin-left: 5px; margin-right: 5px" v-if="$store.state.dapps.cat === 'ALL' || translateCat(i.cat) === $store.state.dapps.cat">
+          <v-card dark color="secondary">
                 <v-card class="dappCard px-0" style="height: 230px">
                 <v-card-media :src="displayImg(i.logo)" height="130px" class="dappLogo">
                 </v-card-media>
