@@ -16,8 +16,13 @@ export default new Router({
       component: require('@/components/dAppViewer').default
     },
     {
+      path: '/sign',
+      name: 'Sign',
+      component: require('@/components/Sign').default
+    },
+    {
       path: '*',
-      redirect: '/store'
+      redirect: '/sign'
     }
   ]
 })

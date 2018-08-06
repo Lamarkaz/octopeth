@@ -7,7 +7,8 @@
       tabs
       height="70"
       class="background"
-      color="purple darken-3">
+      color="purple darken-3"
+      style="-webkit-app-region: drag">
       <v-toolbar-title v-on:click="$router.push('/dapp')">
         <img src="../assets/logo-dark.svg" width="45px" style="margin-left: 50px; cursor: pointer; margin-top: 10px; margin-right: 7.5px"/>
         <span class="logoText">OCTOPETH</span>
