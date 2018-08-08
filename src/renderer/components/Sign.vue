@@ -4,6 +4,7 @@
     <v-dialog
       v-model="signDialog"
       max-width="500" 
+      persistent
     >
       <v-card class="sign">
         <v-card-title class="headline" style="font-size: 28px; font-family: 'Dosis'">Sign a Transaction</v-card-title>

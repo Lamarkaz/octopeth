@@ -4,6 +4,7 @@
     <v-dialog
       v-model="signDialog"
       max-width="500" 
+      persistent
     >
       <v-card class="confirm">
         <v-card-title class="headline" style="font-size: 28px; font-family: 'Dosis'">Confirm a Transaction</v-card-title>
@@ -106,6 +107,49 @@
             color="green darken-1"
             flat="flat"
             class="genBtn"
+            @click.stop="confDialog = true"
+          >
+            Confirm
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <!-- Confirm Password Dialog -->
+    <v-dialog
+      v-model="confDialog"
+      hide-overlay
+      width="330"
+    >
+      <v-card
+        color="purple darken-4"
+        dark
+        style="padding: 7px"
+      >
+        <v-card-text class="conf">
+          Confirm your Identity to complete transaction
+          <v-text-field 
+            v-model="confirmpw"
+            name="input-10-1"
+            color="white"
+            style="margin-top: 15px"
+            :append-icon="confPassBol ? 'visibility' : 'visibility_off'"
+            :append-icon-cb="() => (confPassBol = !confPassBol)"
+            :type="confPassBol ? 'password' : 'text'" 
+            counter
+            dark
+            label="Confirm Password" 
+            required
+            >
+          </v-text-field>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="white"
+            style="color: black"
+            class="genBtn"
+            :disabled="(confirmpw.length < 8)"
+            @click.stop="confDialog = false"
           >
             Confirm
           </v-btn>
@@ -125,7 +169,10 @@ export default {
       gasPrice: 181978,
       gasLimit: 60,
       maxTransFee: 0.010918,
-      maxTotal: 0.010918
+      maxTotal: 0.010918,
+      confDialog: false,
+      confirmpw: '',
+      confPassBol: true
     }
   },
   computed: {
@@ -176,6 +223,11 @@ export default {
     overflow: hidden; 
     width: 120px; 
     white-space: nowrap;
+  }
+  .conf {
+    font-family: 'Dosis';
+    font-size: 18px;
+    font-weight: 500;
   }
   .arrow {
     color: white;
