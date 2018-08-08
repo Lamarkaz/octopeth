@@ -16,22 +16,29 @@
             </v-avatar>
             <h3 class="address">{{ '0x' + this.$store.state.auth.user.address }}</h3>
             <h3 class="appTitle">Gnosis</h3>
-            <v-chip color="purple darken-4" text-color="white" style="margin-right: 115px; margin-top: 5px; padding: 0px 5px; font-weight: 600; font-family: 'Dosis'; font-size: 13px" disabled="">
-              Balance: {{$store.state.auth.user.balance}} ETH
-            </v-chip>
+            <v-tooltip bottom color="black">
+              <v-chip slot="activator" color="purple darken-4" text-color="white" style="margin-right: 115px; margin-top: 5px; padding: 0px 5px; font-weight: 600; font-family: 'Dosis'; font-size: 13px" disabled>
+                Balance: {{$store.state.auth.user.balance}} ETH
+              </v-chip>
+              <span>0 USD</span>
+            </v-tooltip>
           </center>
           <v-layout row wrap>
             <v-flex :key="12" xs12 style="margin-left: auto; margin-right: auto; margin-top: 25px; max-width: 85%">
-              <v-text-field 
-                name="input-10-1"
-                v-model="transAmount"
-                label="Amount"
-                color="white"
-                suffix="ETH"
-                disabled
-                dark
-                >
-              </v-text-field>
+              <v-tooltip right color="black">
+                <v-text-field
+                  slot="activator" 
+                  name="input-10-1"
+                  v-model="transAmount"
+                  label="Amount"
+                  color="white"
+                  suffix="ETH"
+                  disabled
+                  dark
+                  >
+                </v-text-field>
+                <span>0 USD</span>
+              </v-tooltip>
               <v-text-field 
                 name="input-10-1"
                 v-model="gasPrice"
@@ -52,27 +59,35 @@
                 required
                 >
               </v-text-field>
-              <v-text-field 
-                name="input-10-1"
-                v-model="maxTransFee"
-                label="Max Transaction Fee"
-                color="white"
-                suffix="ETH"
-                disabled
-                dark
-                >
-              </v-text-field>
-              <v-text-field 
-                name="input-10-1"
-                v-model="maxTotal"
-                label="Max Total"
-                color="purple darken-2"
-                suffix="ETH"
-                disabled
-                autofocus
-                dark
-                >
-              </v-text-field>
+              <v-tooltip right color="black">
+                <v-text-field 
+                  slot="activator"
+                  name="input-10-1"
+                  v-model="maxTransFee"
+                  label="Max Transaction Fee"
+                  color="white"
+                  suffix="ETH"
+                  disabled
+                  dark
+                  >
+                </v-text-field>
+                <span>0 USD</span>
+              </v-tooltip>
+              <v-tooltip right color="black">
+                <v-text-field 
+                  slot="activator"
+                  name="input-10-1"
+                  v-model="maxTotal"
+                  label="Max Total"
+                  color="purple darken-2"
+                  suffix="ETH"
+                  disabled
+                  autofocus
+                  dark
+                  >
+                </v-text-field>
+                <span>0 USD</span>
+              </v-tooltip>
             </v-flex>
           </v-layout>
         </v-card-text>

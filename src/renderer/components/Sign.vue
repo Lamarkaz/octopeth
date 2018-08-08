@@ -21,6 +21,19 @@
             <v-flex :key="12" xs12 style="margin-left: -20px; margin-top: 15px">
               <v-card-text class="message">Hello, I'm a message. <br/> Please sign me.</v-card-text>
             </v-flex>
+            <v-text-field 
+              v-model="confirmpw"
+              name="input-10-1"
+              color="white"
+              :append-icon="confPassBol ? 'visibility' : 'visibility_off'"
+              :append-icon-cb="() => (confPassBol = !confPassBol)"
+              :type="confPassBol ? 'password' : 'text'" 
+              counter
+              dark
+              label="Confirm Password" 
+              required
+              >
+            </v-text-field>
           </v-layout>
         </v-card-text>
         <v-card-actions>
@@ -38,6 +51,7 @@
             color="green darken-1"
             flat="flat"
             class="genBtn"
+            :disabled="(confirmpw.length < 8)"
           >
             Sign
           </v-btn>
@@ -52,7 +66,9 @@ import crypto from 'crypto'
 export default {
   data () {
     return {
-      signDialog: false
+      signDialog: false,
+      confirmpw: '',
+      confPassBol: true
     }
   },
   computed: {
