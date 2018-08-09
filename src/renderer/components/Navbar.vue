@@ -7,15 +7,19 @@
       tabs
       height="70"
       class="background"
-      color="purple darken-3">
+      color="purple darken-3"
+      style="-webkit-app-region: drag">
       <v-toolbar-title v-on:click="$router.push('/dapp')">
         <img src="../assets/logo-dark.svg" width="45px" style="margin-left: 50px; cursor: pointer; margin-top: 10px; margin-right: 7.5px"/>
         <span class="logoText">OCTOPETH</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-chip color="grey darken-4" text-color="white" style="margin-right: 15px; padding: 0px 10px; font-weight: 600; font-family: 'Dosis'; font-size: 15px" disabled="">
-        Balance: {{$store.state.auth.user.balance}} ETH
-      </v-chip>
+      <v-tooltip bottom color="black">
+        <v-chip slot="activator" color="grey darken-4" text-color="white" style="margin-right: 15px; padding: 0px 10px; font-weight: 600; font-family: 'Dosis'; font-size: 15px" disabled="">
+          Balance: {{$store.state.auth.user.balance}} ETH
+        </v-chip>
+        <span>0 USD</span>
+      </v-tooltip>
       <div class="text-xs-center">
         <v-menu
           origin="center center"

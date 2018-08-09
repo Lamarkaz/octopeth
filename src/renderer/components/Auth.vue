@@ -95,7 +95,7 @@
                           slot="progress"
                           :value="pw_progress"
                           :color="pw_color"
-                          height="5"
+                          height="3"
                         ></v-progress-linear>
                       </v-text-field>
                     </v-flex>
@@ -117,7 +117,7 @@
                           slot="progress"
                           :value="confirmpw_progress"
                           :color="confirmpw_color"
-                          height="5"
+                          height="3"
                         ></v-progress-linear>
                       </v-text-field>
                     </v-flex>
