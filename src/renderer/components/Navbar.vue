@@ -173,6 +173,7 @@
             color="green darken-1"
             flat="flat"
             class="genBtn"
+            @click="publish"
           >
             Publish
           </v-btn>
@@ -217,6 +218,9 @@ export default {
     },
     changeCat: function (name) {
       this.$store.commit('CHANGECAT', name)
+    },
+    publish: function () {
+      alert('published')
     }
   },
   computed: {

@@ -21,7 +21,7 @@
                         <v-icon style="color: white; margin-right: 2px; margin-top: -5px"></v-icon> {{ translateCat(i.cat) }}
                       </v-card-text>
                     </div>
-                    <div class="appBody text-xs-left">{{ i.desc }}</div>
+                    <div class="appBody text-xs-left">{{ i.desc }} <v-btn @click="install(i)">INSTALL</v-btn></div>
                   </v-card-text>
                 </v-card-title>
               </v-card>
@@ -37,8 +37,7 @@
 import scrape from 'website-scraper'
 import phantomHtml from 'website-scraper-phantom'
 import path from 'path'
-import { remote } from 'electron'
-import download from 'image-downloader'
+import crypto from 'crypto'
 
 export default {
   data () {
@@ -70,38 +69,28 @@ export default {
       //     category: 'tokens'
       //   }
       // ],
-      currentItem: 'tab-Home',
-      items: [
-        'App1', 'App2', 'App3', 'App4', 'App5', 'App6', 'App7', 'App8', 'App9'
-      ]
     }
   },
   methods: {
-    install: function (url, title, logo, cb) {
+    install: function (dapp) {
       var self = this
-      this.$db.count({type: 'app', installed: true}, function (err, count) {
-        if (err) self.$electron.remote.dialog.showErrorBox('Error', 'There seems to be a problem connecting to the local database')
-        scrape({urls: [url], directory: path.join(remote.app.getPath('userData'), '/apps/' + count + 1 + '/'), httpResponseHandler: phantomHtml}).then(function () {
-          download.image({url: url, dest: path.join(remote.app.getPath('userData'), '/logos/' + count + 1 + '/')}).then(({filename, image}) => {
-            self.$db.insert({
-              type: 'app',
-              location: path.join(remote.app.getPath('userData'), '/apps/' + count + 1 + '/'),
-              title: title,
-              logo: path.join(remote.app.getPath('userData'), '/logos/' + count + 1 + '/' + filename),
-              installed: true,
-              id: count + 1
-            }, function (err) {
-              if (err) throw err
-              if (cb) cb()
-              self.$store.dispatch('updateMyDapps')
-              self.$store.dispatch('updateExplore')
-            })
-          }).catch(function () {
-            self.$electron.remote.dialog.showErrorBox('Error', 'The dApp logo could not be downloaded')
-          })
-        }).catch(function () {
-          self.$electron.remote.dialog.showErrorBox('Error', 'The dApp contents could not be downloaded')
+      var directory = path.join(this.$electron.remote.app.getPath('userData'), '/apps/' + crypto.createHash('sha256').update(dapp.title).digest('hex') + '/')
+      scrape({urls: [dapp.url], recursive: true, prettifyUrls: true, updateMissingSources: true, directory: directory, httpResponseHandler: phantomHtml}).then(function () {
+        self.$db.update({
+          'data.title': dapp.title
+        },
+        {
+          $set: {
+            'data.directory': directory,
+            'data.installed': true
+          }
+        }, function (err) {
+          if (err) throw err
+          self.$store.dispatch('updateMyDapps')
+          self.$store.dispatch('updateExplore')
         })
+      }).catch(function (e) {
+        self.$electron.remote.dialog.showErrorBox('Error', 'The dApp contents could not be downloaded: ' + e)
       })
     },
     displayImg: function (img) {
