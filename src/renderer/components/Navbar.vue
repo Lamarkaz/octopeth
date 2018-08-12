@@ -118,12 +118,17 @@
               </v-text-field>
               <v-text-field 
                 name="input-10-1"
-                label="URL"
+                label="Git Repository URL"
                 color="white"
                 dark
                 required
                 >
               </v-text-field>
+              <v-layout align-center>
+                <v-switch v-model="enabled" hide-details color="white" class="shrink mr-2" dark></v-switch>
+                <label style="font-size: 14px; margin-left: 15px; opacity: 0.7">Custom Branch</label>
+                <v-text-field v-model="gitBranch" :disabled="!enabled" color="white" label="Git branch" dark style="margin-left: 20px; max-width: 60%; margin-right"></v-text-field>
+              </v-layout>
               <v-text-field 
                 name="input-10-1"
                 v-model="dappLogo"
@@ -202,7 +207,9 @@ export default {
       explore: [],
       currentItem: 'tab-Home',
       e2: 3,
-      isOpen: false
+      isOpen: false,
+      enabled: false,
+      gitBranch: 'master'
     }
   },
   methods: {

@@ -34,10 +34,7 @@
 </template>
 
 <script>
-import scrape from 'website-scraper'
-import phantomHtml from 'website-scraper-phantom'
 import path from 'path'
-import crypto from 'crypto'
 
 export default {
   data () {
@@ -74,24 +71,34 @@ export default {
   methods: {
     install: function (dapp) {
       var self = this
-      var directory = path.join(this.$electron.remote.app.getPath('userData'), '/apps/' + crypto.createHash('sha256').update(dapp.title).digest('hex') + '/')
-      scrape({urls: [dapp.url], recursive: true, prettifyUrls: true, updateMissingSources: true, directory: directory, httpResponseHandler: phantomHtml}).then(function () {
-        self.$db.update({
-          'data.title': dapp.title
-        },
-        {
-          $set: {
-            'data.directory': directory,
-            'data.installed': true
-          }
-        }, function (err) {
-          if (err) throw err
-          self.$store.dispatch('updateMyDapps')
-          self.$store.dispatch('updateExplore')
+      var directory = path.join(this.$electron.remote.app.getPath('userData'), '/apps/')
+      const simpleGit = require('simple-git')(directory)
+      const branchRegex = /(?=tree).*$/ // Non Negative Look-behind Regex for first word after 'tree/'
+      const repoRegex = /^(.*[/])/ // Regex for everything before the last forward slash
+      const repo = dapp.url
+      var repoBranch = repo.match(branchRegex)[0].substr(5)
+      var repoURL = repo.match(repoRegex)[0].slice(0, -6)
+      console.log(directory, repoURL, repoBranch)
+      simpleGit.clone(repoURL)
+        .then(function () {
+          console.log(dapp.title + 'Dapp Installed Successfully')
+          self.$db.update({
+            'data.title': dapp.title
+          },
+          {
+            $set: {
+              'data.directory': directory,
+              'data.installed': true
+            }
+          }, function (err) {
+            if (err) throw err
+            self.$store.dispatch('updateMyDapps')
+            self.$store.dispatch('updateExplore')
+          })
         })
-      }).catch(function (e) {
-        self.$electron.remote.dialog.showErrorBox('Error', 'The dApp contents could not be downloaded: ' + e)
-      })
+        .catch(function (e) {
+          self.$electron.remote.dialog.showErrorBox('Error', 'The dApp contents could not be downloaded: ' + e)
+        })
     },
     displayImg: function (img) {
       return 'data:image/jpeg;base64,' + btoa(img.buffer)

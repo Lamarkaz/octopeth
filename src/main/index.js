@@ -1,7 +1,6 @@
 'use strict'
 
 import { app, BrowserWindow } from 'electron'
-import * as Splashscreen from "@trodi/electron-splashscreen"
 
 /**
  * Set `__static` path to static files in production
@@ -32,6 +31,8 @@ function createWindow () {
     'web-preferences': {'web-security': false}
   })
 
+  mainWindow.loadURL(winURL)
+
   mainWindow.on('closed', () => {
     mainWindow = null
   })
@@ -41,21 +42,7 @@ function createWindow () {
   })
 }
 
-app.on('ready', () => {
-  createWindow,
-  mainWindow = Splashscreen.initSplashScreen({
-    windowOpts: windowOptions,
-    templateUrl: path.join(__dirname, "..", "icon.svg"),
-    delay: 0, // force show immediately since example will load fast
-    minVisible: 1500, // show for 1.5s so example is obvious
-    splashScreenOpts: {
-        height: 500,
-        width: 500,
-        transparent: true,
-    },
-  })
-  mainWindow.loadURL(winURL)
-})
+app.on('ready', createWindow)
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
