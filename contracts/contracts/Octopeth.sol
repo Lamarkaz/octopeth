@@ -14,36 +14,35 @@ contract Octopeth is Ownable {
     string logo;
     string desc;
     string contact;
-    bytes32 hash;
     categories cat;
     bool approved;
   }
 
   enum categories {OTHER, GAMING, ENTERTAINMENT, FINANCE, SOCIAL, EXCHANGE, GAMBLING, TOKENS, SHARING, GOVERNANCE}
 
-  event Publish(address owner, string title, string url, string contact, string logo, string desc, bytes32 hash, categories cat);
-  event Review(address owner, string title, string url, string contact, string logo, string desc, bytes32 hash, categories cat);
+  event Publish(address owner, string title, string url, string contact, string logo, string desc, categories cat);
+  event Review(address owner, string title, string url, string contact, string logo, string desc, categories cat);
   event Remove(string indexed title);
   event PreCensor(bool value);
   event Config(bytes value);
 
-  mapping (string => dApp) dApps;
+  mapping (bytes32 => dApp) dApps;
 
-  function publish(string title, string url, string contact, string logo, string desc, bytes32 hash, categories cat) public {
-    require(dApps[title].owner == address(0) || dApps[title].owner == msg.sender);
-    dApp memory newdApp = dApp(msg.sender, title, url, logo, desc, contact, hash, cat, !(preCensorship));
-    dApps[title] = newdApp;
-    emit Publish(msg.sender, title, url, contact, logo, desc, hash, cat);
+  function publish(string title, string url, string contact, string logo, string desc, categories cat) public {
+    require(dApps[keccak256(bytes(title))].owner == address(0) || dApps[keccak256(bytes(title))].owner == msg.sender);
+    dApp memory newdApp = dApp(msg.sender, title, url, logo, desc, contact, cat, !(preCensorship));
+    dApps[keccak256(bytes(title))] = newdApp;
+    emit Publish(msg.sender, title, url, contact, logo, desc, cat);
   }
 
   function review(string title, bool value) public onlyOwner {
-    dApp storage thisdApp = dApps[title];
-    dApps[title].approved = value;
-    emit Review(thisdApp.owner, thisdApp.title, thisdApp.url, thisdApp.contact, thisdApp.logo, thisdApp.desc, thisdApp.hash, thisdApp.cat);
+    dApp storage thisdApp = dApps[keccak256(bytes(title))];
+    thisdApp.approved = value;
+    emit Review(thisdApp.owner, thisdApp.title, thisdApp.url, thisdApp.contact, thisdApp.logo, thisdApp.desc, thisdApp.cat);
   }
 
   function remove(string title) public onlyOwner {
-    dApps[title].approved = false;
+    dApps[keccak256(bytes(title))].approved = false;
     emit Remove(title);
   }
 
@@ -56,4 +55,15 @@ contract Octopeth is Ownable {
     config = value;
     emit Config(value);
   }
+
+  function getDApp(string apptitle) view public returns (string title, string url, string contact, string logo, string desc, categories cat) {
+    dApp storage app = dApps[keccak256(bytes(apptitle))];
+    title = app.title;
+    url = app.url;
+    contact = app.contact;
+    logo = app.contact;
+    desc = app.desc;
+    cat = app.cat;
+  }
+
 }
