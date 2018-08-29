@@ -8,25 +8,6 @@
     <!-- explore view-->
     <Explore></Explore>
     <!-- <Explore></Explore> -->
-    <v-card>
-      <v-bottom-nav
-        :active.sync="bottomNav"
-        color="purple darken-3"
-        :value="true"
-        fixed
-        class="storeNav"
-      >
-        <v-btn dark>
-          <span>Explore</span>
-          <v-icon>explore</v-icon>
-        </v-btn>
-
-        <v-btn dark>
-          <span>My ÐApps</span>
-          <v-icon>archive</v-icon>
-        </v-btn>
-      </v-bottom-nav>
-    </v-card>
   </div>
 </template>
 

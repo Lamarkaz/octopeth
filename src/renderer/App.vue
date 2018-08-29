@@ -30,7 +30,7 @@
       this.$contract.getPastEvents('Publish', {fromBlock: 0}, function (err, arr) {
         if (!err) {
           arr.forEach(function (e) {
-            self.$contract.methods.getDApp(e.returnValues.title).call().then(function(values){
+            self.$contract.methods.getDApp(e.returnValues.title).call().then(function (values) {
               const xhr = new XMLHttpRequest()
               // TODO: Check if logo is URL
               xhr.open('GET', decodeURIComponent(values.logo))

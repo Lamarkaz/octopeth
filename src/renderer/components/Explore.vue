@@ -15,7 +15,7 @@
                 <v-card-media :src="displayImg(i.logo)" height="130px" class="dappLogo">
                 </v-card-media>
                 <v-card-title primary-title >
-                  <v-card-text>
+                  <v-card-text style="paddding-left: 0px; padding-right: 0px">
                     <h3 class="appTitle text-xs-center">{{ i.title }}</h3>
                     <div class="categType">
                       <v-card-text class="text-xs-center categText">
@@ -194,7 +194,7 @@ export default {
   margin-left: -10px;
   margin-top: 15px;
   font-weight: 500;
-  font-size: 15px;
+  font-size: 14px;
   position: relative;
   display: none;
   transition: all 600ms ease-in-out;

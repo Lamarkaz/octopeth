@@ -16,7 +16,7 @@
       <v-spacer></v-spacer>
       <v-tooltip bottom color="black">
         <v-chip slot="activator" color="grey darken-4" text-color="white" style="margin-right: 15px; padding: 0px 10px; font-weight: 600; font-family: 'Dosis'; font-size: 15px" disabled="">
-          Balance: {{$store.state.auth.user.balance}} ETH
+          Balance: 158 ETH
         </v-chip>
         <span>0 USD</span>
       </v-tooltip>
@@ -296,7 +296,7 @@ export default {
     margin-left: -10px;
     margin-top: 10px;
     font-weight: 500;
-    font-size: 15px;
+    font-size: 14px;
     display: none;
     transition: all 600ms ease-in-out;
   }
