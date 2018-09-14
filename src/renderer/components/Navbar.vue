@@ -63,6 +63,28 @@
         </v-tab>
       </v-tabs>
     </v-toolbar>
+
+    <v-navigation-drawer
+      style="margin-top: 120px"
+      permanent
+      width="200"
+      value="true"
+    >
+      <v-list>
+        <v-list-tile>
+          <v-list-tile-action>
+            <v-icon>archive</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-title>My ÐApps</v-list-tile-title>
+        </v-list-tile>
+        <v-list-tile>
+          <v-list-tile-action>
+            <v-icon>explore</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-title>Explore</v-list-tile-title>
+        </v-list-tile>
+      </v-list>
+    </v-navigation-drawer>
     
     <!-- Logout warning modal -->
     <v-dialog
@@ -195,6 +217,8 @@
 <script>
 import crypto from 'crypto'
 import FileSaver from 'file-saver'
+import swal from 'sweetalert'
+
 export default {
   data () {
     return {
@@ -218,7 +242,7 @@ export default {
     },
     addressToClipboard: function () {
       this.$electron.remote.clipboard.writeText('0x' + this.$store.state.auth.user.address)
-      alert('Address copied to clipboard')
+      swal('Good Job!', 'Address copied to clipboard', 'success', {buttons: false})
     },
     exportIdentity: function () {
       var identity = this.$store.state.auth.user
@@ -226,12 +250,13 @@ export default {
       delete identity.balance
       var blob = new Blob([JSON.stringify(identity)], {type: 'text/plain;charset=utf-8'})
       FileSaver.saveAs(blob, 'identity.json')
+      swal('Identity Saved!', 'Identity file is saved successfully', 'success', {buttons: false})
     },
     changeCat: function (name) {
       this.$store.commit('CHANGECAT', name)
     },
     publish: function () {
-      alert('published')
+      swal('Ðapp Published', 'Ðapp is successfully published and is explorable.', 'success', {buttons: false})
     }
   },
   computed: {

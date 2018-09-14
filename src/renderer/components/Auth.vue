@@ -69,7 +69,7 @@
         <!-- Password dialog -->
         <v-layout row justify-center>
           <v-dialog v-model="dialog" persistent max-width="500px" dark> 
-            <v-card class="genId">
+            <v-card class="genId" background="#222">
               <v-card-title>
                 <span class="headline" style="font-family: 'Dosis', sans-serif; font-size: 23px !important; font-weight: 600; color: white"><v-icon style="font-size: 26px; padding-right: 10px; margin-top: -6px; color: white">person_add</v-icon>Generate a new Identity</span>
               </v-card-title>
@@ -141,6 +141,7 @@
 
 <script>
 import ethers from 'ethers'
+import swal from 'sweetalert'
 // Auth carousel assets
 import '../assets/create.png'
 import '../assets/explore.png'
@@ -229,7 +230,7 @@ export default{
               self.filename = $event.target.value.split('\\').pop()
             }
           } else {
-            alert('Error: Invalid wallet file')
+            swal('Error!: Invalid wallet file', 'Make sure your Identity file is correct', 'error')
           }
         }
       })(files[0])
@@ -240,7 +241,7 @@ export default{
       ethers.Wallet.fromEncryptedWallet(this.json, this.password).then(function (wallet) {
         self.$store.dispatch('authenticate', JSON.parse(self.json))
       }).catch(function (e) {
-        alert(e)
+        swal('Error!', e, 'error')
       })
       this.ready = true
     },
@@ -308,7 +309,7 @@ input[type=file] {
   box-shadow: none;
   padding-bottom: 5px;
   color: rgb(107, 32, 172);
-  background: transparent;
+  background: #222;
 }
 .authForm {
   padding-left: 10%;

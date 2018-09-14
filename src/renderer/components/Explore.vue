@@ -6,32 +6,34 @@
         <v-icon class="mainWrapperIcon">explore</v-icon>
         Explore
       </h3>
-      <v-container grid-list-md text-xs-center>
-      <v-layout align-center justify-center row>
-        <v-flex v-for="i in $store.state.dapps.explore" :key="`3${i.title}`" lg2 style="max-width: 200px; margin-left: 5px; margin-right: 5px" v-if="$store.state.dapps.cat === 'ALL' || translateCat(i.cat) === $store.state.dapps.cat">
-          <v-card dark color="secondary">
-                <v-card class="dappCard px-0" style="height: 230px">
-                <v-progress-linear v-if="installingKey == titleDM5(i)" class="installProg" color="purple darken-3" :indeterminate="true" height="4"></v-progress-linear>
-                <v-card-media :src="displayImg(i.logo)" height="130px" class="dappLogo">
-                </v-card-media>
-                <v-card-title primary-title >
-                  <v-card-text style="paddding-left: 0px; padding-right: 0px">
-                    <h3 class="appTitle text-xs-center">{{ i.title }}</h3>
-                    <div class="categType">
-                      <v-card-text class="text-xs-center categText">
-                        <v-icon style="color: white; margin-right: 2px; margin-top: -5px"></v-icon> {{ translateCat(i.cat) }}
-                      </v-card-text>
-                    </div>
-                    <div class="appBody text-xs-left">{{ i.desc }} 
-                      <v-btn v-if="installingKey == titleDM5(i)" class="installBtn" style="margin-left: 0px">INSTALLING...</v-btn>
-                      <v-btn v-else class="installBtn" @click="install(i)">INSTALL</v-btn>
-                    </div>
-                  </v-card-text>
-                </v-card-title>
+      <v-container grid-list-lg pb-4>
+        <v-container no-padding fluid grid-list-xl>
+          <v-layout justify-center row wrap>
+            <v-flex v-for="i in $store.state.dapps.explore" :key="`3${i.title}`" xs12 sm6 md4 lg3 xl2 style="max-width: 230px; margin-left: 5px; margin-right: 5px; float: left" v-if="$store.state.dapps.cat === 'ALL' || translateCat(i.cat) === $store.state.dapps.cat">
+              <v-card dark color="secondary">
+                  <v-card class="dappCard px-0" style="height: 230px">
+                  <v-progress-linear v-if="installingKey == titleDM5(i)" class="installProg" color="purple darken-3" :indeterminate="true" height="4"></v-progress-linear>
+                  <v-card-media :src="displayImg(i.logo)" height="130px" class="dappLogo">
+                  </v-card-media>
+                  <v-card-title primary-title >
+                    <v-card-text style="paddding-left: 0px; padding-right: 0px">
+                      <h3 class="appTitle text-xs-center">{{ i.title }}</h3>
+                      <div class="categType">
+                        <v-card-text class="text-xs-center categText">
+                          <v-icon style="color: white; margin-right: 2px; margin-top: -5px"></v-icon> {{ translateCat(i.cat) }}
+                        </v-card-text>
+                      </div>
+                      <div class="appBody text-xs-left">{{ i.desc }} 
+                        <v-btn v-if="installingKey == titleDM5(i)" class="installBtn" style="margin-left: 0px">INSTALLING...</v-btn>
+                        <v-btn v-else class="installBtn" @click="install(i)">INSTALL</v-btn>
+                      </div>
+                    </v-card-text>
+                  </v-card-title>
+                </v-card>
               </v-card>
-          </v-card>
-        </v-flex>
-      </v-layout>
+            </v-flex>
+          </v-layout>
+        </v-container>
       </v-container>
     </div>
   </v-app>
@@ -40,6 +42,7 @@
 <script>
 import crypto from 'crypto'
 import path from 'path'
+import swal from 'sweetalert'
 
 export default {
   data () {
@@ -90,7 +93,7 @@ export default {
       console.log(directory, repoURL, repoBranch)
       simpleGit.clone(repoURL)
         .then(function () {
-          alert(dapp.title + ' Ðapp Installed Successfully.')
+          swal(dapp.title + ' Installed', ' Ðapp Installed Successfully.', 'success')
           self.installing = false
           self.$db.update({
             'data.title': dapp.title
@@ -108,7 +111,7 @@ export default {
         })
         .catch(function (e) {
           self.$electron.remote.dialog.showErrorBox('Error', 'The dApp contents could not be downloaded: ' + e)
-          alert(e)
+          swal('Error!', e, 'error')
         })
     },
     displayImg: function (img) {

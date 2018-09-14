@@ -97,8 +97,6 @@
 
   body {
     font-family: 'Dosis', sans-serif !important;
-    -ms-overflow-style: scrollbar;
-    -webkit-app-region:drag !important;
   }
   input[type="submit"],
   input[type="reset"],
