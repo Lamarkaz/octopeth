@@ -1,10 +1,34 @@
 <template>
   <div>
+    <v-navigation-drawer
+      dark
+      absolute
+      permanent
+      width="200"
+      :clipped="clipped"
+      v-model="drawer"
+    >
+      <v-list style="margin-top: 62px">
+        <v-list-tile @click="currentView = 'inventory'" :value="currentView == 'inventory'" active-class="grey darken-2">
+          <v-list-tile-action>
+            <v-icon>archive</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-title>My ÐApps</v-list-tile-title>
+        </v-list-tile>
+        <v-list-tile @click="currentView = 'explore'" :value="currentView == 'explore'" active-class="grey darken-2">
+          <v-list-tile-action>
+            <v-icon>explore</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-title>Explore</v-list-tile-title>
+        </v-list-tile>
+      </v-list>
+    </v-navigation-drawer>
+    
     <v-toolbar
       fixed
       dark
       flat
-      tabs
+      :clipped-left="clipped"
       height="70"
       class="background"
       color="purple darken-3"
@@ -45,7 +69,7 @@
           </v-list>
         </v-menu>
       </div>
-      <v-tabs
+      <!-- <v-tabs
         slot="extension"
         v-model="currentItem"
         fixed-tabs
@@ -61,30 +85,8 @@
         >
           {{ item }}
         </v-tab>
-      </v-tabs>
+      </v-tabs> -->
     </v-toolbar>
-
-    <v-navigation-drawer
-      style="margin-top: 120px"
-      permanent
-      width="200"
-      value="true"
-    >
-      <v-list>
-        <v-list-tile>
-          <v-list-tile-action>
-            <v-icon>archive</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title>My ÐApps</v-list-tile-title>
-        </v-list-tile>
-        <v-list-tile>
-          <v-list-tile-action>
-            <v-icon>explore</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title>Explore</v-list-tile-title>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
     
     <!-- Logout warning modal -->
     <v-dialog
@@ -211,6 +213,11 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+
+    <!-- installed view -->
+    <MyDapps v-if="currentView == 'inventory'"></MyDapps>
+    <!-- explore view-->
+    <Explore v-if="currentView == 'explore'"></Explore>
   </div>
 </template>
 
@@ -222,6 +229,9 @@ import swal from 'sweetalert'
 export default {
   data () {
     return {
+      drawer: true,
+      clipped: true,
+      currentView: 'inventory',
       dappLogo: '',
       dappTitle: '',
       dappDesc: '',
@@ -272,7 +282,7 @@ export default {
     font-family: 'Dosis', sans-serif !important;
     font-weight: 700;
     font-size: 23px;
-    color: #222;
+    color: white;
     position: absolute;
     margin-top: 11px;
     margin-left: -5px;
@@ -375,5 +385,23 @@ export default {
     color: rgba(255,255,255,0.5);
     margin-top: 40px;
     margin-left: 35px;
+  }
+  .exploreNoti {
+    font: 0/0 a;
+    width: 12px;
+    height: 12px;
+    background: #FFDD40;
+    top: -4px;
+    left: 17px;
+    position: absolute;
+    border-radius: 100%;
+    box-shadow: 0 0 0 0 rgba(255,221,65,0.4);
+    -webkit-animation: feature-pulse 2s infinite;
+    animation: feature-pulse 2s infinite;
+    opacity: 1;
+    transition: all 0.3s ease;
+  }
+  .navActive {
+    background: hsla(0,0%,100%,.12);
   }
 </style>

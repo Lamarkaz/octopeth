@@ -1,6 +1,5 @@
 <template>
   <v-app style="background: #222">
-    <div class="sideNav"></div>
     <div class="mainWrapper">
       <h3 class="text-xs-center MainWrapperTypo">
         <v-icon class="mainWrapperIcon">explore</v-icon>
@@ -153,8 +152,7 @@ export default {
   background-color: #222;
 }
 .mainWrapper {
-  margin-right: 90px;
-  margin-left: 90px;
+  margin-left: 200px;
   min-height: 500px;
   font-family: 'Dosis', sans-serif;
   font-weight: 400;
@@ -168,6 +166,7 @@ export default {
   margin-top: -4px;
 }
 .MainWrapperTypo {
+  margin-top: 105px;
   margin-bottom: 25px;
   color: rgb(107, 32, 172);
   font-size: 25px;

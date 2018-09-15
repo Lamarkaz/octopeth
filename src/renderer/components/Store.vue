@@ -3,11 +3,6 @@
     <div id="electron-titlebar"></div>
     <!-- navbar -->
     <Navbar></Navbar>
-    <!-- installed view -->
-    <MyDapps></MyDapps>
-    <!-- explore view-->
-    <Explore></Explore>
-    <!-- <Explore></Explore> -->
   </div>
 </template>
 
