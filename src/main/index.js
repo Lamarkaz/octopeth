@@ -26,7 +26,6 @@ function createWindow () {
     minWidth: 1155,
     backgroundColor: '#222',
     useContentSize: true,
-    titleBarStyle: 'hidden',
     'web-preferences': {'web-security': false}
   })
 

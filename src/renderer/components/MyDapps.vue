@@ -5,28 +5,30 @@
         <v-icon class="mainWrapperIcon">archive</v-icon>
         My ÐApps
       </h3>
-      <v-container grid-list-md text-xs-center>
-      <v-layout row wrap>
-        <v-flex v-for="i in $store.state.dapps.myDapps" :key="`1${i.title}`" lg2 style="max-width: 200px; margin-left: 5px; margin-right: 5px" v-if="$store.state.dapps.cat === 'ALL' || translateCat(i.cat) === $store.state.dapps.cat">
-          <v-card dark color="secondary">
-                <v-card class="dappCard px-0" style="height: 230px">
-                <v-card-media :src="displayImg(i.logo)" height="130px" class="dappLogo">
-                </v-card-media>
-                <v-card-title primary-title >
-                  <v-card-text>
-                    <h3 class="appTitle text-xs-center">{{ i.title }}</h3>
-                    <div class="categType">
-                      <v-card-text class="text-xs-center categText">
-                        <v-icon style="color: white; margin-right: 2px; margin-top: -5px"></v-icon> {{ translateCat(i.cat) }}
+      <v-container grid-list-lg pb-4>
+        <v-container no-padding fluid grid-list-xl>
+          <v-layout justify-center row wrap>
+            <v-flex v-for="i in $store.state.dapps.myDapps" :key="`1${i.title}`" xs12 sm6 md4 lg3 xl2  style="max-width: 230px; margin-left: 5px; margin-right: 5px" v-if="$store.state.dapps.cat === 'ALL' || translateCat(i.cat) === $store.state.dapps.cat">
+              <v-card dark color="secondary">
+                    <v-card class="dappCard px-0" style="height: 240px">
+                    <v-card-media :src="displayImg(i.logo)" height="130px" class="dappLogo">
+                    </v-card-media>
+                    <v-card-title primary-title >
+                      <v-card-text>
+                        <h3 class="appTitle text-xs-center">{{ i.title }}</h3>
+                        <div class="categType">
+                          <v-card-text class="text-xs-center categText">
+                            <v-icon style="color: white; margin-right: 2px; margin-top: -5px"></v-icon> {{ translateCat(i.cat) }}
+                          </v-card-text>
+                        </div>
+                        <div class="appBody text-xs-left">{{ i.desc }}</div>
                       </v-card-text>
-                    </div>
-                    <div class="appBody text-xs-left">{{ i.desc }}</div>
-                  </v-card-text>
-                </v-card-title>
+                    </v-card-title>
+                  </v-card>
               </v-card>
-          </v-card>
-        </v-flex>
-      </v-layout>
+            </v-flex>
+          </v-layout>
+        </v-container>
       </v-container>
       <v-container fluid grid-list-md>
         <v-layout row wrap>
@@ -138,7 +140,6 @@ export default {
   }
   .MainWrapperTypo {
     margin-top: 65px;
-    margin-bottom: 25px;
     color: rgb(107, 32, 172);
     font-size: 25px;
   }

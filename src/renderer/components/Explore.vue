@@ -7,10 +7,10 @@
       </h3>
       <v-container grid-list-lg pb-4>
         <v-container no-padding fluid grid-list-xl>
-          <v-layout justify-center row wrap>
+          <v-layout row wrap style="margin-left: 70px">
             <v-flex v-for="i in $store.state.dapps.explore" :key="`3${i.title}`" xs12 sm6 md4 lg3 xl2 style="max-width: 230px; margin-left: 5px; margin-right: 5px; float: left" v-if="$store.state.dapps.cat === 'ALL' || translateCat(i.cat) === $store.state.dapps.cat">
               <v-card dark color="secondary">
-                  <v-card class="dappCard px-0" style="height: 230px">
+                  <v-card class="dappCard px-0" style="height: 240px">
                   <v-progress-linear v-if="installingKey == titleDM5(i)" class="installProg" color="purple darken-3" :indeterminate="true" height="4"></v-progress-linear>
                   <v-card-media :src="displayImg(i.logo)" height="130px" class="dappLogo">
                   </v-card-media>
@@ -24,7 +24,7 @@
                       </div>
                       <div class="appBody text-xs-left">{{ i.desc }} 
                         <v-btn v-if="installingKey == titleDM5(i)" class="installBtn" style="margin-left: 0px">INSTALLING...</v-btn>
-                        <v-btn v-else class="installBtn" @click="install(i)">INSTALL</v-btn>
+                        <v-btn v-else class="installBtn" @click="install(i)"><v-icon style="font-size: 16px; margin-right: 5px">get_app</v-icon> INSTALL</v-btn>
                       </div>
                     </v-card-text>
                   </v-card-title>
@@ -152,7 +152,7 @@ export default {
   background-color: #222;
 }
 .mainWrapper {
-  margin-left: 200px;
+  margin-left: 160px;
   min-height: 500px;
   font-family: 'Dosis', sans-serif;
   font-weight: 400;
@@ -167,7 +167,6 @@ export default {
 }
 .MainWrapperTypo {
   margin-top: 105px;
-  margin-bottom: 25px;
   color: rgb(107, 32, 172);
   font-size: 25px;
 }
@@ -233,7 +232,7 @@ export default {
 }
 .dappCard:hover  .appTitle {
   color: rgb(107, 32, 172);
-  margin-top: -175px;
+  margin-top: -170px;
 }
 .dappCard:hover  .appBody {
   display: block;
@@ -254,7 +253,7 @@ export default {
   font-weight: 500; 
 }
 .installBtn {
-  left: 22px;
+  left: 27px;
   top: 88px;
   background-color: rgb(107, 32, 172) !important;
   font-weight: 700;

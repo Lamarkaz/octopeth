@@ -40,9 +40,9 @@
       <v-spacer></v-spacer>
       <v-tooltip bottom color="black">
         <v-chip slot="activator" color="grey darken-4" text-color="white" style="margin-right: 15px; padding: 0px 10px; font-weight: 600; font-family: 'Dosis'; font-size: 15px" disabled="">
-          Balance: 158 ETH
+          Balance: {{ usdBalance }} ETH
         </v-chip>
-        <span>0 USD</span>
+        <span>{{ usdBalance }} USD</span>
       </v-tooltip>
       <div class="text-xs-center">
         <v-menu
@@ -55,37 +55,20 @@
           <v-gravatar :hash="md5hash" :size="26" class="grav" slot="activator" style="margin-right: 30px"/>
           <v-list>
             <v-list-tile key="1" @click.stop="pubDialog = true">
-              <v-list-tile-title class="menuItemStyle">Publish ÐApp</v-list-tile-title>
+              <v-list-tile-title class="menuItemStyle"><v-icon style="font-size: 18px; margin-right: 8px">publish</v-icon>Publish ÐApp</v-list-tile-title>
             </v-list-tile>
             <v-list-tile key="2" @click="addressToClipboard()">
-              <v-list-tile-title class="menuItemStyle">Copy Address To Clipboard</v-list-tile-title>
+              <v-list-tile-title class="menuItemStyle"><v-icon style="font-size: 18px; margin-right: 8px">filter_none</v-icon>Copy Address To Clipboard</v-list-tile-title>
             </v-list-tile>
             <v-list-tile key="3" @click="exportIdentity()">
-              <v-list-tile-title class="menuItemStyle">Export Encrypted Identity</v-list-tile-title>
+              <v-list-tile-title class="menuItemStyle"><v-icon style="font-size: 18px; margin-right: 8px">get_app</v-icon>Export Encrypted Identity</v-list-tile-title>
             </v-list-tile>
             <v-list-tile key="4" @click.stop="dialog = true">
-              <v-list-tile-title class="menuItemStyle">Logout</v-list-tile-title>
+              <v-list-tile-title class="menuItemStyle"><v-icon style="font-size: 18px; margin-right: 8px">exit_to_app</v-icon>Logout</v-list-tile-title>
             </v-list-tile>
           </v-list>
         </v-menu>
       </div>
-      <!-- <v-tabs
-        slot="extension"
-        v-model="currentItem"
-        fixed-tabs
-        color="grey darken-4"
-        slider-color="grey darken-1"
-        show-arrows
-      >
-        <v-tab
-          v-for="item in $store.state.dapps.categories"
-          :key="`5${item}`"
-          @click="changeCat(item)"
-          :href="'#tab-' + item"
-        >
-          {{ item }}
-        </v-tab>
-      </v-tabs> -->
     </v-toolbar>
     
     <!-- Logout warning modal -->
@@ -153,6 +136,11 @@
                 <label style="font-size: 14px; margin-left: 15px; opacity: 0.7">Custom Branch</label>
                 <v-text-field v-model="gitBranch" :disabled="!enabled" color="white" label="Git branch" dark style="margin-left: 20px; max-width: 60%; margin-right"></v-text-field>
               </v-layout>
+              <v-layout align-center>
+                <v-switch v-model="pathEnabled" hide-details color="white" class="shrink mr-2" dark></v-switch>
+                <label style="font-size: 14px; margin-left: 15px; opacity: 0.7">Custom Path</label>
+                <v-text-field :disabled="!pathEnabled" color="white" label="Path" dark style="margin-left: 20px; max-width: 60%; margin-right"></v-text-field>
+              </v-layout>
               <v-text-field 
                 name="input-10-1"
                 v-model="dappLogo"
@@ -182,7 +170,7 @@
             </v-flex>
             <v-flex :key="4" xs4>
                 <h3 class="previewer">Your ÐApp Card Preview</h3>
-                <v-card class="dappCard px-0" style="height: 230px; width: 200px">
+                <v-card class="dappCard px-0" style="height: 240px; width: 230px">
                 <v-card-media :src="dappLogo" height="130px" class="dappLogo">
                 </v-card-media>
                 <v-card-title primary-title >
@@ -225,6 +213,8 @@
 import crypto from 'crypto'
 import FileSaver from 'file-saver'
 import swal from 'sweetalert'
+import price from 'crypto-price'
+import {BigNumber} from 'bignumber.js'
 
 export default {
   data () {
@@ -243,7 +233,9 @@ export default {
       e2: 3,
       isOpen: false,
       enabled: false,
-      gitBranch: 'master'
+      pathEnabled: false,
+      gitBranch: 'master',
+      usdBalance: 0
     }
   },
   methods: {
@@ -273,6 +265,15 @@ export default {
     md5hash: function () {
       return crypto.createHash('md5').update(this.$store.state.auth.user.address).digest('hex')
     }
+  },
+  created () {
+    price.getCryptoPrice('USD', 'ETH').then(obj => {
+      var bal = new BigNumber(this.$store.state.user.balance)
+      bal = bal.times(obj.price).decimalPlaces(2)
+      this.usdBalance = bal.toNumber()
+    }).catch(err => {
+      console.log(err)
+    })
   }
 }
 </script>
@@ -282,7 +283,7 @@ export default {
     font-family: 'Dosis', sans-serif !important;
     font-weight: 700;
     font-size: 23px;
-    color: white;
+    color: #222;
     position: absolute;
     margin-top: 11px;
     margin-left: -5px;
