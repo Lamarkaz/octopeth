@@ -3,7 +3,19 @@ import db from '../../js/db'
 const state = {
   myDapps: [],
   explore: [],
-  categories: ['ALL', 'GAMING', 'ENTERTAINMENT', 'FINANCE', 'SOCIAL', 'EXCHANGE', 'GAMBLING', 'TOKENS', 'SHARING', 'GOVERNANCE', 'OTHER'],
+  categories: [
+    { item: 'ALL', value: 0 },
+    { item: 'GAMING', value: 1 },
+    { item: 'ENTERTAINMENT', value: 2 },
+    { item: 'FINANCE', value: 3 },
+    { item: 'SOCIAL', value:4 },
+    { item: 'EXCHANGE', value: 5 },
+    { item: 'GAMBLING', value: 6 },
+    { item: 'TOKENS', value: 7 },
+    { item: 'SHARING', value: 8 },
+    { item: 'GOVERNANCE', value:9 },
+    { item: 'OTHER', value: 10 }
+  ],
   cat: 'ALL'
 }
 

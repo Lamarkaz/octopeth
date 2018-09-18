@@ -1,0 +1,367 @@
+[
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "value",
+        "type": "bool"
+      }
+    ],
+    "name": "review",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x27b55475"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "url",
+        "type": "string"
+      },
+      {
+        "name": "contact",
+        "type": "string"
+      },
+      {
+        "name": "logo",
+        "type": "string"
+      },
+      {
+        "name": "desc",
+        "type": "string"
+      },
+      {
+        "name": "cat",
+        "type": "uint8"
+      }
+    ],
+    "name": "publish",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x3ad8173a"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "preCensorship",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0x3b6df722"
+  },
+  {
+    "constant": false,
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x715018a6"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "config",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0x79502c55"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "title",
+        "type": "string"
+      }
+    ],
+    "name": "remove",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x80599e4b"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "value",
+        "type": "bool"
+      }
+    ],
+    "name": "preCensor",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x8a7f800c"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "value",
+        "type": "bytes"
+      }
+    ],
+    "name": "updateConfig",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x8cc6acce"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0x8da5cb5b"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "apptitle",
+        "type": "string"
+      }
+    ],
+    "name": "getDApp",
+    "outputs": [
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "url",
+        "type": "string"
+      },
+      {
+        "name": "contact",
+        "type": "string"
+      },
+      {
+        "name": "logo",
+        "type": "string"
+      },
+      {
+        "name": "desc",
+        "type": "string"
+      },
+      {
+        "name": "cat",
+        "type": "uint8"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0x91b9b640"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "transferOwnership",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0xf2fde38b"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "owner",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "name": "url",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "name": "contact",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "name": "logo",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "name": "desc",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "name": "cat",
+        "type": "uint8"
+      }
+    ],
+    "name": "Publish",
+    "type": "event",
+    "signature": "0x49d29b9f52e994938dfbd63cefb18a6341a0e2248ed1a91295d44756e7765637"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "owner",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "name": "url",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "name": "contact",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "name": "logo",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "name": "desc",
+        "type": "string"
+      },
+      {
+        "indexed": false,
+        "name": "cat",
+        "type": "uint8"
+      }
+    ],
+    "name": "Review",
+    "type": "event",
+    "signature": "0x4efc11a85713008a07540c61a36a3c310d4c0135d5b3ebfc57acdc57c549233a"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "title",
+        "type": "string"
+      }
+    ],
+    "name": "Remove",
+    "type": "event",
+    "signature": "0x834a2d47e948021d7136fb7275b3f1e1feae6333c0d683e8c13f901667defd8c"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "value",
+        "type": "bool"
+      }
+    ],
+    "name": "PreCensor",
+    "type": "event",
+    "signature": "0x9f90b16ecbeaa03697f7ad37bc569e43325c68bc6942130f1153018f17a7f35e"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "value",
+        "type": "bytes"
+      }
+    ],
+    "name": "Config",
+    "type": "event",
+    "signature": "0xfa604b9f72cfe31dc76d72c3ca4f78daeb444286f7b9e1db3eeda406629fabcd"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "previousOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipRenounced",
+    "type": "event",
+    "signature": "0xf8df31144d9c2f0f6b59d69b8b98abd5459d07f2742c4df920b25aae33c64820"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipTransferred",
+    "type": "event",
+    "signature": "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0"
+  }
+]

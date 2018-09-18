@@ -5,7 +5,7 @@ import Vuetify from 'vuetify'
 import Gravatar from 'vue-gravatar'
 import Web3 from 'web3'
 import config from '../../config'
-import artifact from '../../contracts/build/contracts/Octopeth'
+import abi from '../../contracts/ABI/Octopeth_sol-Octopeth.json'
 
 import App from './App'
 import router from './router'
@@ -48,7 +48,7 @@ Vue.prototype.$db = db
 
 // Web3 and Contract
 Vue.prototype.$web3 = new Web3(config.provider)
-Vue.prototype.$contract = new Vue.prototype.$web3.eth.Contract(artifact.abi, config.address)
+Vue.prototype.$contract = new Vue.prototype.$web3.eth.Contract(abi, config.address)
 
 /* eslint-disable no-new */
 new Vue({

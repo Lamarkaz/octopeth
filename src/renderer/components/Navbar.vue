@@ -124,6 +124,7 @@
                 >
               </v-text-field>
               <v-text-field 
+                v-model="dappURL"
                 name="input-10-1"
                 label="Git Repository URL"
                 color="white"
@@ -131,15 +132,15 @@
                 required
                 >
               </v-text-field>
-              <v-layout align-center>
+              <!-- <v-layout align-center>
                 <v-switch v-model="enabled" hide-details color="white" class="shrink mr-2" dark></v-switch>
                 <label style="font-size: 14px; margin-left: 15px; opacity: 0.7">Custom Branch</label>
                 <v-text-field v-model="gitBranch" :disabled="!enabled" color="white" label="Git branch" dark style="margin-left: 20px; max-width: 60%; margin-right"></v-text-field>
-              </v-layout>
+              </v-layout> -->
               <v-layout align-center>
                 <v-switch v-model="pathEnabled" hide-details color="white" class="shrink mr-2" dark></v-switch>
                 <label style="font-size: 14px; margin-left: 15px; opacity: 0.7">Custom Path</label>
-                <v-text-field :disabled="!pathEnabled" color="white" label="Path" dark style="margin-left: 20px; max-width: 60%; margin-right"></v-text-field>
+                <v-text-field v-model="dappPath" :disabled="!pathEnabled" color="white" label="Path" dark style="margin-left: 20px; max-width: 60%; margin-right"></v-text-field>
               </v-layout>
               <v-text-field 
                 name="input-10-1"
@@ -165,8 +166,19 @@
                 dark
                 color="white"
                 :items="$store.state.dapps.categories"
+                item-text="item"
+                item-value="value"
                 label="Category"
               ></v-select>
+              <v-text-field
+                v-model="dappContact" 
+                name="input-10-1"
+                label="Contact Email"
+                color="white"
+                dark
+                required
+                >
+              </v-text-field>
             </v-flex>
             <v-flex :key="4" xs4>
                 <h3 class="previewer">Your ÐApp Card Preview</h3>
@@ -226,6 +238,8 @@ export default {
       dappTitle: '',
       dappDesc: '',
       dappCateg: '',
+      dappURL: '',
+      dappContact: '',
       dialog: false,
       pubDialog: false,
       explore: [],
@@ -234,7 +248,7 @@ export default {
       isOpen: false,
       enabled: false,
       pathEnabled: false,
-      gitBranch: 'master',
+      dappPath: 'root',
       usdBalance: 0
     }
   },
@@ -258,7 +272,14 @@ export default {
       this.$store.commit('CHANGECAT', name)
     },
     publish: function () {
-      swal('Ðapp Published', 'Ðapp is successfully published and is explorable.', 'success', {buttons: false})
+      console.log(this.dappCateg)
+      this.$contract.methods.publish(this.dappTitle, this.dappURL, this.dappContact, this.dappLogo, this.dappDesc, this.dappCateg)
+        .send({from: this.$store.state.auth.user.address, gas: 6000000, gasPrice: '0'})
+        .on('receipt', function (receipt) {
+          console.log(receipt)
+          swal('Ðapp Published', 'Ðapp is successfully published and is explorable.', 'success', {buttons: false})
+        })
+        .on('error', console.error)
     }
   },
   computed: {

@@ -16,7 +16,7 @@
     name: 'octopeth',
     created () {
       // DELETE. ONLY FOR TESTING
-      this.$db.remove({}, { multi: true })
+      // this.$db.remove({}, { multi: true })
       // END
       var self = this
       this.$db.findOne({type: 'wallet'}, function (err, doc) {
@@ -28,9 +28,11 @@
       this.$store.dispatch('updateExplore')
       this.$store.dispatch('updateMyDapps')
       this.$contract.getPastEvents('Publish', {fromBlock: 0}, function (err, arr) {
+        console.log(arr)
         if (!err) {
           arr.forEach(function (e) {
             self.$contract.methods.getDApp(e.returnValues.title).call().then(function (values) {
+              console.log(values)
               const xhr = new XMLHttpRequest()
               // TODO: Check if logo is URL
               xhr.open('GET', decodeURIComponent(values.logo))
@@ -42,17 +44,18 @@
                   self.$db.findOne({'data.title': values.title}, function (err, doc) {
                     if (!err) {
                       if (doc === null) {
-                      // TODO: Check approval event by the Octopeth owner before inserting
-                      // TODO Check image dimensions before inserting
-                      // TODO: Consider implementing OOP for image validation
-                      // TODO: Set a download file size limit to prevent use of excessively large files
+                        // console.log(values)
+                        // console.log('title: ' + values.title, 'url: ' + values.url, 'contact: ' + values.contact, 'cat: ' + values.cat, 'owner: ' + values.owner, 'desc: ' + values.desc, 'logo: ' + values.logo)
+                        // TODO: Check approval event by the Octopeth owner before inserting
+                        // TODO Check image dimensions before inserting
+                        // TODO: Consider implementing OOP for image validation
+                        // TODO: Set a download file size limit to prevent use of excessively large files
                         self.$db.insert({
                           type: 'app',
                           data: {
                             title: decodeURIComponent(values.title),
                             url: decodeURIComponent(values.url),
                             contact: decodeURIComponent(values.contact),
-                            hash: values.hash,
                             cat: values.cat,
                             owner: values.owner,
                             desc: decodeURIComponent(values.desc),

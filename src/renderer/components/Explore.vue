@@ -84,7 +84,7 @@ export default {
       self.installText = 'INSTALLING...'
       var directory = path.join(this.$electron.remote.app.getPath('userData'), '/apps/')
       const simpleGit = require('simple-git')(directory)
-      const branchRegex = /(?=tree).*$/ // Non Negative Look-behind Regex for first word after 'tree/'
+      const branchRegex = /(?=root).*$/ // Non Negative Look-behind Regex for first word after 'tree/'
       const repoRegex = /^(.*[/])/ // Regex for everything before the last forward slash
       const repo = dapp.url
       var repoBranch = repo.match(branchRegex)[0].substr(5)
