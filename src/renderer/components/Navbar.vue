@@ -4,7 +4,9 @@
       dark
       absolute
       permanent
-      width="200"
+      :mini-variant.sync="mini"
+      stateless
+      width="250"
       :clipped="clipped"
       v-model="drawer"
     >
@@ -22,12 +24,45 @@
           <v-list-tile-title>Explore</v-list-tile-title>
         </v-list-tile>
       </v-list>
+      <v-divider></v-divider>
+      <v-list>
+        <v-list-tile-action>
+          <v-btn
+            icon
+            @click.stop="mini = !mini"
+            style="margin-left: auto; margin-right: auto; margin-top: 0px; margin-bottom: 0px"
+          >
+            <v-icon v-if="mini == false">chevron_left</v-icon>
+            <v-icon v-if="mini == true">chevron_right</v-icon>
+          </v-btn>
+        </v-list-tile-action>
+      </v-list>
+      <v-divider></v-divider>
+      <v-list-group v-if="mini == false"
+          no-action
+        >
+          <v-list-tile slot="activator">
+            <v-list-tile-title style="color: white; font-weight: 500; font-family: 'Dosis'; font-size: 18px">Categories</v-list-tile-title>
+          </v-list-tile>
+
+          <v-list-tile
+            v-for="(category, i) in categories"
+            :key="i"
+            @click="changeCat(category.value)"
+          >
+            <v-list-tile-title v-text="category.item" style="color: white; font-size: 14px; font-weight: 700; font-family: 'Dosis'"></v-list-tile-title>
+            <v-list-tile-action>
+              <v-icon v-text="category.icon"></v-icon>
+            </v-list-tile-action>
+          </v-list-tile>
+        </v-list-group>
     </v-navigation-drawer>
     
     <v-toolbar
       fixed
       dark
       flat
+      tabs
       :clipped-left="clipped"
       height="70"
       class="background"
@@ -69,6 +104,25 @@
           </v-list>
         </v-menu>
       </div>
+      <!--
+      <v-tabs
+        slot="extension"
+        v-model="model"
+        centered
+        color="grey darken-4"
+        slider-color="deep-purple"
+      >
+        <v-tab
+          v-for="i in $store.state.dapps.categories"
+          :key="i"
+          :href="`#tab-${i}`"
+          @click="changeCat(i)"
+        >
+          {{ i }}
+        </v-tab>
+      </v-tabs>
+      -->
+      
     </v-toolbar>
     
     <!-- Logout warning modal -->
@@ -165,7 +219,7 @@
                 v-model="dappCateg"
                 dark
                 color="white"
-                :items="$store.state.dapps.categories"
+                :items="categories"
                 item-text="item"
                 item-value="value"
                 label="Category"
@@ -245,11 +299,25 @@ export default {
       explore: [],
       currentItem: 'tab-Home',
       e2: 3,
+      mini: true,
       isOpen: false,
       enabled: false,
       pathEnabled: false,
       dappPath: 'root',
-      usdBalance: 0
+      usdBalance: 0,
+      categories: [
+        { item: 'ALL', value: 0, icon: 'category' },
+        { item: 'GAMING', value: 1, icon: 'videogame_asset' },
+        { item: 'ENTERTAINMENT', value: 2, icon: 'local_movies' },
+        { item: 'FINANCE', value: 3, icon: 'account_balance_wallet' },
+        { item: 'SOCIAL', value: 4, icon: 'group' },
+        { item: 'EXCHANGE', value: 5, icon: 'compare_arrows' },
+        { item: 'GAMBLING', value: 6, icon: 'local_play' },
+        { item: 'TOKENS', value: 7, icon: 'attach_money' },
+        { item: 'SHARING', value: 8, icon: 'share' },
+        { item: 'GOVERNANCE', value: 9, icon: 'account_balance' },
+        { item: 'OTHER', value: 10, icon: 'more_horiz' }
+      ]
     }
   },
   methods: {
@@ -289,7 +357,7 @@ export default {
   },
   created () {
     price.getCryptoPrice('USD', 'ETH').then(obj => {
-      var bal = new BigNumber(this.$store.state.user.balance)
+      var bal = new BigNumber(this.$store.state.auth.user.balance)
       bal = bal.times(obj.price).decimalPlaces(2)
       this.usdBalance = bal.toNumber()
     }).catch(err => {

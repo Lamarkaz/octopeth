@@ -38,7 +38,7 @@ Vue.component('v-gravatar', Gravatar)
 
 Vue.use(Vuetify, {
   theme: {
-    primary: '#F7931E',
+    primary: '#ffffff',
     secondary: '#222222'
   }
 })
