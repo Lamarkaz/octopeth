@@ -133,15 +133,15 @@ export default {
     opacity: 0.8;
   }
   .mainWrapperIcon {
-    font-size: 35px !important;
+    font-size: 30px !important;
     margin-right: 5px;
-    color: rgb(107, 32, 172);
+    color: white;
     margin-top: -4px;
   }
   .MainWrapperTypo {
     margin-top: 65px;
-    color: rgb(107, 32, 172);
-    font-size: 25px;
+    color: white;
+    font-size: 20px;
   }
   .appView {
     margin-top: 15px;

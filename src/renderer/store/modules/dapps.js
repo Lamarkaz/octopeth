@@ -4,7 +4,8 @@ const state = {
   myDapps: [],
   explore: [],
   categories: ['ALL', 'GAMING', 'ENTERTAINMENT', 'FINANCE', 'SOCIAL', 'EXCHANGE', 'GAMBLING', 'TOKENS', 'SHARING', 'GOVERNANCE', 'OTHER'],
-  cat: 'ALL'
+  cat: 'ALL',
+  currView: 'inventory'
 }
 
 const mutations = {
@@ -16,6 +17,9 @@ const mutations = {
   },
   CHANGECAT (state, name) {
     state.cat = name
+  },
+  CHANGEVIEW (state, view) {
+    state.currView = view
   }
 }
 

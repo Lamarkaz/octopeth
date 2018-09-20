@@ -1,63 +1,5 @@
 <template>
   <div>
-    <v-navigation-drawer
-      dark
-      absolute
-      permanent
-      :mini-variant.sync="mini"
-      stateless
-      width="250"
-      :clipped="clipped"
-      v-model="drawer"
-    >
-      <v-list style="margin-top: 62px">
-        <v-list-tile @click="currentView = 'inventory'" :value="currentView == 'inventory'" active-class="grey darken-2">
-          <v-list-tile-action>
-            <v-icon>archive</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title>My ÐApps</v-list-tile-title>
-        </v-list-tile>
-        <v-list-tile @click="currentView = 'explore'" :value="currentView == 'explore'" active-class="grey darken-2">
-          <v-list-tile-action>
-            <v-icon>explore</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title>Explore</v-list-tile-title>
-        </v-list-tile>
-      </v-list>
-      <v-divider></v-divider>
-      <v-list>
-        <v-list-tile-action>
-          <v-btn
-            icon
-            @click.stop="mini = !mini"
-            style="margin-left: auto; margin-right: auto; margin-top: 0px; margin-bottom: 0px"
-          >
-            <v-icon v-if="mini == false">chevron_left</v-icon>
-            <v-icon v-if="mini == true">chevron_right</v-icon>
-          </v-btn>
-        </v-list-tile-action>
-      </v-list>
-      <v-divider></v-divider>
-      <v-list-group v-if="mini == false"
-          no-action
-        >
-          <v-list-tile slot="activator">
-            <v-list-tile-title style="color: white; font-weight: 500; font-family: 'Dosis'; font-size: 18px">Categories</v-list-tile-title>
-          </v-list-tile>
-
-          <v-list-tile
-            v-for="(category, i) in categories"
-            :key="i"
-            @click="changeCat(category.value)"
-          >
-            <v-list-tile-title v-text="category.item" style="color: white; font-size: 14px; font-weight: 700; font-family: 'Dosis'"></v-list-tile-title>
-            <v-list-tile-action>
-              <v-icon v-text="category.icon"></v-icon>
-            </v-list-tile-action>
-          </v-list-tile>
-        </v-list-group>
-    </v-navigation-drawer>
-    
     <v-toolbar
       fixed
       dark
@@ -122,7 +64,6 @@
         </v-tab>
       </v-tabs>
       -->
-      
     </v-toolbar>
     
     <!-- Logout warning modal -->
@@ -267,11 +208,6 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-
-    <!-- installed view -->
-    <MyDapps v-if="currentView == 'inventory'"></MyDapps>
-    <!-- explore view-->
-    <Explore v-if="currentView == 'explore'"></Explore>
   </div>
 </template>
 
@@ -306,17 +242,17 @@ export default {
       dappPath: 'root',
       usdBalance: 0,
       categories: [
-        { item: 'ALL', value: 0, icon: 'category' },
-        { item: 'GAMING', value: 1, icon: 'videogame_asset' },
-        { item: 'ENTERTAINMENT', value: 2, icon: 'local_movies' },
-        { item: 'FINANCE', value: 3, icon: 'account_balance_wallet' },
-        { item: 'SOCIAL', value: 4, icon: 'group' },
-        { item: 'EXCHANGE', value: 5, icon: 'compare_arrows' },
-        { item: 'GAMBLING', value: 6, icon: 'local_play' },
-        { item: 'TOKENS', value: 7, icon: 'attach_money' },
-        { item: 'SHARING', value: 8, icon: 'share' },
-        { item: 'GOVERNANCE', value: 9, icon: 'account_balance' },
-        { item: 'OTHER', value: 10, icon: 'more_horiz' }
+        { item: 'ALL', value: '0', icon: 'category' },
+        { item: 'GAMING', value: '1', icon: 'videogame_asset' },
+        { item: 'ENTERTAINMENT', value: '2', icon: 'local_movies' },
+        { item: 'FINANCE', value: '3', icon: 'account_balance_wallet' },
+        { item: 'SOCIAL', value: '4', icon: 'group' },
+        { item: 'EXCHANGE', value: '5', icon: 'compare_arrows' },
+        { item: 'GAMBLING', value: '6', icon: 'local_play' },
+        { item: 'TOKENS', value: '7', icon: 'attach_money' },
+        { item: 'SHARING', value: '8', icon: 'share' },
+        { item: 'GOVERNANCE', value: '9', icon: 'account_balance' },
+        { item: 'OTHER', value: '10', icon: 'more_horiz' }
       ]
     }
   },
@@ -335,9 +271,6 @@ export default {
       var blob = new Blob([JSON.stringify(identity)], {type: 'text/plain;charset=utf-8'})
       FileSaver.saveAs(blob, 'identity.json')
       swal('Identity Saved!', 'Identity file is saved successfully', 'success', {buttons: false})
-    },
-    changeCat: function (name) {
-      this.$store.commit('CHANGECAT', name)
     },
     publish: function () {
       console.log(this.dappCateg)

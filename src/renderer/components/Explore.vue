@@ -8,7 +8,7 @@
       <v-container grid-list-lg pb-4>
         <v-container no-padding fluid grid-list-xl>
           <v-layout row wrap style="margin-left: 70px">
-            <v-flex v-for="i in $store.state.dapps.explore" :key="`3${i.title}`" xs12 sm6 md4 lg3 xl2 style="max-width: 230px; margin-left: 5px; margin-right: 5px; float: left" v-if="i.cat === $store.state.dapps.cat">
+            <v-flex v-for="i in $store.state.dapps.explore" :key="`3${i.title}`" xs12 sm6 md4 lg3 xl2 style="max-width: 230px; margin-left: 5px; margin-right: 5px; float: left" v-if="$store.state.dapps.cat === 'ALL' || $store.state.dapps.cat === '0' || i.cat === $store.state.dapps.cat">
               <v-card dark color="secondary">
                   <v-card class="dappCard px-0" style="height: 240px">
                   <v-progress-linear v-if="installingKey == titleDM5(i)" class="installProg" color="purple darken-3" :indeterminate="true" height="4"></v-progress-linear>
@@ -29,7 +29,7 @@
                     </v-card-text>
                   </v-card-title>
                 </v-card>
-              </v-card>
+              </v-card v-if="$store.state.dapps.cat === 'ALL' || $store.state.dapps.cat === '0' || i.cat === $store.state.dapps.cat">
             </v-flex>
           </v-layout>
         </v-container>
@@ -162,15 +162,15 @@ export default {
   opacity: 0.8;
 }
 .mainWrapperIcon {
-  font-size: 35px !important;
+  font-size: 30px !important;
   margin-right: 5px;
-  color: rgb(107, 32, 172);
+  color: white;
   margin-top: -4px;
 }
 .MainWrapperTypo {
   margin-top: 105px;
-  color: rgb(107, 32, 172);
-  font-size: 25px;
+  color: white;
+  font-size: 20px;
 }
 .appView {
   margin-top: 15px;

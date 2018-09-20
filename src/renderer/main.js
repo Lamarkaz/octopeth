@@ -17,6 +17,7 @@ import Explore from '@/components/Explore'
 import dAppViewer from '@/components/Sign'
 import Sign from '@/components/dAppViewer'
 import Transaction from '@/components/Transaction'
+import NavDrawer from '@/components/NavDrawer'
 
 import 'vuetify/dist/vuetify.min.css'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
@@ -29,6 +30,7 @@ Vue.component('MyDapps', MyDapps)
 Vue.component('dAppViewer', dAppViewer)
 Vue.component('Sign', Sign)
 Vue.component('Transaction', Transaction)
+Vue.component('NavDrawer', NavDrawer)
 
 Vue.use(require('vue-electron'))
 Vue.use(require('electron-titlebar'))
