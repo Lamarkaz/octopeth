@@ -5,7 +5,7 @@ const state = {
   explore: [],
   categories: ['ALL', 'GAMING', 'ENTERTAINMENT', 'FINANCE', 'SOCIAL', 'EXCHANGE', 'GAMBLING', 'TOKENS', 'SHARING', 'GOVERNANCE', 'OTHER'],
   cat: 'ALL',
-  currView: 'inventory'
+  currView: 'explore'
 }
 
 const mutations = {
