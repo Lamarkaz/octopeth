@@ -126,11 +126,11 @@ function createWindow () {
       ]
     },
     {
-      role: 'help',
+      label: 'Help',
       submenu: [
         {
-          label: 'Documentation for developers',
-          click () { require('electron').shell.openExternal('https://developer') }
+          label: 'Report an issue',
+          click () { require('electron').shell.openExternal('https://developer.lamarkaz.com') }
         }
       ]
     }
@@ -141,9 +141,14 @@ function createWindow () {
       label: 'Octopeth',
       submenu: [
         {role: 'about'},
-        {label: 'Developer', submenu: [
-          {}
-        ]},
+        {
+          label: 'Developer',
+          submenu: [
+            {
+              label: 'Developer Documentation',
+              click () { require('electron').shell.openExternal('https://developer.lamarkaz.com') }
+            }
+          ]},
         {type: 'separator'},
         {role: 'services', submenu: []},
         {type: 'separator'},

@@ -14,6 +14,7 @@ import Navbar from '@/components/Navbar'
 import Auth from '@/components/Auth'
 import MyDapps from '@/components/MyDapps'
 import Explore from '@/components/Explore'
+import Publisher from '@/components/Publisher'
 import dAppViewer from '@/components/Sign'
 import Sign from '@/components/dAppViewer'
 import Transaction from '@/components/Transaction'
@@ -28,6 +29,7 @@ Vue.component('Auth', Auth)
 Vue.component('Explore', Explore)
 Vue.component('MyDapps', MyDapps)
 Vue.component('dAppViewer', dAppViewer)
+Vue.component('Publisher', Publisher)
 Vue.component('Sign', Sign)
 Vue.component('Transaction', Transaction)
 Vue.component('NavDrawer', NavDrawer)

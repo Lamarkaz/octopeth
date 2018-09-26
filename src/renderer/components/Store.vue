@@ -8,8 +8,10 @@
 
     <!-- installed view -->
     <MyDapps v-show="this.$store.state.dapps.currView == 'inventory'"></MyDapps>
-    <!-- explore view-->
+    <!-- explore view -->
     <Explore v-show="this.$store.state.dapps.currView == 'explore'"></Explore>
+    <!-- publisher portal --> 
+    <Publisher v-show="this.$store.state.dapps.currView == 'publisher'"></Publisher>
   </div>
 </template>
 

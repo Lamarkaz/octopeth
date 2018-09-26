@@ -9,7 +9,7 @@
       :clipped="clipped"
       v-model="drawer"
   >
-    <v-list style="margin-top: 62px">
+    <v-list style="margin-top: 62px; padding-bottom: 0px">
       <v-list-tile @click="changeView('inventory')" :value="this.$store.state.dapps.currView == 'inventory'" active-class="grey darken-2">
         <v-list-tile-action>
           <v-icon>archive</v-icon>
@@ -22,7 +22,15 @@
         </v-list-tile-action>
         <v-list-tile-title>Explore</v-list-tile-title>
       </v-list-tile>
+      <v-divider></v-divider>
+      <v-list-tile @click="changeView('publisher')" :value="this.$store.state.dapps.currView == 'publisher'" active-class="grey darken-2">
+        <v-list-tile-action>
+          <v-icon>apps</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-title>Publisher Portal</v-list-tile-title>
+      </v-list-tile>
     </v-list>
+    <v-divider></v-divider>
     <v-list>
       <v-list-tile-action>
         <v-btn
