@@ -154,7 +154,6 @@ export default {
   background-color: #222;
 }
 .mainWrapper {
-  margin-left: 160px;
   min-height: 500px;
   font-family: 'Dosis', sans-serif;
   font-weight: 400;

@@ -3,11 +3,11 @@
     "constant": false,
     "inputs": [
       {
-        "name": "title",
-        "type": "string"
+        "name": "id",
+        "type": "uint256"
       },
       {
-        "name": "value",
+        "name": "approved",
         "type": "bool"
       }
     ],
@@ -16,7 +16,51 @@
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "function",
-    "signature": "0x27b55475"
+    "signature": "0x150ad280"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "id",
+        "type": "uint256"
+      }
+    ],
+    "name": "getDApp",
+    "outputs": [
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "url",
+        "type": "string"
+      },
+      {
+        "name": "contact",
+        "type": "string"
+      },
+      {
+        "name": "logo",
+        "type": "string"
+      },
+      {
+        "name": "desc",
+        "type": "string"
+      },
+      {
+        "name": "cat",
+        "type": "uint8"
+      },
+      {
+        "name": "approved",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function",
+    "signature": "0x36b1f6a3"
   },
   {
     "constant": false,
@@ -70,6 +114,21 @@
   },
   {
     "constant": false,
+    "inputs": [
+      {
+        "name": "id",
+        "type": "uint256"
+      }
+    ],
+    "name": "remove",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x4cc82215"
+  },
+  {
+    "constant": false,
     "inputs": [],
     "name": "renounceOwnership",
     "outputs": [],
@@ -77,6 +136,45 @@
     "stateMutability": "nonpayable",
     "type": "function",
     "signature": "0x715018a6"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "url",
+        "type": "string"
+      },
+      {
+        "name": "contact",
+        "type": "string"
+      },
+      {
+        "name": "logo",
+        "type": "string"
+      },
+      {
+        "name": "desc",
+        "type": "string"
+      },
+      {
+        "name": "cat",
+        "type": "uint8"
+      }
+    ],
+    "name": "update",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function",
+    "signature": "0x770112f3"
   },
   {
     "constant": true,
@@ -92,21 +190,6 @@
     "stateMutability": "view",
     "type": "function",
     "signature": "0x79502c55"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "title",
-        "type": "string"
-      }
-    ],
-    "name": "remove",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function",
-    "signature": "0x80599e4b"
   },
   {
     "constant": false,
@@ -155,43 +238,18 @@
   },
   {
     "constant": true,
-    "inputs": [
-      {
-        "name": "apptitle",
-        "type": "string"
-      }
-    ],
-    "name": "getDApp",
+    "inputs": [],
+    "name": "numdApps",
     "outputs": [
       {
-        "name": "title",
-        "type": "string"
-      },
-      {
-        "name": "url",
-        "type": "string"
-      },
-      {
-        "name": "contact",
-        "type": "string"
-      },
-      {
-        "name": "logo",
-        "type": "string"
-      },
-      {
-        "name": "desc",
-        "type": "string"
-      },
-      {
-        "name": "cat",
-        "type": "uint8"
+        "name": "",
+        "type": "uint256"
       }
     ],
     "payable": false,
     "stateMutability": "view",
     "type": "function",
-    "signature": "0x91b9b640"
+    "signature": "0xbf734098"
   },
   {
     "constant": false,
@@ -211,6 +269,11 @@
   {
     "anonymous": false,
     "inputs": [
+      {
+        "indexed": true,
+        "name": "id",
+        "type": "uint256"
+      },
       {
         "indexed": false,
         "name": "owner",
@@ -249,63 +312,38 @@
     ],
     "name": "Publish",
     "type": "event",
-    "signature": "0x49d29b9f52e994938dfbd63cefb18a6341a0e2248ed1a91295d44756e7765637"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "name": "owner",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "name": "title",
-        "type": "string"
-      },
-      {
-        "indexed": false,
-        "name": "url",
-        "type": "string"
-      },
-      {
-        "indexed": false,
-        "name": "contact",
-        "type": "string"
-      },
-      {
-        "indexed": false,
-        "name": "logo",
-        "type": "string"
-      },
-      {
-        "indexed": false,
-        "name": "desc",
-        "type": "string"
-      },
-      {
-        "indexed": false,
-        "name": "cat",
-        "type": "uint8"
-      }
-    ],
-    "name": "Review",
-    "type": "event",
-    "signature": "0x4efc11a85713008a07540c61a36a3c310d4c0135d5b3ebfc57acdc57c549233a"
+    "signature": "0xab15b2ca965edf28e0e013c51df4b680f1db8646d1d1227c286d6d8cedda3231"
   },
   {
     "anonymous": false,
     "inputs": [
       {
         "indexed": true,
-        "name": "title",
-        "type": "string"
+        "name": "id",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "approved",
+        "type": "bool"
+      }
+    ],
+    "name": "Review",
+    "type": "event",
+    "signature": "0xdfde343ba101c766111b5537105cbee33124b6bc71880b3e267bca45dc809ed8"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "name": "id",
+        "type": "uint256"
       }
     ],
     "name": "Remove",
     "type": "event",
-    "signature": "0x834a2d47e948021d7136fb7275b3f1e1feae6333c0d683e8c13f901667defd8c"
+    "signature": "0x476e4aa4bb19dbdea8700b4db99d81ad2fefcf51924ba5d493b7be6393f82201"
   },
   {
     "anonymous": false,

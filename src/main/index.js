@@ -1,6 +1,6 @@
 'use strict'
 
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, Menu } from 'electron'
 
 /**
  * Set `__static` path to static files in production
@@ -40,6 +40,147 @@ function createWindow () {
   mainWindow.once('ready-to-show', () => {
     mainWindow.show()
   })
+
+  // const MenuTemplate = [
+  //   {
+  //     label: 'Octopeth',
+  //     submenu: [
+  //       {label: 'About Octopeth'},
+  //       {label: 'Developer',
+  //         submenu: [
+  //           {
+  //             label: '',
+  //             label: ''
+  //           }
+  //         ]
+  //       },
+  //       {type: 'separator'},
+  //       {
+  //         label: 'Exit',
+  //         click () {
+  //           app.quit()
+  //         }
+  //       }
+  //     ]
+  //   },
+  //   {
+  //     label: 'Navigation',
+  //     submenu: [
+  //       {
+  //         label: 'Reload',
+  //         accelerator: 'CmdOrCtrl+R'
+  //       },
+  //       {
+  //         label: 'Go Forward',
+  //         accelerator: 'CmdOrCtrl+F'
+  //       },
+  //       {
+  //         label: 'Go Backward',
+  //         accelerator: 'CmdOrCtrl+B'
+  //       },
+  //       {
+  //         label: 'Close ÐApp'
+  //       }
+  //     ]
+  //   },
+  //   {
+  //     label: 'Help',
+  //     submenu: [
+  //       {}
+  //     ]
+  //   }
+  // ]
+
+  const template = [
+    {
+      label: 'Edit',
+      submenu: [
+        {role: 'undo'},
+        {role: 'redo'},
+        {type: 'separator'},
+        {role: 'cut'},
+        {role: 'copy'},
+        {role: 'paste'},
+        {role: 'pasteandmatchstyle'},
+        {role: 'delete'},
+        {role: 'selectall'}
+      ]
+    },
+    {
+      label: 'View',
+      submenu: [
+        {role: 'reload'},
+        {role: 'toggledevtools'},
+        {type: 'separator'},
+        {role: 'resetzoom'},
+        {role: 'zoomin'},
+        {role: 'zoomout'},
+        {type: 'separator'},
+        {role: 'togglefullscreen'}
+      ]
+    },
+    {
+      role: 'window',
+      submenu: [
+        {role: 'minimize'}
+      ]
+    },
+    {
+      role: 'help',
+      submenu: [
+        {
+          label: 'Documentation for developers',
+          click () { require('electron').shell.openExternal('https://developer') }
+        }
+      ]
+    }
+  ]
+
+  if (process.platform === 'darwin') {
+    template.unshift({
+      label: 'Octopeth',
+      submenu: [
+        {role: 'about'},
+        {label: 'Developer', submenu: [
+          {}
+        ]},
+        {type: 'separator'},
+        {role: 'services', submenu: []},
+        {type: 'separator'},
+        {role: 'hide'},
+        {role: 'hideothers'},
+        {role: 'unhide'},
+        {type: 'separator'},
+        { label: 'Quit Octopeth',
+          role: 'quit'
+        }
+      ]
+    })
+
+    // Edit menu
+    template[1].submenu.push(
+      {type: 'separator'},
+      {
+        label: 'Speech',
+        submenu: [
+          {role: 'startspeaking'},
+          {role: 'stopspeaking'}
+        ]
+      }
+    )
+
+    // Window menu
+    template[3].submenu = [
+      {role: 'close'},
+      {role: 'minimize'},
+      {role: 'zoom'},
+      {type: 'separator'},
+      {role: 'front'}
+    ]
+  }
+
+  const menu = Menu.buildFromTemplate(template)
+  Menu.setApplicationMenu(menu)
 }
 
 app.on('ready', createWindow)

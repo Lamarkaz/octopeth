@@ -6,14 +6,22 @@
 `Solidity version 0.4.25+commit.59dbf8f1`
 
 
- ##### function review `0x27b55475` 
+ ##### function review `0x150ad280` 
   nonpayable 
 
 
  Type | Name |
 --- | --- |
-| string | title |
-| bool | value |
+| uint256 | id |
+| bool | approved |
+___
+ ##### function getDApp `0x36b1f6a3` 
+ constant view 
+
+
+ Type | Name |
+--- | --- |
+| uint256 | id |
 ___
  ##### function publish `0x3ad8173a` 
   nonpayable 
@@ -33,23 +41,37 @@ ___
 
 
 ___
- ##### function renounceOwnership `0x715018a6` 
-  nonpayable 
-Allows the current owner to relinquish control of the contract.
-
-___
- ##### function config `0x79502c55` 
- constant view 
-
-
-___
- ##### function remove `0x80599e4b` 
+ ##### function remove `0x4cc82215` 
   nonpayable 
 
 
  Type | Name |
 --- | --- |
+| uint256 | id |
+___
+ ##### function renounceOwnership `0x715018a6` 
+  nonpayable 
+Allows the current owner to relinquish control of the contract.
+
+___
+ ##### function update `0x770112f3` 
+  nonpayable 
+
+
+ Type | Name |
+--- | --- |
+| uint256 | id |
 | string | title |
+| string | url |
+| string | contact |
+| string | logo |
+| string | desc |
+| uint8 | cat |
+___
+ ##### function config `0x79502c55` 
+ constant view 
+
+
 ___
  ##### function preCensor `0x8a7f800c` 
   nonpayable 
@@ -72,13 +94,10 @@ ___
 
 
 ___
- ##### function getDApp `0x91b9b640` 
+ ##### function numdApps `0xbf734098` 
  constant view 
 
 
- Type | Name |
---- | --- |
-| string | apptitle |
 ___
  ##### function transferOwnership `0xf2fde38b` 
   nonpayable 
@@ -88,12 +107,13 @@ Allows the current owner to transfer control of the contract to a newOwner.
 --- | --- |
 | address | _newOwner |
 ___
- ##### event Publish `0x49d29b9f52e994938dfbd63cefb18a6341a0e2248ed1a91295d44756e7765637` 
+ ##### event Publish `0xab15b2ca965edf28e0e013c51df4b680f1db8646d1d1227c286d6d8cedda3231` 
    
 
 
  Type | Name |
 --- | --- |
+| uint256 | id |
 | address | owner |
 | string | title |
 | string | url |
@@ -102,27 +122,22 @@ ___
 | string | desc |
 | uint8 | cat |
 ___
- ##### event Review `0x4efc11a85713008a07540c61a36a3c310d4c0135d5b3ebfc57acdc57c549233a` 
+ ##### event Review `0xdfde343ba101c766111b5537105cbee33124b6bc71880b3e267bca45dc809ed8` 
    
 
 
  Type | Name |
 --- | --- |
-| address | owner |
-| string | title |
-| string | url |
-| string | contact |
-| string | logo |
-| string | desc |
-| uint8 | cat |
+| uint256 | id |
+| bool | approved |
 ___
- ##### event Remove `0x834a2d47e948021d7136fb7275b3f1e1feae6333c0d683e8c13f901667defd8c` 
+ ##### event Remove `0x476e4aa4bb19dbdea8700b4db99d81ad2fefcf51924ba5d493b7be6393f82201` 
    
 
 
  Type | Name |
 --- | --- |
-| string | title |
+| uint256 | id |
 ___
  ##### event PreCensor `0x9f90b16ecbeaa03697f7ad37bc569e43325c68bc6942130f1153018f17a7f35e` 
    

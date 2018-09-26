@@ -1,1 +1,6 @@
-{}
+{
+  "ropsten": {
+    "Octopeth.sol:Octopeth": "0x3ad484fD68D7A13D137e0bffC99d45AFaA5D7f10",
+    "Ownable.sol:Ownable": "0xdD813B8eff8c78505F9876255d84f37A995FFC0E"
+  }
+}

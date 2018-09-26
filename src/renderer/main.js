@@ -50,7 +50,7 @@ Vue.prototype.$db = db
 
 // Web3 and Contract
 Vue.prototype.$web3 = new Web3(config.provider)
-Vue.prototype.$contract = new Vue.prototype.$web3.eth.Contract(abi, config.address)
+Vue.prototype.$contract = new Vue.prototype.$web3.eth.Contract(abi, require('../../contracts/addressbook.json').ropsten['Octopeth.sol:Octopeth'])
 
 /* eslint-disable no-new */
 new Vue({

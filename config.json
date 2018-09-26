@@ -1,4 +1,3 @@
 {
-  "provider":"https://ropsten.infura.io/",
-  "address":"0x9b51da28adbc89cf9a4a8523f2f8821c388fb022"
+  "provider":"https://ropsten.infura.io/"
 }

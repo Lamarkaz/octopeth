@@ -125,7 +125,6 @@ export default {
   }
 .mainWrapper {
     margin-top: 40px;
-    margin-left: 200px;
     min-height: 500px;
     font-family: 'Dosis', sans-serif;
     font-weight: 400;
