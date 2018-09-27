@@ -95,7 +95,7 @@ export default {
           swal(dapp.title + ' Installed', ' Ðapp Installed Successfully.', 'success')
           self.installing = false
           self.$db.update({
-            'data.title': dapp.title
+            'data.id': dapp.id
           },
           {
             $set: {

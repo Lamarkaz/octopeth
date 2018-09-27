@@ -140,7 +140,6 @@
 
 
 <script>
-import ethers from 'ethers'
 import swal from 'sweetalert'
 // Auth carousel assets
 import '../assets/create.png'
@@ -238,25 +237,20 @@ export default{
     authenticate () {
       var self = this
       this.ready = false
-      ethers.Wallet.fromEncryptedWallet(this.json, this.password).then(function (wallet) {
+      try {
+        this.$web3.eth.accounts.decrypt(this.json, this.password)
         self.$store.dispatch('authenticate', JSON.parse(self.json))
-      }).catch(function (e) {
-        swal('Error!', e, 'error')
-      })
-      this.ready = true
+        this.ready = true
+      } catch (e) {
+        swal('Error!', e, 'error') // DOESN'T WORK
+      }
     },
     generate: function () {
-      var self = this
       this.ready = false
       this.loader = true
-      var wallet = ethers.Wallet.createRandom()
-      var encrypted = wallet.encrypt(this.pw, function (pc) {
-        if (pc === 1) {
-          encrypted.then(function (json) {
-            self.$store.dispatch('authenticate', JSON.parse(json))
-          })
-        }
-      })
+      var privkey = this.$web3.eth.accounts.create().privateKey
+      var encrypted = this.$web3.eth.accounts.encrypt(privkey, this.pw)
+      this.$store.dispatch('authenticate', encrypted)
     }
   },
   computed: {

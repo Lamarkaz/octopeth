@@ -50,9 +50,12 @@ Vue.use(Vuetify, {
 // NeDB
 Vue.prototype.$db = db
 
+// Helpers
+Vue.prototype.$helpers = require('./js').default
+
 // Web3 and Contract
 Vue.prototype.$web3 = new Web3(config.provider)
-Vue.prototype.$contract = new Vue.prototype.$web3.eth.Contract(abi, require('../../contracts/addressbook.json').ropsten['Octopeth.sol:Octopeth'])
+Vue.prototype.$contract = new Vue.prototype.$web3.eth.Contract(abi, require('../../contracts/addressbook.json').ropsten['Octopeth.sol:Octopeth'], {gas: 6000000, gasPrice: 1})
 
 /* eslint-disable no-new */
 new Vue({

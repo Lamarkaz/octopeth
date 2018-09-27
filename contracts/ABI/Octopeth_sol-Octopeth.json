@@ -29,6 +29,10 @@
     "name": "getDApp",
     "outputs": [
       {
+        "name": "owner",
+        "type": "address"
+      },
+      {
         "name": "title",
         "type": "string"
       },

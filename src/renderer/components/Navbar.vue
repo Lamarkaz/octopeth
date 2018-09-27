@@ -17,7 +17,7 @@
       <v-spacer></v-spacer>
       <v-tooltip bottom color="black">
         <v-chip slot="activator" color="grey darken-4" text-color="white" style="margin-right: 15px; padding: 0px 10px; font-weight: 600; font-family: 'Dosis'; font-size: 15px" disabled="">
-          Balance: {{ usdBalance }} ETH
+          Balance: {{ this.$store.state.auth.user.balance }} ETH
         </v-chip>
         <span>{{ usdBalance }} USD</span>
       </v-tooltip>
@@ -239,7 +239,7 @@ export default {
       isOpen: false,
       enabled: false,
       pathEnabled: false,
-      dappPath: 'root',
+      dappPath: '/tree/root',
       usdBalance: 0,
       categories: [
         { item: 'ALL', value: '0', icon: 'category' },
@@ -273,14 +273,18 @@ export default {
       swal('Identity Saved!', 'Identity file is saved successfully', 'success', {buttons: false})
     },
     publish: function () {
-      console.log(this.dappCateg)
-      this.$contract.methods.publish(this.dappTitle, this.dappURL, this.dappContact, this.dappLogo, this.dappDesc, this.dappCateg)
-        .send({from: this.$store.state.auth.user.address, gas: 6000000, gasPrice: '0'})
-        .on('receipt', function (receipt) {
-          console.log(receipt)
-          swal('Ðapp Published', 'Ðapp is successfully published and is explorable.', 'success', {buttons: false})
-        })
-        .on('error', console.error)
+      var self = this
+      var privkey = this.$web3.eth.accounts.decrypt(this.$store.state.auth.user, '12345678').privateKey
+      var tx = this.$contract.methods.publish(this.dappTitle, this.dappURL, this.dappContact, this.dappLogo, this.dappDesc, this.dappCateg)
+      // .on('receipt', function (receipt) {
+      //   console.log(receipt)
+      //   swal('Ðapp Published', 'Ðapp is successfully published and is explorable.', 'success', {buttons: false})
+      // })
+      // .on('error', console.error)
+      this.$web3.eth.accounts.signTransaction(tx, privkey, function (err, res) {
+        if (err) console.log(err)
+        self.$web3.eth.sendSignedTransaction(res)
+      })
     }
   },
   computed: {

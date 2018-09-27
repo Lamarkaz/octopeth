@@ -40,6 +40,9 @@ module.exports = {
             contracts[contract] = await contracts[contract].deploy().send({from: web3.eth.accounts[0], gasPrice, gas:4000000})
             console.log(contract + " deployed at address " + contracts[contract].options.address)
         }
+        if(network == 'ropsten'){
+            contracts['Octopeth.sol:Octopeth'].methods.publish('Decentube', 'https://github.com/lamarkaz/decentube/tree/root', 'contact@lamarkaz.com','https://image.ibb.co/g9aBP9/logo.png', 'Decentralized Video Streaming with Coinhive Monetization', 2).send({from: accounts[0], gas: 6000000, gasPrice: '1000000000'})
+        }
         save(contracts) // Saves contract addresses to addressbook.json. Development addresses will never be saved to addressbook.
         test(contracts) // Call the test function if you want to run unit tests after deployment. Tests will only run if network is dev
     }

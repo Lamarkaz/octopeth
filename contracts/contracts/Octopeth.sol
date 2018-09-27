@@ -73,12 +73,13 @@ contract Octopeth is Ownable {
     emit Config(value);
   }
 
-  function getDApp(uint id) view public ifDAppValid(id) returns (string title, string url, string contact, string logo, string desc, categories cat, bool approved) {
+  function getDApp(uint id) view public ifDAppValid(id) returns (address owner, string title, string url, string contact, string logo, string desc, categories cat, bool approved) {
     dApp storage app = dApps[id];
+    owner = app.owner;
     title = app.title;
     url = app.url;
     contact = app.contact;
-    logo = app.contact;
+    logo = app.logo;
     desc = app.desc;
     cat = app.cat;
     approved = app.approved;
