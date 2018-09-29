@@ -54,7 +54,7 @@
                             dark
                             required
                         ></v-text-field>
-                        <v-btn :disabled="!valid" class="authBtn" style="background-color: #cecece" v-on:click="authenticate">
+                        <v-btn :disabled="!valid" class="authBtn" style="background-color: #cecece" :loading="loader" v-on:click="authenticate">
                             <v-icon style="font-size: 20px; padding-right: 10px;">vpn_key</v-icon>Authenticate
                         </v-btn>
                         <div class="dividerStyle"></div>

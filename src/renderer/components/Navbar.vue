@@ -185,7 +185,7 @@
                     <h3 class="appTitle text-xs-center">{{ dappTitle }}</h3>
                     <div class="categType">
                       <v-card-text class="text-xs-center categText">
-                        <v-icon style="color: white; margin-right: 2px; margin-top: -5px"></v-icon> {{ dappCateg }}
+                        <v-icon style="color: white; margin-right: 2px; margin-top: -5px"></v-icon> {{ numToCat(dappCateg) }}
                       </v-card-text>
                     </div>
                     <div class="appBody text-xs-left">{{ dappDesc }}</div>
@@ -285,6 +285,9 @@ export default {
         if (err) console.log(err)
         self.$web3.eth.sendSignedTransaction(res)
       })
+    },
+    numToCat: function (num) {
+      return this.$store.state.dapps.categories[num]
     }
   },
   computed: {

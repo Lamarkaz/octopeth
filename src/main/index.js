@@ -26,6 +26,7 @@ function createWindow () {
     minWidth: 1155,
     backgroundColor: '#222',
     useContentSize: true,
+    titleBarStyle: 'hidden-inset',
     'web-preferences': {'web-security': false}
   })
 
@@ -107,11 +108,19 @@ function createWindow () {
       ]
     },
     {
+      label: 'Developer',
+      submenu: [
+        {
+          label: 'Developer Documentation',
+          click () { require('electron').shell.openExternal('https://developer.lamarkaz.com/octopeth') }
+        },
+        {role: 'toggledevtools'}
+      ]
+    },
+    {
       label: 'View',
       submenu: [
         {role: 'reload'},
-        {role: 'toggledevtools'},
-        {type: 'separator'},
         {role: 'resetzoom'},
         {role: 'zoomin'},
         {role: 'zoomout'},
@@ -126,11 +135,15 @@ function createWindow () {
       ]
     },
     {
-      label: 'Help',
+      role: 'help',
       submenu: [
         {
-          label: 'Report an issue',
-          click () { require('electron').shell.openExternal('https://developer.lamarkaz.com') }
+          label: 'Report an Issue',
+          click () { require('electron').shell.openExternal('https://github.com/lamarkaz/octopeth/issues') }
+        },
+        {
+          label: 'Octopeth Gitter Channel',
+          click () { require('electron').shell.openExternal('https://gitter.im/LamarkazLab/octopeth') }
         }
       ]
     }
@@ -141,14 +154,6 @@ function createWindow () {
       label: 'Octopeth',
       submenu: [
         {role: 'about'},
-        {
-          label: 'Developer',
-          submenu: [
-            {
-              label: 'Developer Documentation',
-              click () { require('electron').shell.openExternal('https://developer.lamarkaz.com') }
-            }
-          ]},
         {type: 'separator'},
         {role: 'services', submenu: []},
         {type: 'separator'},
