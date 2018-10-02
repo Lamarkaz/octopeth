@@ -56,6 +56,8 @@
           v-for="(category, i) in categories"
           :key="i"
           @click="changeCat(category.value)"
+          :value="$store.state.dapps.cat == category.value"
+          active-class="grey darken-2"
         >
           <v-list-tile-title v-text="category.item" style="color: white; font-size: 15px; font-weight: 700; font-family: 'Dosis'"></v-list-tile-title>
           <v-list-tile-action>

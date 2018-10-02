@@ -64,10 +64,13 @@
       <div class="warningAlert" v-if="pw != confirmpw" type="error">
         <v-icon style="margin-right: 5px; font-size: 21px; color: #FF4151">warning</v-icon> passwords do not match
       </div>
+      <div class="warningAlert" v-else-if="pw.length > 25" type="error">
+        <v-icon style="margin-right: 5px; font-size: 21px; color: #FF4151">warning</v-icon> password is too long
+      </div>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn class="genBtn" @click.native="$emit('input')">Cancel</v-btn>
-        <v-btn class="genBtn" :loading="loader" @click.native="generate()" :disabled="(pw != confirmpw || pw.length < 8)">Generate</v-btn>
+        <v-btn class="genBtn" color="red darken-1" flat="flat" @click.native="$emit('input')">Cancel</v-btn>
+        <v-btn class="genBtn" color="green darken-1" flat="flat" :loading="loader" @click.native="generate()" :disabled="(pw != confirmpw || pw.length < 8 || pw.length > 25)">Generate</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -113,7 +116,11 @@ export default {
       return Math.min(100, this.confirmpw.length * 10)
     },
     pw_color () {
-      return ['error', 'warning', 'success'][Math.floor(this.pw_progress / 40)]
+      if (this.pw.length > 25) {
+        return 'error'
+      } else {
+        return ['error', 'warning', 'success'][Math.floor(this.pw_progress / 40)]
+      }
     },
     confirmpw_color () {
       return ['error', 'warning', 'success'][Math.floor(this.confirmpw_progress / 40)]
