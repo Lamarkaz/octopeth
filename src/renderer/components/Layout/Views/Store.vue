@@ -17,6 +17,7 @@
 
 
 <script>
+import NavDrawer from '@/components/Layout/Views/Store/Elements/NavDrawer.vue'
 export default {
   data () {
     return {
@@ -30,6 +31,9 @@ export default {
         case 1: return 'purple darken-3'
       }
     }
+  },
+  components: {
+    'NavDrawer': NavDrawer
   }
 }
 </script>

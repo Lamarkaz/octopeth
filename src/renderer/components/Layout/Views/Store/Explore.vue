@@ -191,6 +191,9 @@ export default {
   margin-left: auto;
   border-radius: 3px;
 }
+.card__media__background {
+  background-size: 90% !important;
+}
 .appBody {
   width: 120%;
   margin-left: -10px;

@@ -8,12 +8,12 @@ export default new Router({
     {
       path: '/store',
       name: 'Store',
-      component: require('@/components/Store').default
+      component: require('@/components/Layout/Views/Store.vue').default
     },
     {
       path: '/dapp',
       name: 'dAppViewer',
-      component: require('@/components/dAppViewer').default
+      component: require('@/components/Layout/Views/dAppViewer/dAppViewer.vue').default
     },
     {
       path: '*',

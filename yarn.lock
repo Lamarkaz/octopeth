@@ -2982,6 +2982,10 @@ ejs@^2.5.7:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/ejs/-/ejs-2.6.1.tgz#498ec0d495655abc6f23cd61868d926464071aa0"
 
+electron-about-window@^1.12.1:
+  version "1.12.1"
+  resolved "https://registry.yarnpkg.com/electron-about-window/-/electron-about-window-1.12.1.tgz#c642de39b32b254b8fbba6181a2a29c2b5da24b9"
+
 electron-builder-lib@19.56.2:
   version "19.56.2"
   resolved "https://registry.yarnpkg.com/electron-builder-lib/-/electron-builder-lib-19.56.2.tgz#9e4ef3a1a5fa21d3fd490561261ae639bb263da3"

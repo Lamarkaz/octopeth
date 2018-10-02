@@ -10,18 +10,17 @@ import abi from '../../contracts/ABI/Octopeth_sol-Octopeth.json'
 import App from './App'
 import router from './router'
 import store from './store'
-import Navbar from '@/components/Navbar'
-import Auth from '@/components/Auth'
-import MyDapps from '@/components/MyDapps'
-import Explore from '@/components/Explore'
-import Publisher from '@/components/Publisher'
-import dAppViewer from '@/components/Sign'
-import Sign from '@/components/dAppViewer'
-import Transaction from '@/components/Transaction'
-import NavDrawer from '@/components/NavDrawer'
+
+import Navbar from '@/components/Layout/Navbar/Navbar.vue'
+import Auth from '@/components/Layout/Views/Auth/Auth.vue'
+import MyDapps from '@/components/Layout/Views/Store/MyDapps.vue'
+import Explore from '@/components/Layout/Views/Store/Explore.vue'
+import Publisher from '@/components/Layout/Views/Store/Publisher.vue'
+import dAppViewer from '@/components/Layout/Views/dAppViewer/dAppViewer.vue'
 
 import 'vuetify/dist/vuetify.min.css'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
+import './styles/main.css'
 
 // Global Components
 Vue.component('Navbar', Navbar)
@@ -30,9 +29,6 @@ Vue.component('Explore', Explore)
 Vue.component('MyDapps', MyDapps)
 Vue.component('dAppViewer', dAppViewer)
 Vue.component('Publisher', Publisher)
-Vue.component('Sign', Sign)
-Vue.component('Transaction', Transaction)
-Vue.component('NavDrawer', NavDrawer)
 
 Vue.use(require('vue-electron'))
 Vue.use(require('electron-titlebar'))
