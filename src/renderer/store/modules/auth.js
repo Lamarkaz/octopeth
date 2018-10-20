@@ -1,3 +1,4 @@
+// The auth state communicate with db to set user auth, deauth and balance
 import db from '../../js/db'
 import config from '../../../../config'
 import Web3 from 'web3'

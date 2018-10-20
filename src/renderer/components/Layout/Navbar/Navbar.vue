@@ -34,10 +34,10 @@
             <v-list-tile key="1" @click="PublishDialog = true">
               <v-list-tile-title class="menuItemStyle"><v-icon style="font-size: 18px; margin-right: 8px">publish</v-icon>Publish ÐApp</v-list-tile-title>
             </v-list-tile>
-            <v-list-tile key="2" @click="addressToClipboard()">
+            <v-list-tile key="2" @click="this.$helpers.addressToClipboard()">
               <v-list-tile-title class="menuItemStyle"><v-icon style="font-size: 18px; margin-right: 8px">filter_none</v-icon>Copy Address To Clipboard</v-list-tile-title>
             </v-list-tile>
-            <v-list-tile key="3" @click="exportIdentity()">
+            <v-list-tile key="3" @click="this.$helpers.identity.exportIdentity()">
               <v-list-tile-title class="menuItemStyle"><v-icon style="font-size: 18px; margin-right: 8px">get_app</v-icon>Export Encrypted Identity</v-list-tile-title>
             </v-list-tile>
             <v-list-tile key="4" @click="LogoutDialog = true">
@@ -89,7 +89,8 @@ export default {
     return {
       clipped: true,
       LogoutDialog: false,
-      PublishDialog: false
+      PublishDialog: false,
+      usdBalance: 0
     }
   },
   methods: {

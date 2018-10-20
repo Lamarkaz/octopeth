@@ -1,11 +1,11 @@
+// The dapps state that fetch DApps list from Database
 import db from '../../js/db'
 
 const state = {
   myDapps: [],
   explore: [],
   categories: ['ALL', 'GAMING', 'ENTERTAINMENT', 'FINANCE', 'SOCIAL', 'EXCHANGE', 'GAMBLING', 'TOKENS', 'SHARING', 'GOVERNANCE', 'OTHER'],
-  cat: 'ALL',
-  currView: 'explore'
+  cat: 'ALL'
 }
 
 const mutations = {
@@ -14,12 +14,6 @@ const mutations = {
   },
   NEWEXPLORE (state, docs) {
     state.explore = docs
-  },
-  CHANGECAT (state, name) {
-    state.cat = name
-  },
-  CHANGEVIEW (state, view) {
-    state.currView = view
   }
 }
 
