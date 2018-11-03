@@ -1,6 +1,5 @@
 <template>
   <v-navigation-drawer
-      dark
       absolute
       permanent
       :mini-variant.sync="mini"
@@ -8,8 +7,9 @@
       width="250"
       :clipped="clipped"
       v-model="drawer"
+      class="greyish"
   >
-    <v-list style="margin-top: 62px; padding-bottom: 0px">
+    <v-list style="margin-top: 80px; padding-bottom: 0px">
       <v-list-tile @click="changeView('inventory')" :value="this.$store.state.dapps.currView == 'inventory'" active-class="grey darken-2">
         <v-list-tile-action>
           <v-icon>archive</v-icon>
@@ -18,9 +18,9 @@
       </v-list-tile>
       <v-list-tile @click="changeView('explore')" :value="this.$store.state.dapps.currView == 'explore'" active-class="grey darken-2">
         <v-list-tile-action>
-          <v-icon>explore</v-icon>
+          <v-icon>whatshot</v-icon>
         </v-list-tile-action>
-        <v-list-tile-title>Explore</v-list-tile-title>
+        <v-list-tile-title>Discover</v-list-tile-title>
       </v-list-tile>
       <v-divider></v-divider>
       <v-list-tile @click="changeView('publisher')" :value="this.$store.state.dapps.currView == 'publisher'" active-class="grey darken-2">
@@ -46,10 +46,10 @@
     <v-divider></v-divider>
     <v-list v-if="mini == false"
         max-height
-        dark
+        class="greyish"
       >
         <v-list-tile>
-          <v-list-tile-title style="color: white; font-weight: 500; font-family: 'Dosis'; font-size: 13px; opacity: 0.7">Categories</v-list-tile-title>
+          <v-list-tile-title style="font-family: 'Open Sans'; font-size: 11px; opacity: 0.7">Categories</v-list-tile-title>
         </v-list-tile>
 
         <v-list-tile
@@ -59,9 +59,9 @@
           :value="$store.state.dapps.cat == category.value"
           active-class="grey darken-2"
         >
-          <v-list-tile-title v-text="category.item" style="color: white; font-size: 15px; font-weight: 700; font-family: 'Dosis'"></v-list-tile-title>
+          <v-list-tile-title v-text="category.item" style="font-size: 12px; font-weight: 700; font-family: 'Open Sans'"></v-list-tile-title>
           <v-list-tile-action>
-            <v-icon v-text="category.icon"></v-icon>
+            <v-icon style="color: #868d96" v-text="category.icon"></v-icon>
           </v-list-tile-action>
         </v-list-tile>
       </v-list>
@@ -102,4 +102,11 @@ export default {
   }
 }
 </script>
+
+<style>
+.greyish {
+  background-color: #b1bac5;
+}
+</style>
+
 

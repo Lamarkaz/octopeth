@@ -43,10 +43,11 @@
 </script>
 
 <style>
-  @import '../../node_modules/typeface-dosis/index.css';
+  /* @import '../../node_modules/typeface-dosis/index.css'; */
+@import url('https://fonts.googleapis.com/css?family=Chivo:700,900|Open+Sans:400,700');
 
   body {
-    font-family: 'Dosis', sans-serif !important;
+    font-family: 'Open Sans', sans-serif !important;
   }
   input[type="submit"],
   input[type="reset"],

@@ -34,7 +34,6 @@
             :rules="[v => !!v || 'Identity file is required!']"
             ref="fileTextField"
             color="purple darken-3"
-            dark
             loading
             required
             ></v-text-field>
@@ -51,7 +50,6 @@
                 :type="passBol ? 'password' : 'text'"
                 color="purple darken-3"
                 counter
-                dark
                 required
             ></v-text-field>
             <v-btn :disabled="!valid" class="authBtn" style="background-color: #cecece" :loading="loader" @click="authenticate">
@@ -216,9 +214,10 @@ export default{
   background-image: linear-gradient(-160deg, #6175c7 0%, #9245ba 70%);
   background-size: 63% 100%;
   -webkit-app-region: drag;
+  font-family: 'Open Sans';
 }
 .authOverlay {
-    background: #222;
+    background: #ffffff;
     position: absolute;
     width: 38%;
     height: 100%;
@@ -240,7 +239,6 @@ input[type=file] {
   box-shadow: none;
   padding-bottom: 5px;
   color: rgb(107, 32, 172);
-  background: #222;
 }
 .authForm {
   padding-left: 10%;
@@ -264,7 +262,7 @@ input[type=file] {
   border-radius: 999px;
   font-size: 15px;
   font-weight: 700;
-  font-family: 'Dosis', sans-serif !important;
+  font-family: 'Open Sans', sans-serif !important;
 }
 .pulse {
   display: inline-block;

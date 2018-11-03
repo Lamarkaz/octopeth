@@ -1,5 +1,5 @@
 <template>
-  <v-app style="background: #222">
+  <v-app style="background: #131313">
     <div class="mainWrapper">
       <h3 class="text-xs-center MainWrapperTypo">
         <v-icon class="mainWrapperIcon">archive</v-icon>

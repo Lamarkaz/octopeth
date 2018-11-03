@@ -2,68 +2,77 @@
   <div>
     <v-toolbar
       fixed
-      dark
       flat
       tabs
+      extended
       :clipped-left="clipped"
-      height="70"
+      height="40"
       class="background"
-      color="purple darken-3"
-      style="-webkit-app-region: drag">
-      <v-toolbar-title v-on:click="$router.push('/dapp')">
-        <img src="../../../assets/logo-dark.svg" width="45px" style="margin-left: 50px; cursor: pointer; margin-top: 10px; margin-right: 7.5px"/>
-        <span class="logoText">OCTOPETH</span>
-      </v-toolbar-title>
+      style="-webkit-app-region: drag; background-color: #DCE1E3 !important; border-bottom: 1px solid rgba(0,0,0,0.1)">
       <v-spacer></v-spacer>
-      <v-tooltip bottom color="black">
-        <v-chip slot="activator" color="grey darken-4" text-color="white" style="margin-right: 15px; padding: 0px 10px; font-weight: 600; font-family: 'Dosis'; font-size: 15px" disabled>
-          Balance: {{ this.$store.state.auth.user.balance }} ETH
-        </v-chip>
-        <span>{{ usdBalance }} USD</span>
-      </v-tooltip>
-      <div class="text-xs-center">
-        <v-menu
-          origin="center center"
-          transition="scale-transition"
-          bottom
-          dark
-          color="primary"
+      <div class="extendedBar" slot="extension">
+        <!-- <v-tabs
+          v-model="model"
+          centered
+          color="grey darken-4"
+          slider-color="deep-purple"
         >
-          <v-gravatar :hash="md5hash" :size="30" class="grav" slot="activator" style="margin-right: 30px"/>
-          <v-list style="cursor: pointer">
-            <v-list-tile key="1" @click="PublishDialog = true">
-              <v-list-tile-title class="menuItemStyle"><v-icon style="font-size: 18px; margin-right: 8px">publish</v-icon>Publish ÐApp</v-list-tile-title>
-            </v-list-tile>
-            <v-list-tile key="2" @click="this.$helpers.addressToClipboard()">
-              <v-list-tile-title class="menuItemStyle"><v-icon style="font-size: 18px; margin-right: 8px">filter_none</v-icon>Copy Address To Clipboard</v-list-tile-title>
-            </v-list-tile>
-            <v-list-tile key="3" @click="this.$helpers.identity.exportIdentity()">
-              <v-list-tile-title class="menuItemStyle"><v-icon style="font-size: 18px; margin-right: 8px">get_app</v-icon>Export Encrypted Identity</v-list-tile-title>
-            </v-list-tile>
-            <v-list-tile key="4" @click="LogoutDialog = true">
-              <v-list-tile-title class="menuItemStyle"><v-icon style="font-size: 18px; margin-right: 8px">exit_to_app</v-icon>Logout</v-list-tile-title>
-            </v-list-tile>
-          </v-list>
-        </v-menu>
+          <v-tab
+            v-for="i in $store.state.dapps.categories"
+            :key="i"
+            :href="`#tab-${i}`"
+            @click="changeCat(i)"
+          >
+            {{ i }}
+          </v-tab>
+        </v-tabs> -->
+        <div class="extRight">
+          <v-tooltip bottom color="black">
+            <v-btn class="navBtn" flat icon slot="activator" color="purple">
+              <v-icon class="navIcon">all_inclusive</v-icon>
+            </v-btn>
+           <!-- <span>{{ this.$store.state.auth.user.balance }} ETH | {{ usdBalance }} USD</span> -->
+           <span>Octopeth Wallet</span>
+          </v-tooltip>
+          <v-tooltip bottom color="black">
+            <v-btn class="navBtn" flat icon slot="activator" color="black">
+              <v-icon class="navIcon">person</v-icon>
+            </v-btn>
+           <!-- <span>{{ this.$store.state.auth.user.balance }} ETH | {{ usdBalance }} USD</span> -->
+           <span>Profile</span>
+          </v-tooltip>
+          <v-tooltip bottom color="black">
+          <v-btn class="navBtn" slot="activator" flat icon color="black">
+            <v-icon class="navIcon">menu</v-icon>
+          </v-btn>
+          <span>Customize Octopeth</span>
+          </v-tooltip>
+          <v-menu
+            origin="center center"
+            transition="scale-transition"
+            bottom
+            dark
+            color="primary"
+          >
+            <v-icon>menu</v-icon>
+            <v-list style="cursor: pointer">
+              <v-gravatar :hash="md5hash" :size="15" class="grav" slot="activator" style="margin-right: 30px"/>
+              <v-list-tile key="1" @click="PublishDialog = true">
+                <v-list-tile-title class="menuItemStyle"><v-icon style="font-size: 18px; margin-right: 8px">publish</v-icon>Publish ÐApp</v-list-tile-title>
+              </v-list-tile>
+              <v-list-tile key="2" @click="addressToClipboard()">
+                <v-list-tile-title class="menuItemStyle"><v-icon style="font-size: 18px; margin-right: 8px">filter_none</v-icon>Copy Address To Clipboard</v-list-tile-title>
+              </v-list-tile>
+              <v-list-tile key="3" @click="exportIdentity()">
+                <v-list-tile-title class="menuItemStyle"><v-icon style="font-size: 18px; margin-right: 8px">get_app</v-icon>Export Encrypted Identity</v-list-tile-title>
+              </v-list-tile>
+              <v-list-tile key="4" @click="LogoutDialog = true">
+                <v-list-tile-title class="menuItemStyle"><v-icon style="font-size: 18px; margin-right: 8px">exit_to_app</v-icon>Logout</v-list-tile-title>
+              </v-list-tile>
+            </v-list>
+          </v-menu>
+        </div>
       </div>
-      <!--
-      <v-tabs
-        slot="extension"
-        v-model="model"
-        centered
-        color="grey darken-4"
-        slider-color="deep-purple"
-      >
-        <v-tab
-          v-for="i in $store.state.dapps.categories"
-          :key="i"
-          :href="`#tab-${i}`"
-          @click="changeCat(i)"
-        >
-          {{ i }}
-        </v-tab>
-      </v-tabs>
-      -->
     </v-toolbar>
     
     <!-- Logout warning modal -->
@@ -146,9 +155,6 @@ export default {
   cursor: pointer;
   transition: border-radius 0.4s ease-in-out;
 }
-.grav:hover {
-  border-radius: 0px;
-}
 .bottom-nav {
   z-index: 0;
 }
@@ -169,5 +175,20 @@ export default {
 }
 .navActive {
   background: hsla(0,0%,100%,.12);
+}
+.extendedBar {
+  height: 100%;
+  width: 100%;
+  background: #F3F3F3;
+}
+.extRight {
+  float: right;
+  margin-right: -5px;
+}
+.navBtn {
+  margin-left: -10px;
+}
+.navIcon {
+  font-size: 20px;
 }
 </style>
